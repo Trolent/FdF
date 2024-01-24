@@ -6,18 +6,20 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:05:14 by trolland          #+#    #+#             */
-/*   Updated: 2024/01/24 23:52:30 by trolland         ###   ########.fr       */
+/*   Updated: 2024/01/24 23:53:03 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/fdf.h"
 
-void print_map(t_alt ***map)
+void	print_map(t_alt ***map)
 {
-	int i = 0;
-	int j = 0;
+	int	i;
+	int	j;
 
-	while(i< 9)
+	i = 0;
+	j = 0;
+	while (i < 9)
 	{
 		j = 0;
 		while (j < 9)
@@ -42,5 +44,5 @@ int	main(int argc, char **argv)
 		ft_parse(&map, argv[1]);
 		// print_map(&map);
 	}
-	return(0);
+	return (0);
 }
