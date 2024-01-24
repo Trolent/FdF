@@ -6,11 +6,29 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:05:14 by trolland          #+#    #+#             */
-/*   Updated: 2024/01/16 12:57:00 by trolland         ###   ########.fr       */
+/*   Updated: 2024/01/24 23:03:48 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/fdf.h"
+
+void print_map(t_alt ***map)
+{
+	int i = 0;
+	int j = 0;
+
+	while(i< 9)
+	{
+		j = 0;
+		while (j < 9)
+		{
+			printf("%d ", (*map)[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;	
+	}
+}
 
 int	main(int argc, char **argv)
 {
@@ -20,6 +38,9 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		ft_quit(ERR_ARG);
 	else
-		ft_parse(map, argv[1]);
+	{
+		ft_parse(&map, argv[1]);
+		// print_map(&map);
+	}
 	return(0);
 }

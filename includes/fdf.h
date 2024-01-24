@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:59:55 by trolland          #+#    #+#             */
-/*   Updated: 2024/01/13 17:34:34 by trolland         ###   ########.fr       */
+/*   Updated: 2024/01/24 22:34:34 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_alt
 	long long	color;
 }				t_alt;
 
-int				ft_parse(t_alt **map, char *file);
+int				ft_parse(t_alt ***map, char *file);
 int				ft_quit(char *s);
 
 #endif

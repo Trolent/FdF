@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:04:58 by trolland          #+#    #+#             */
-/*   Updated: 2024/01/16 14:32:35 by trolland         ###   ########.fr       */
+/*   Updated: 2024/01/24 23:03:36 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_get_map_input(int fd)
 	char	*line;
 	char	*concat;
 
-	concat = "";
+	concat = ft_strdup("");
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -56,25 +56,25 @@ int	ft_chek_arg_no(char **split)
 	return (max);
 }
 
-void	ft_assign_values(t_alt **map, char **split)
+void	ft_assign_values(t_alt ***map, char ***split)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (split[i])
+	while ((*split)[i])
 	{
 		j = 0;
-		while (split[i][j])
+		while ((*split)[i][j])
 		{
-			map[i][j].z = ft_atoi(&split[i][j]);
+			(*map)[i][j].z = ft_atoi(split[i][j]);
 			j++;
 		}
 		i++;
 	}
 }
 
-t_alt	**ft_create_map(t_alt **map, int fd)
+t_alt	**ft_create_map(t_alt ***map, int fd)
 {
 	int		rows;
 	char	**split;
@@ -86,29 +86,44 @@ t_alt	**ft_create_map(t_alt **map, int fd)
 	if (!line)
 		return (NULL);
 	split = ft_split(line, '\n');
+	//
+	int h = 0;
+	while (split[h])
+	{
+		int k = 0;
+		while(split[h][k])
+		{
+			printf("%s ", &split[h][k]);
+			k++;
+		}
+		printf("\n");
+		h++;
+	}
+	//
 	if (!split)
 		return (free(line), NULL);
 	rows = 0;
 	while (split[rows])
 		rows++;
-	map = malloc(sizeof(t_alt *) * rows);
+	*map = malloc(sizeof(t_alt *) * rows);
 	if (!map)
 		return (free(line), ft_free_tab(split, rows), NULL);
 	col = ft_chek_arg_no(split);
 	if (col == 0)
-		return (free(line), ft_free_tab(split, rows), free(map), NULL);
-	i = -1;
-	while (i++ < rows)
+		return (free(line), ft_free_tab(split, rows), free(*map), NULL);
+	i = 0;
+	while (i < rows)
 	{
-		map[i] = malloc(sizeof(t_alt) * col);
-		if (!map[i])
-			free(map[i]);
+		(*map)[i] = malloc(sizeof(t_alt) * col);
+		if (!(*map)[i])
+			free((*map)[i]);
+			i++;
 	}
-	ft_assign_values(map, split);
-	return (map);
+	ft_assign_values(map, &split);
+	return (*map);
 }
 
-int	ft_parse(t_alt **map, char *file)
+int	ft_parse(t_alt ***map, char *file)
 {
 	int fd;
 
@@ -120,7 +135,7 @@ int	ft_parse(t_alt **map, char *file)
 	if (fd == -1)
 		ft_quit(ERR_READ_FILE);
 	else
-		map = ft_create_map(map, fd);
+		*map = ft_create_map(map, fd);
 	close(fd);
 	return (1);
 }
