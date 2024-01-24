@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:05:14 by trolland          #+#    #+#             */
-/*   Updated: 2024/01/24 23:53:54 by trolland         ###   ########.fr       */
+/*   Updated: 2024/01/24 23:55:41 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_map(t_alt ***map)
 	while (i < 10)
 	{
 		j = 0;
-		while (j < 9)
+		while (j < 10)
 		{
 			printf("%d ", (*map)[i][j]);
 			j++;
