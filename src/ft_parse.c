@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:04:58 by trolland          #+#    #+#             */
-/*   Updated: 2024/01/24 23:03:36 by trolland         ###   ########.fr       */
+/*   Updated: 2024/01/25 13:58:48 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,8 @@ void	ft_assign_values(t_alt ***map, char ***split)
 	i = 0;
 	while ((*split)[i])
 	{
-		j = 0;
-		while ((*split)[i][j])
-		{
-			(*map)[i][j].z = ft_atoi(split[i][j]);
-			j++;
-		}
+		(*map)[i][j].z = ft_atoi(split[i][0]);
+		j++;
 		i++;
 	}
 }
@@ -87,18 +83,18 @@ t_alt	**ft_create_map(t_alt ***map, int fd)
 		return (NULL);
 	split = ft_split(line, '\n');
 	//
-	int h = 0;
-	while (split[h])
-	{
-		int k = 0;
-		while(split[h][k])
-		{
-			printf("%s ", &split[h][k]);
-			k++;
-		}
-		printf("\n");
-		h++;
-	}
+	// int h = 0;
+	// while (split[h])
+	// {
+	// 	int k = 0;
+	// 	while(split[h][k])
+	// 	{
+	// 		printf("%s ", &split[h][k]);
+	// 		k++;
+	// 	}
+	// 	printf("\n");
+	// 	h++;
+	// }
 	//
 	if (!split)
 		return (free(line), NULL);
