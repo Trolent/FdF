@@ -1,0 +1,34 @@
+
+
+
+t_coordinate
+{
+    int value = z;
+    long colour = 0xFFFFFF;
+}
+
+
+
+
+
+int parse (t_alt **alt.ber)
+{
+    it can be of two forms:
+        with only values part of N
+        or values part of N and colour code associated to each points
+    
+    with parsisng make a t_alt tab
+    if tab is good return 1
+    else return 0 
+}
+
+
+
+int main()
+{
+    
+    if parse good
+        open window and print image
+    else error mesage
+    
+}
