@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:05:14 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/02 18:01:28 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/06 13:38:51 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	main(int argc, char **argv)
 	}
 	// let's go mlx baby !!!
 		
-	graphics(map);
+	graphics(&map);
 	
-	free_map(&map, map.rows);
+	free_map(&map, map->rows);
 	return (0);
 }

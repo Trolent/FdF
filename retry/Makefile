@@ -6,7 +6,7 @@
 #    By: trolland <trolland@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 16:23:19 by trolland          #+#    #+#              #
-#    Updated: 2024/02/02 18:00:30 by trolland         ###   ########.fr        #
+#    Updated: 2024/02/06 16:06:58 by trolland         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,9 @@ all: create_dirs $(NAME)
 $(NAME): $(OBJS) $(LIBFT) $(MLX)
 	@$(CC) $(CFLAGS) $(OBJS) -Lmlx_Linux -lmlx_Linux $(LIBFT) -Imlx_Linux -lXext -lX11 -lm -lz -o $(NAME)
 
+mlx:  $(LIBFT) $(MLX) 
+	@$(CC) $(CFLAGS) minilibx.c -Lmlx_Linux -lmlx_Linux $(LIBFT) -Imlx_Linux -lXext -lX11 -lm -lz -o mlx
+	
 object/%.o: src/%.c
 	@printf "\033[0;32%sm\tCompiling: $<\033[0m\n";
 	@$(CC) $(CFLAGS) -c $< -o $@

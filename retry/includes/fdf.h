@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:59:55 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/02 18:29:17 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/06 17:27:33 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <errno.h>
 # include <stdio.h>
 # include <unistd.h>
+# include <math.h>
 
 // DEFINE GRAPHICS
 // WINDOW
@@ -37,17 +38,12 @@ typedef struct	s_data {
 	int		endian;
 }				t_data;
 
-typedef struct	s_vars {
-	void	*mlx;
-	void	*win;
-}				t_vars;
-
 typedef struct s_pixel
 {
 	int				x;
 	int				y;
 	int				z;
-	unsigned int	color;
+	unsigned long	color;
 }					t_pixel;
 
 typedef struct s_map
@@ -56,7 +52,16 @@ typedef struct s_map
 	int				rows;
 	int				columns;
 	int				zoom;
+	int				iso;
+	int				angle;
 }					t_map;
+
+typedef struct	s_vars {
+	void	*mlx;
+	void	*win;
+	t_map	*map;
+	t_data	*img;
+}				t_vars;
 
 int					parse(t_map *map, char *file);
 int					quit(char *s);
@@ -70,3 +75,9 @@ int					graphics(t_map *map);
 void	print_map(t_map *map); // =========> must be commented before submiting
 
 #endif
+
+
+/* *x = (*x - *y) * cos(angle);
+*y = (*x + *y) * sin(angle) - z;
+
+M_PI / 4 = angle 45 degres */

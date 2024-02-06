@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:04:58 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/02 15:57:55 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/06 12:47:18 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,9 @@ void	asign_values(t_map *map, char **split)
 		in_line = 0;
 		while (j < map->columns)
 		{
-			map->coord[i][j].x = special_atoi(&split[i][in_line], &in_line);
+			map->coord[i][j].z = special_atoi(&split[i][in_line], &in_line);
+			map->coord[i][j].x = i;
+			map->coord[i][j].y = j;
 			if (split[i][in_line] == ',')
 				map->coord[i][j].color = special_atoi_hex(&split[i][in_line],
 						&in_line);
