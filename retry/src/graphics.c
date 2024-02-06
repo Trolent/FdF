@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 17:16:38 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/06 17:53:10 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/06 18:14:34 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,23 +72,26 @@ int mouse_hook(int mousecode, t_vars *vars)
 		if (vars->map->zoom < 10)
 			vars->map->zoom += 1;
 	if (mousecode == 5)
-		if (vars->map->zoom < 0)
+		if (vars->map->zoom > 0)
 			vars->map->zoom -= 1;
 	return(0);
 }
 
 int render_next_frame(t_vars *vars)
 {
-	// t_data *new;
+	t_data new;
+	new.img = mlx_new_image(vars->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	new.addr = mlx_get_data_addr(new->img, new->bits_per_pixel, new->line_length, new->endian);;
+	
+	free(vars->img);
+	vars->img = &new;
 
-	// free(vars->img);
-	vars->img->img = mlx_new_image(vars->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-	vars->img->addr = mlx_get_data_addr(vars->img->img, &vars->img->bits_per_pixel, &vars->img->line_length,
-			&vars->img->endian);
-	// vars->img = new;
+	// vars->img->img = mlx_new_image(vars->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	// vars->img->addr = mlx_get_data_addr(vars->img->img, &vars->img->bits_per_pixel, &vars->img->line_length,
+			// &vars->img->endian);
 	print_graph_map(vars->map, vars->img);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img->img, 0, 0);
-	
+	return(0);
 }
 
 int	graphics(t_map *map)

@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "fdf.h": "c",
+        "error_maps.h": "c",
+        "libft.h": "c"
+    }
+}
