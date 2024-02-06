@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_maps.h                                       :+:      :+:    :+:   */
+/*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 19:09:18 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/02 18:34:15 by trolland         ###   ########.fr       */
+/*   Created: 2024/01/12 17:05:14 by trolland          #+#    #+#             */
+/*   Updated: 2024/02/02 18:01:28 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_MAPS_H
-# define ERROR_MAPS_H
+#include "includes/fdf.h"
+#include <stdio.h> // must dell before push
 
-# include "../libft/libft.h"
+int	main(int argc, char **argv)
+{
+	t_map map;
 
-# define ERR_ARG "Wrong number of arguments"
-# define ERR_FILE_TYPE "Wrong file type : it should be using \".fdf\" format"
-# define ERR_NO_FILE "No file passed as arg"
-# define ERR_READ_FILE "Error reading file"
-# define ERR_GEN "Error generating map"
-
-# define ERROR_MLX "cannot assign mlx"
-
-#endif
+	errno = 0;
+	if (argc != 2)
+		quit(ERR_ARG);
+	else
+	{
+		map_init(&map);
+		if (parse(&map, argv[1]) == 0)
+			quit(ERR_GEN);
+		print_map(&map);
+	}
+	// let's go mlx baby !!!
+		
+	graphics(map);
+	
+	free_map(&map, map.rows);
+	return (0);
+}
