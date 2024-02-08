@@ -6,132 +6,195 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:04:58 by trolland          #+#    #+#             */
-/*   Updated: 2024/01/31 18:42:30 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/06 12:47:18 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-char	*ft_get_map_input(int fd)
-{
-	char	*line;
-	char	*concat;
-
-	concat = ft_strdup("");
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		concat = ft_strjoin(concat, line);
-	}
-	if (!concat[0])
-		return (NULL);
-	return (concat);
-}
-
-int	ft_chek_arg_no(char **split)
+int	special_atoi(const char *str, int *index)
 {
 	int	i;
-	int	j;
-	int	val;
-	int	max;
+	int	res;
+	int	neg;
 
 	i = 0;
-	max = ft_count_words(split[i], " ");
-	while (split[i])
+	res = 0;
+	neg = 1;
+	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	if (str[i] == '-' || str[i] == '+')
 	{
-		j = 0;
-		val = 0;
-		while (split[i][j])
-		{
-			val = ft_count_words(split[i], " ");
-			j++;
-		}
-		if (val != max)
+		if (str[i] == '-')
+			neg = -neg;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		res = (res * 10) + str[i] - '0';
+		i++;
+	}
+	*index += i;
+	return (res * neg);
+}
+
+int strvalue(char c)
+{
+	int i;
+	char *lower;
+	char *caps;
+
+	i =0;
+	lower = "0123456789abcdef";
+	caps = "0123456789ABCDEF";
+	while(lower[i])
+	{
+		if (c == lower[i])
+			return(i);
+		i++;
+	}
+	i = 0;
+	while(caps[i])
+	{
+		if (c == caps[i])
+			return(i);
+		i++;
+	}
+	return(-1);
+}
+
+unsigned int	special_atoi_hex(const char *str, int *index)
+{
+	int				i;
+	unsigned int	res;
+
+	i = 0;
+	res = 0;
+	if (str[i] == ',' && str[i+1] == '0' && str[i+2] == 'x')
+		i+=3;
+	while ((str[i] >= '0' && str[i] <= '9') || (str[i] >= 'a' && str[i] <= 'f')
+		|| (str[i] >= 'A' && str[i] <= 'F'))
+	{
+		res = (res * 16) + strvalue(str[i]);
+		i++;
+	}
+	*index += i;
+	return (res);
+}
+
+int	check_columns(char **split, int rows)
+{
+	int	columns;
+	int	i;
+
+	i = 0;
+	columns = count_words_sep(split[i], "0123456789,-xABCDEFabcdef");
+	while (i < rows)
+	{
+		if (columns != count_words_sep(split[i], "0123456789,-xABCDEFabcdef"))
 			return (0);
 		i++;
 	}
-	printf("%d\n", max);
-	return (max);
+	printf("%d\n", columns);
+	return (columns);
 }
 
-void	ft_assign_values(t_alt ***map, char ***split)
+void	asign_values(t_map *map, char **split)
 {
 	int	i;
 	int	j;
+	int	in_line;
 
 	i = 0;
-	while ((*split)[i])
+	while (i < map->rows)
 	{
-		(*map)[i][j].z = ft_atoi(split[i][0]);
-		j++;
+		j = 0;
+		in_line = 0;
+		while (j < map->columns)
+		{
+			map->coord[i][j].z = special_atoi(&split[i][in_line], &in_line);
+			map->coord[i][j].x = i;
+			map->coord[i][j].y = j;
+			if (split[i][in_line] == ',')
+				map->coord[i][j].color = special_atoi_hex(&split[i][in_line],
+						&in_line);
+			else
+				map->coord[i][j].color = WHITE;
+			j++;
+		}
 		i++;
 	}
 }
 
-t_alt	**ft_create_map(t_alt ***map, int fd)
+int	create_struct(t_map *map, char *line)
 {
-	int		rows;
 	char	**split;
-	char	*line;
-	int		col;
 	int		i;
 
-	line = ft_get_map_input(fd);
-	if (!line)
-		return (NULL);
-	split = ft_split(line, '\n');
-	//
-	// int h = 0;
-	// while (split[h])
-	// {
-	// 	int k = 0;
-	// 	while(split[h][k])
-	// 	{
-	// 		printf("%s ", &split[h][k]);
-	// 		k++;
-	// 	}
-	// 	printf("\n");
-	// 	h++;
-	// }
-	//
-	if (!split)
-		return (free(line), NULL);
-	rows = 0;
-	while (split[rows])
-		rows++;
-	*map = malloc(sizeof(t_alt *) * rows);
-	if (!map)
-		return (free(line), ft_free_tab(split, rows), NULL);
-	col = ft_chek_arg_no(split);
-	if (col == 0)
-		return (free(line), ft_free_tab(split, rows), free(*map), NULL);
 	i = 0;
-	while (i < rows)
+	split = ft_split(line, '\n');
+	if (!split)
+		return (0);
+	map->columns = check_columns(split, map->rows);
+	if (map->columns == 0)
+		return (ft_free_tab(split, map->rows), 0);
+	map->coord = malloc(sizeof(t_pixel) * map->rows + 1);
+	if (!map->coord)
+		return (0);
+	while (i <= map->rows)
 	{
-		(*map)[i] = malloc(sizeof(t_alt) * col);
-		if (!(*map)[i])
-			free((*map)[i]);
-			i++;
+		map->coord[i] = malloc(sizeof(t_pixel) * map->columns + 1);
+		if (!map->coord[i])
+			return (free_map(map, i), 0);
+		i++;
 	}
-	ft_assign_values(map, &split);
-	return (*map);
+	asign_values(map, split);
+	ft_free_tab(split, map->rows);
+	return (1);
 }
 
-int	ft_parse(t_alt ***map, char *file)
+int	create_map(t_map *map, int fd)
 {
-	int fd;
+	int		rows;
+	char	*line;
+	char	*buffer;
+
+	rows = 0;
+	line = ft_strdup("");
+	if (!line)
+		return (0);
+	while (1)
+	{
+		buffer = get_next_line(fd);
+		if (rows == 0 && !buffer)
+			return (free(line), 0);
+		if (buffer == 0)
+			break ;
+		line = free_join(line, buffer);
+		free(buffer);
+		if (!line)
+			return (free(buffer), 0);
+		rows++;
+	}
+	map->rows = rows;
+	if (create_struct(map, line) == 0)
+		return (free(buffer), free(line), 0);
+	return (free(buffer), free(line), 1);
+}
+
+int	parse(t_map *map, char *file)
+{
+	int	fd;
 
 	if (!file)
-		ft_quit(ERR_NO_FILE);
-	if (ft_check_last_characters(file, ".fdf") == 0)
-		ft_quit(ERR_FILE_TYPE);
+		quit(ERR_NO_FILE);
+	if (check_last_characters(file, ".fdf") == 0)
+		quit(ERR_FILE_TYPE);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		ft_quit(ERR_READ_FILE);
-	else
-		*map = ft_create_map(map, fd);
+		quit(ERR_READ_FILE);
+	else if (create_map(map, fd) == 0)
+		return (0);
 	close(fd);
 	return (1);
 }

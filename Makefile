@@ -6,76 +6,68 @@
 #    By: trolland <trolland@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 16:23:19 by trolland          #+#    #+#              #
-#    Updated: 2024/01/13 18:42:34 by trolland         ###   ########.fr        #
+#    Updated: 2024/02/06 16:06:58 by trolland         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME=fdf.a
-CC=cc
-CFLAGS= -Wall -Wextra -Werror -I$(HEADER)
+NAME = fdf
 
-# ---------------------------------------------------------------------------- #
-# ----------------------------------- SRCS ----------------------------------- #
-# ---------------------------------------------------------------------------- #
-SRC= 
+LIBFT	= 	libft/libft.a
+MLX 	=	mlx_Linux/mlx_Linux.a 
+
+SRCS :=		fdf.c errors.c free_join.c ft_parse.c graphics.c map_utils.c
+			
+SRCS := 	$(addprefix src/, $(SRCS))
+OBJS := 	$(patsubst src/%.c, object/%.o, $(SRCS))
+DEPS := 	$(OBJS:.o=.d)
 
 
-LFT_OBJS = ./libft/
+CC := cc
+CFLAGS := -MMD -MP -Iincludes -Ilibft -Imlx_Linux -g
 
-OBJ= $(SRC:.c=.o)
-HEADER=./lib
-LIBFT=./libft/libft.a
+all: create_dirs $(NAME)
 
-bonus : all
+# ifeq (run, $(firstword $(MAKECMDGOALS)))
+# 	runargs := $(wordlist 2, $(words $(MAKECMDGOALS)), $(MAKECMDGOALS))
+# 	$(eval $(runargs):;@true)
+# endif
 
-all : $(NAME)
+$(NAME): $(OBJS) $(LIBFT) $(MLX)
+	@$(CC) $(CFLAGS) $(OBJS) -Lmlx_Linux -lmlx_Linux $(LIBFT) -Imlx_Linux -lXext -lX11 -lm -lz -o $(NAME)
 
-$(OBJ_DIR)/%.o:		%.c
-					$(CC) $(CFLAGS) -c $< -o $@ -g
-
-#%.o : %.c $(LIBFT)
-#	$(CC) $(CFLAGS) -c $^ -o $@
-
-$(LIBFT) :
-	$(MAKE) -C ./libft
+mlx:  $(LIBFT) $(MLX) 
+	@$(CC) $(CFLAGS) minilibx.c -Lmlx_Linux -lmlx_Linux $(LIBFT) -Imlx_Linux -lXext -lX11 -lm -lz -o mlx
 	
-$(NAME) : $(OBJ) $(LIBFT)
+object/%.o: src/%.c
+	@printf "\033[0;32%sm\tCompiling: $<\033[0m\n";
+	@$(CC) $(CFLAGS) -c $< -o $@
 
-	@echo "\033[1;31m .--..--..--..--..--..--..--..--..--..--..--..--..--..--..--..--."
-	@echo "/ .. \\.. \\.. \\.. \\.. \\.. \\.. \\.. \\.. \\.. \\.. \\.. \\.. \\.. \\.. \\.. \\"
-	@echo "\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/ /"
-	@echo " \\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /"
-	@echo " / /\\/ /\`' /\`' /\`' /\`' /\`' /\`' /\`' /\`' /\`' /\`' /\`' /\`' /\`' /\\/ /\\"
-	@echo "/ /\\ \\/\`--'\`--'\`--'\`--'\`--'\`--'\`--'\`--'\`--'\`--'\`--'\`--'\`--'\\ \\/\\ \\"
-	@echo "\\ \\/\\ \\                                                    /\\ \\/ /"
-	@echo " \\/ /\\ \\                                                  / /\\/ /"
-	@echo " / /\\/ /        \033[0m    \033[1;32m          COMPILING    \033[0m   \033[1;31m            \\ \\/ /\\"
-	@echo "/ /\\ \\/                                                    \\ \\/\\ \\"
-	@echo "\\ \\/\\ \\                  \033[0m    \033[1;33m    FDF  \033[0m  \033[1;31m                   /\\ \\/ /"
-	@echo " \\/ /\\ \\                                                  / /\\/ /"
-	@echo " / /\\/ /                                                  \\ \\/ /\\"
-	@echo "/ /\\ \\/                                                    \\ \\/\\ \\"
-	@echo "\\ \\/\\ \\.--..--..--..--..--..--..--..--..--..--..--..--..--./\\ \\/ /"
-	@echo " \\/ /\\/ ../ ../ ../ ../ ../ ../ ../ ../ ../ ../ ../ ../ ../ /\\/ /"
-	@echo " / /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\/ /\\"
-	@echo "/ /\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\/\\ \\"
-	@echo "\\ \`'\\ \`'\\ \`'\\ \`'\\ \`'\\ \`'\\ \`'\\ \`'\\ \`'\\ \`'\\ \`'\\ \`'\\ \`'\\ \`'\\ \`'\\ \`' /"
-	@echo " \`--'\`--'\`--'\`--'\`--'\`--'\`--'\`--'\`--'\`--'\`--'\`--'\`--'\`--'\`--'\`--'\033[0m"
- 
-	cp $(LIBFT) $(NAME)
-	ar rcs $(NAME) $(OBJ)
+# run: $(NAME)
+# 	@./fdf maps/test_maps/t1.fdf
 
-main : $(NAME) $(LIBFT)
-	$(CC) main.c -L. -lftprintf
-	
-clean :
-	make -C ./libft clean
-	rm -rf $(OBJ)
+create_dirs:
+	@if [ ! -d "object" ]; then mkdir object; fi
 
-fclean : clean
-	rm -rf $(LIBFT)
-	rm -rf $(NAME)
+$(LIBFT):
+	@$(MAKE) -C libft
 
-re : fclean all
+$(MLX):
+	@$(MAKE) -C mlx_Linux
 
-.PHONY: all clean fclean re
+# run: $(NAME)
+# 	./fdf $(runargs)
+
+clean:
+	@if [ -d "object" ]; then rm -rf object && echo "\033[1;31mFdf .o files have been deleted\033[0m"; fi
+	@$(MAKE) --no-print-directory clean -C libft
+	@$(MAKE) --no-print-directory clean -C mlx_Linux
+
+fclean: clean
+	@if [ -f "fdf" ]; then rm -rf fdf && echo "\033[1;31mFdf executable has been deleted\033[0m"; fi
+	@$(MAKE) --no-print-directory fclean -C libft
+
+re: fclean all
+
+-include $(DEPS)
+
+.PHONY: all create_dirs clean fclean
