@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:59:55 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/06 17:27:33 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/07 19:08:15 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 
 // DEFINE GRAPHICS
 // WINDOW
-# define WINDOW_WIDTH 1920
-# define WINDOW_HEIGHT 1080
+# define WINDOW_WIDTH 1920/2
+# define WINDOW_HEIGHT 1080/2
 //COLORS
 # define WHITE 0xFFFFFF
 # define RED 0xFF0000
@@ -70,7 +70,7 @@ char				*free_join(char *s1, char *s2);
 void				free_map(t_map *map, int lines);
 void				map_init(t_map *map);
 
-int					graphics(t_map *map);
+int					graphics(t_map *map/* , char *str */);
 
 void	print_map(t_map *map); // =========> must be commented before submiting
 
