@@ -1,93 +1,81 @@
 #include "mlx_Linux/mlx.h"
 #include <error.h>
-  #include <stdlib.h>
-
 #include <mlx.h>
-#include "includes/fdf.h"
+#include <stdlib.h>
 
-#include <mlx.h>
+#define WHITE 0xFFFFFF
+#define RED 0xFF0000
+#define GREEN 0x00FF00
+#define BLUE 0x0000FF
 
-typedef struct s_datas {
-    void *mlx;
-    void *win;
-    void *img1; // Première image
-    void *img2; // Deuxième image
-    char *addr1; // Adresse de la première image
-    char *addr2; // Adresse de la deuxième image
-    int bits_per_pixel;
-    int line;
-    int line_length;
-    int endian;
-    int width;
-    int height;
-    float transition; // Valeur de transition pour l'interpolation linéaire
-} t_datas;
-
-
-char *interpolate(char *addr1, char *addr2, float transition)
+typedef struct s_data
 {
-    char *result = malloc(sizeof(char) * WINDOW_WIDTH * WINDOW_HEIGHT * 4); // Taille de l'image en RGBA
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}			t_data;
 
-    for (int i = 0; i < WINDOW_WIDTH * WINDOW_HEIGHT * 4; i++)
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
+}
+
+int	create_trgb(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
+}
+
+int	get_t(int trgb)
+{
+	return ((trgb >> 24) & 0xFF);
+}
+
+int	get_r(int trgb)
+{
+	return ((trgb >> 16) & 0xFF);
+}
+
+int	get_g(int trgb)
+{
+	return ((trgb >> 8) & 0xFF);
+}
+
+int	get_b(int trgb)
+{
+	return (trgb & 0xFF);
+}
+
+
+int	main(void)
+{
+	void *mlx;
+	void *mlx_win;
+	t_data img;
+
+	mlx = mlx_init();
+	mlx_win = mlx_new_window(mlx, 750, 750, "Hello world!");
+	img.img = mlx_new_image(mlx, 750, 750);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
+			&img.endian);
+
+	int i = 100;
+    int j;
+    while (i < 450)
     {
-        // Interpolation linéaire entre les valeurs des pixels des deux images
-        result[i] = (1 - transition) * addr1[i] + transition * addr2[i];
+        j = 100;
+        while (j < 450)
+        {
+            my_mlx_pixel_put(&img, i, j, RED-i);
+            j++;
+        }
+        i++;
     }
 
-    return result;
-}
-
-
-void draw_image(t_datas *data)
-{
-    char *current_addr;
-
-    // Interpolation linéaire entre les adresses des deux images
-    current_addr = interpolate(data->addr1, data->addr2, data->transition);
-
-    // Dessiner l'image sur la fenêtre MLX
-    mlx_put_image_to_window(data->mlx, data->win, current_addr, 0, 0);
-}
-
-void update_transition(t_datas *data)
-{
-    // Mettre à jour la valeur de transition (par exemple, de 0 à 1 pour une transition complète)
-    data->transition += 0.01; // Augmentez la valeur de transition en fonction de vos besoins
-
-    // Assurez-vous que la valeur de transition reste dans la plage [0, 1]
-    if (data->transition > 1.0)
-        data->transition = 1.0;
-
-    // Dessiner l'image mise à jour
-    draw_image(data);
-}
-
-int main()
-{
-    t_datas data;
-
-    // Initialisation de la connexion MLX
-    data.mlx = mlx_init();
-
-    // Création d'une fenêtre MLX
-    data.win = mlx_new_window(data.mlx, 800, 600, "Image Transition");
-
-    // Chargement des images
-    data.img1 = mlx_xpm_file_to_image(data.mlx, "image1.xpm", &data.width, &data.height);
-    data.img2 = mlx_xpm_file_to_image(data.mlx, "image2.xpm", &data.width, &data.height);
-
-    // Obtention des adresses des images
-    data.addr1 = mlx_get_data_addr(data.img1, &data.bits_per_pixel, &data.line_length, &data.endian);
-    data.addr2 = mlx_get_data_addr(data.img2, &data.bits_per_pixel, &data.line_length, &data.endian);
-
-    // Initialisation de la valeur de transition à 0
-    data.transition = 0.0;
-
-    // Dessiner l'image initiale
-    draw_image(&data);
-
-    // Boucle d'événements MLX principale
-    mlx_loop(data.mlx);
-
-    return 0;
+	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
+	mlx_loop(mlx);
 }

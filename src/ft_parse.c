@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:04:58 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/06 12:47:18 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/09 16:40:11 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ int	check_columns(char **split, int rows)
 			return (0);
 		i++;
 	}
-	printf("%d\n", columns);
 	return (columns);
 }
 

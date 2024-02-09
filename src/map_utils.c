@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 15:09:59 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/06 17:49:23 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/09 16:38:59 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	free_map(t_map *map, int rows)
 	free(map->coord);
 }
 
-void map_init(t_map *map)
+void	map_init(t_map *map)
 {
 	map->coord = NULL;
 	map->zoom = 8;
@@ -30,12 +30,14 @@ void map_init(t_map *map)
 	map->columns = 0;
 	map->iso = 1;
 	map->angle = 45;
+	map->midx = 0;
+	map->midy = 0;
 }
 
-void	print_map(t_map *map)  ///// ====> must comment before submiting
+void	print_map(t_map *map) ///// ====> must comment before submiting
 {
-	int	i;
-	int	j;
+	int i;
+	int j;
 
 	i = 0;
 	while (i < map->rows)

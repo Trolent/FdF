@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:59:55 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/09 14:03:45 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/09 17:01:00 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@
 # define RED 0xFF0000
 # define GREEN 0x00FF00
 # define BLUE 0x0000FF
+
+#define ESC_KEY 0xff1b
+#define LEFT_KEY 0xff51
+#define RIGHT_KEY 0xff53
+#define UP_KEY 0xff52
+#define DOWN_KEY 0xff54
 
 typedef struct s_data
 {
@@ -55,6 +61,8 @@ typedef struct s_map
 	int				zoom;
 	int				iso;
 	int				angle;
+	int				midx;
+	int				midy;
 }					t_map;
 
 typedef struct s_vars

@@ -18,10 +18,11 @@ void	my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map, int zoom)
 	char	*dst;
 	int		x;
 	int		y;
+
 	if (zoom == 1)
 	{
-		x = pixel->x * map->zoom;
-		y = pixel->y * map->zoom;
+		x = pixel->x * map->zoom + map->midx;
+		y = pixel->y * map->zoom + map->midy;
 	}
 	else
 	{
@@ -32,40 +33,49 @@ void	my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map, int zoom)
 	*(unsigned int *)dst = pixel->color;
 }
 
+void	draw_line(t_pixel *coord0, t_pixel *coord1, t_data *img, t_map *map)
+{
+	int		x0;
+	int		y0;
+	int		x1;
+	int		y1;
+	int		dx;
+	int		dy;
+	int		sx;
+	int		sy;
+	int		err;
+	t_pixel	temp;
+	int		e2;
 
-void draw_line(t_pixel *coord0, t_pixel *coord1, t_data *img, t_map *map) {
-    int x0 = coord0->x * map->zoom;
-    int y0 = coord0->y * map->zoom;
-    int x1 = coord1->x * map->zoom;
-    int y1 = coord1->y * map->zoom;
-
-    int dx = abs(x1 - x0);
-    int dy = abs(y1 - y0);
-    int sx = x0 < x1 ? 1 : -1;
-    int sy = y0 < y1 ? 1 : -1;
-    int err = dx - dy;
-	printf("sx = %d\n", sx);
-	printf("sy = %d\n", sy);
-	t_pixel temp;
-
-    while (x0 != x1 || y0 != y1) {
+	x0 = coord0->x * map->zoom + map->midx;
+	y0 = coord0->y * map->zoom + map->midy;
+	x1 = coord1->x * map->zoom + map->midx;
+	y1 = coord1->y * map->zoom + map->midy;
+	dx = abs(x1 - x0);
+	dy = abs(y1 - y0);
+	sx = x0 < x1 ? 1 : -1;
+	sy = y0 < y1 ? 1 : -1;
+	err = dx - dy;
+	while (x0 != x1 || y0 != y1)
+	{
 		temp.x = x0;
 		temp.y = y0;
 		temp.color = RED;
 		if (temp.x < WINDOW_HEIGHT && temp.y < WINDOW_WIDTH)
-        	my_mlx_pixel_put(img, &temp, map, 0);
-        int e2 = 2 * err;
-        if (e2 > -dy) {
-            err -= dy;
-            x0 += sx;
-        }
-        if (e2 < dx) {
-            err += dx;
-            y0 +=sy;
-        }
-    }
+			my_mlx_pixel_put(img, &temp, map, 0);
+		e2 = 2 * err;
+		if (e2 > -dy)
+		{
+			err -= dy;
+			x0 += sx;
+		}
+		if (e2 < dx)
+		{
+			err += dx;
+			y0 += sy;
+		}
+	}
 }
-
 
 void	print_graph_map(t_map *map, t_data *img)
 {
@@ -80,19 +90,14 @@ void	print_graph_map(t_map *map, t_data *img)
 	while (i < map->rows)
 	{
 		j = 0;
-		while (j < map->columns && (map->coord[i][j].y * gap) < WINDOW_WIDTH
-			&& (map->coord[i][j].x * gap) < WINDOW_HEIGHT)
+		while (j < map->columns && (map->coord[i][j].y * gap + map->midy) < WINDOW_WIDTH
+			&& (map->coord[i][j].x * gap + map->midx) < WINDOW_HEIGHT)
 		{
-			// x =rad(((double)map->coord[i][j].x
-			// - (double)map->coord[i][j].z)/sqrt(2));
-			// printf(" cos = %d\n",x );
-			// y =rad(((double)map->coord[i][j].x+2*(double)map->coord[i][j].y+(double)map->coord[i][j].z)/sqrt(6));
-			// printf(" sin = %d\n",y );
 			my_mlx_pixel_put(img, &map->coord[i][j], map, 1);
 			if (i + 1 < map->rows)
-				draw_line(&map->coord[i][j], &map->coord[i+1][j], img, map);
+				draw_line(&map->coord[i][j], &map->coord[i + 1][j], img, map);
 			if (j + 1 < map->columns)
-				draw_line(&map->coord[i][j], &map->coord[i][j+ 1], img, map);
+				draw_line(&map->coord[i][j], &map->coord[i][j + 1], img, map);
 			j++;
 		}
 		i++;
@@ -102,21 +107,30 @@ void	print_graph_map(t_map *map, t_data *img)
 int	key_hook(int keycode, t_vars *vars)
 {
 	printf("keycode = %d\n", keycode);
-	if (keycode == 0xff1b)
-		quit_map("end program", vars);
-	if (keycode == 0x007a && vars->map->zoom < 10)
-		vars->map->zoom += 1;
-	if (keycode == 0x0078 && vars->map->zoom > 0)
-		vars->map->zoom -= 1;
+	if (keycode == ESC_KEY)
+		mlx_loop_end(vars->mlx);
+	if (keycode == 65361 && vars->map->midy >= vars->map->zoom - vars->map->zoom * vars->map->columns)
+		vars->map->midy -= 1 * vars->map->zoom / 4 + 1;
+	if (keycode == 65363 && vars->map->midy < WINDOW_WIDTH - vars->map->zoom)
+		vars->map->midy += 1 * vars->map->zoom / 4 + 1 ;
+	if (keycode == 65362 && vars->map->midx >= vars->map->zoom - vars->map->zoom * vars->map->rows)
+		vars->map->midx -= 1 * vars->map->zoom /4 +1 ;
+	if (keycode == 65364 && vars->map->midx < WINDOW_HEIGHT - vars->map->zoom)
+		vars->map->midx += 1 * vars->map->zoom / 4 + 1;
+	render_next_frame(vars);
 	return (0);
 }
 
 int	mouse_scroll(int button, int x, int y, t_vars *vars)
 {
-	if (button == 4)
-		vars->map->zoom += 1;
+	int	i;
+
+	i = vars->map->zoom / 10 + 1;
+	if (button == 4 && vars->map->zoom < 100000)
+		vars->map->zoom += i;
 	if (button == 5 && vars->map->zoom > 1)
-		vars->map->zoom -= 1;
+		vars->map->zoom -= i;
+	render_next_frame(vars);
 	return (0);
 }
 int	render_next_frame(t_vars *vars)
@@ -136,7 +150,7 @@ int	render_next_frame(t_vars *vars)
 			&new_img->line_length, &new_img->endian);
 	if (!new_img->addr)
 	{
-		free(new_img);                             
+		free(new_img);
 		mlx_destroy_image(vars->mlx, new_img->img);
 		quit_map("Error: Unable to get data address for new_img", vars);
 	}
@@ -155,7 +169,7 @@ int	mlx_handle_input(t_vars *vars)
 {
 	mlx_mouse_hook(vars->win, (int (*)())mouse_scroll, vars);
 	mlx_key_hook(vars->win, &key_hook, vars);
-	return(1);
+	return (1);
 }
 
 int	graphics(t_map *map /* , char *str */)
@@ -178,7 +192,8 @@ int	graphics(t_map *map /* , char *str */)
 	print_graph_map(vars.map, vars.img);
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.img->img, 0, 0);
 	mlx_handle_input(&vars);
-	mlx_loop_hook(vars.mlx, render_next_frame, &vars);
 	mlx_loop(vars.mlx);
+	mlx_destroy_window(vars.mlx, vars.win);
+	mlx_destroy_display(vars.mlx);
 	return (0);
 }
