@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:59:55 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/09 17:01:00 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/10 13:25:48 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,22 @@
 # include <stdio.h>
 # include <unistd.h>
 
+# if defined(__linux__)
+#  include "../mlx_Linux/mlx.h"
+#  define ESC_KEY 0xff1b
+#  define LEFT_KEY 0xff51
+#  define RIGHT_KEY 0xff53
+#  define UP_KEY 0xff52
+#  define DOWN_KEY 0xff54
+# elif defined(__APPLE__)
+#  include "../libmlx/mlx.h"
+#  define ESC_KEY (53)
+#  define LEFT_KEY (123)
+#  define RIGHT_KEY 124
+#  define UP_KEY 126
+#  define DOWN_KEY 125
+# endif
+
 // DEFINE GRAPHICS
 // WINDOW
 # define WINDOW_WIDTH 1920 / 2
@@ -30,11 +46,6 @@
 # define GREEN 0x00FF00
 # define BLUE 0x0000FF
 
-#define ESC_KEY 0xff1b
-#define LEFT_KEY 0xff51
-#define RIGHT_KEY 0xff53
-#define UP_KEY 0xff52
-#define DOWN_KEY 0xff54
 
 typedef struct s_data
 {

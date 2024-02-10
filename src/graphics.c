@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-#include <mlx.h>
+// #include <mlx.h>
 
 void	my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map, int zoom)
 {
@@ -104,35 +104,6 @@ void	print_graph_map(t_map *map, t_data *img)
 	}
 }
 
-int	key_hook(int keycode, t_vars *vars)
-{
-	printf("keycode = %d\n", keycode);
-	if (keycode == ESC_KEY)
-		mlx_loop_end(vars->mlx);
-	if (keycode == 65361 && vars->map->midy >= vars->map->zoom - vars->map->zoom * vars->map->columns)
-		vars->map->midy -= 1 * vars->map->zoom / 4 + 1;
-	if (keycode == 65363 && vars->map->midy < WINDOW_WIDTH - vars->map->zoom)
-		vars->map->midy += 1 * vars->map->zoom / 4 + 1 ;
-	if (keycode == 65362 && vars->map->midx >= vars->map->zoom - vars->map->zoom * vars->map->rows)
-		vars->map->midx -= 1 * vars->map->zoom /4 +1 ;
-	if (keycode == 65364 && vars->map->midx < WINDOW_HEIGHT - vars->map->zoom)
-		vars->map->midx += 1 * vars->map->zoom / 4 + 1;
-	render_next_frame(vars);
-	return (0);
-}
-
-int	mouse_scroll(int button, int x, int y, t_vars *vars)
-{
-	int	i;
-
-	i = vars->map->zoom / 10 + 1;
-	if (button == 4 && vars->map->zoom < 100000)
-		vars->map->zoom += i;
-	if (button == 5 && vars->map->zoom > 1)
-		vars->map->zoom -= i;
-	render_next_frame(vars);
-	return (0);
-}
 int	render_next_frame(t_vars *vars)
 {
 	t_data	*new_img;
@@ -165,6 +136,37 @@ int	render_next_frame(t_vars *vars)
 	return (0);
 }
 
+int	key_hook(int keycode, t_vars *vars)
+{
+	printf("keycode = %d\n", keycode);
+	if (keycode == ESC_KEY)
+		quit_map("stop", vars);
+		// mlx_loop_end(vars->mlx);
+	if (keycode == LEFT_KEY && vars->map->midy >= vars->map->zoom - vars->map->zoom * vars->map->columns)
+		vars->map->midy -= 1 * vars->map->zoom / 4 + 1;
+	if (keycode == RIGHT_KEY && vars->map->midy < WINDOW_WIDTH - vars->map->zoom)
+		vars->map->midy += 1 * vars->map->zoom / 4 + 1 ;
+	if (keycode == UP_KEY && vars->map->midx >= vars->map->zoom - vars->map->zoom * vars->map->rows)
+		vars->map->midx -= 1 * vars->map->zoom /4 +1 ;
+	if (keycode == DOWN_KEY && vars->map->midx < WINDOW_HEIGHT - vars->map->zoom)
+		vars->map->midx += 1 * vars->map->zoom / 4 + 1;
+	render_next_frame(vars);
+	return (0);
+}
+
+int	mouse_scroll(int button, int x, int y, t_vars *vars)
+{
+	int	i;
+
+	i = vars->map->zoom / 10 + 1;
+	if (button == 4 && vars->map->zoom < 100000)
+		vars->map->zoom += i;
+	if (button == 5 && vars->map->zoom > 1)
+		vars->map->zoom -= i;
+	render_next_frame(vars);
+	return (0);
+}
+
 int	mlx_handle_input(t_vars *vars)
 {
 	mlx_mouse_hook(vars->win, (int (*)())mouse_scroll, vars);
@@ -172,7 +174,7 @@ int	mlx_handle_input(t_vars *vars)
 	return (1);
 }
 
-int	graphics(t_map *map /* , char *str */)
+int	graphics(t_map *map)
 {
 	t_vars	vars;
 
@@ -194,6 +196,6 @@ int	graphics(t_map *map /* , char *str */)
 	mlx_handle_input(&vars);
 	mlx_loop(vars.mlx);
 	mlx_destroy_window(vars.mlx, vars.win);
-	mlx_destroy_display(vars.mlx);
+	// mlx_destroy_display(vars.mlx);
 	return (0);
 }
