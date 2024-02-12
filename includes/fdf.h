@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:59:55 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/10 16:21:06 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/12 17:53:24 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 #  define RIGHT_KEY 0xff53
 #  define UP_KEY 0xff52
 #  define DOWN_KEY 0xff54
+#  define L_KEY 0x6c
 # elif defined(__APPLE__)
 #  include "../libmlx/mlx.h"
 #  define ESC_KEY (53)
@@ -74,6 +75,7 @@ typedef struct s_map
 	int				angle;
 	int				midx;
 	int				midy;
+	int				line;
 }					t_map;
 
 typedef struct s_vars

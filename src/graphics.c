@@ -134,9 +134,9 @@ void	print_graph_map(t_map *map, t_data *img)
 			&& (map->coord[map->rows - 1][map->columns - 1].x * gap + map->midx) > 0)
 		{
 			my_mlx_pixel_put(img, &map->coord[i][j], map, 1);
-			if (i + 1 < map->rows)
+			if (i + 1 < map->rows && map->line == 1)
 				draw_line(&map->coord[i][j], &map->coord[i + 1][j], img, map);
-			if (j + 1 < map->columns)
+			if (j + 1 < map->columns && map->line == 1)
 				draw_line(&map->coord[i][j], &map->coord[i][j + 1], img, map);
 			j++;
 		}
@@ -182,18 +182,25 @@ int	key_hook(int keycode, t_vars *vars)
 	if (keycode == ESC_KEY)
 		quit_map("stop", vars);
 	// mlx_loop_end(vars->mlx);
-	if (keycode == LEFT_KEY && vars->map->midy >= vars->map->zoom
+	if (keycode == RIGHT_KEY && vars->map->midy >= vars->map->zoom
 		- vars->map->zoom * vars->map->columns)
 		vars->map->midy -= 1 * vars->map->zoom / 4 + 1;
-	if (keycode == RIGHT_KEY && vars->map->midy < WINDOW_WIDTH
+	if (keycode == LEFT_KEY && vars->map->midy < WINDOW_WIDTH
 		- vars->map->zoom)
 		vars->map->midy += 1 * vars->map->zoom / 4 + 1;
-	if (keycode == UP_KEY && vars->map->midx >= vars->map->zoom
+	if (keycode == DOWN_KEY && vars->map->midx >= vars->map->zoom
 		- vars->map->zoom * vars->map->rows)
 		vars->map->midx -= 1 * vars->map->zoom / 4 + 1;
-	if (keycode == DOWN_KEY && vars->map->midx < WINDOW_HEIGHT
+	if (keycode == UP_KEY && vars->map->midx < WINDOW_HEIGHT
 		- vars->map->zoom)
 		vars->map->midx += 1 * vars->map->zoom / 4 + 1;
+	if (keycode == L_KEY)
+	{
+		if (vars->map->line == 0)
+			vars->map->line = 1;
+		else
+			vars->map->line = 0;
+	}
 	render_next_frame(vars);
 	return (0);
 }

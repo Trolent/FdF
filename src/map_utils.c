@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 15:09:59 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/09 16:38:59 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/12 17:50:44 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	map_init(t_map *map)
 	map->angle = 45;
 	map->midx = 0;
 	map->midy = 0;
+	map->line = 1;
 }
 
 void	print_map(t_map *map) ///// ====> must comment before submiting
