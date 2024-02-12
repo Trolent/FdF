@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+
 // #include <mlx.h>
 
 void	my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map, int zoom)
@@ -29,8 +30,39 @@ void	my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map, int zoom)
 		y = pixel->y;
 		x = pixel->x;
 	}
+	if (x < 0 || y < 0 || x > WINDOW_HEIGHT || y > WINDOW_WIDTH)
+		return;
 	dst = data->addr + (x * data->line_length + y * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = pixel->color;
+}
+
+int ft_round(float num)
+{
+	int	rounded;
+
+	rounded = (int)num;
+	if (num - rounded >= 0.5)
+		rounded++;
+	return (rounded);
+}
+
+int gradient(int color_start, int color_end, int len, int pos)
+{
+	float	increment[3];
+	int		new[3];
+	int		newcolor;
+
+	increment[0] = (double)((color_end >> 16) - \
+					(color_start >> 16)) / (double)len;
+	increment[1] = (double)(((color_end >> 8) & 0xFF) - \
+					((color_start >> 8) & 0xFF)) / (double)len;
+	increment[2] = (double)((color_end & 0xFF) - (color_start & 0xFF)) \
+					/ (double)len;
+	new[0] = (color_start >> 16) + ft_round(pos * increment[0]);
+	new[1] = ((color_start >> 8) & 0xFF) + ft_round(pos * increment[1]);
+	new[2] = (color_start & 0xFF) + ft_round(pos * increment[2]);
+	newcolor = (new[0] << 16) + (new[1] << 8) + new[2];
+	return (newcolor);
 }
 
 void	draw_line(t_pixel *coord0, t_pixel *coord1, t_data *img, t_map *map)
@@ -56,12 +88,17 @@ void	draw_line(t_pixel *coord0, t_pixel *coord1, t_data *img, t_map *map)
 	sx = x0 < x1 ? 1 : -1;
 	sy = y0 < y1 ? 1 : -1;
 	err = dx - dy;
+
+	int pixel = sqrt(dx * dx + dy * dy);
+	int len = pixel;
+
 	while (x0 != x1 || y0 != y1)
 	{
 		temp.x = x0;
 		temp.y = y0;
-		temp.color = RED;
-		if (temp.x < WINDOW_HEIGHT && temp.y < WINDOW_WIDTH)
+		temp.color = gradient(coord0->color, coord1->color, len, len -pixel);
+		if (temp.x > 0 && temp.x < WINDOW_HEIGHT && temp.y < WINDOW_WIDTH
+			&& temp.y > 0)
 			my_mlx_pixel_put(img, &temp, map, 0);
 		e2 = 2 * err;
 		if (e2 > -dy)
@@ -74,6 +111,7 @@ void	draw_line(t_pixel *coord0, t_pixel *coord1, t_data *img, t_map *map)
 			err += dx;
 			y0 += sy;
 		}
+		pixel--;
 	}
 }
 
@@ -91,7 +129,9 @@ void	print_graph_map(t_map *map, t_data *img)
 	{
 		j = 0;
 		while (j < map->columns && (map->coord[i][j].y * gap + map->midy) < WINDOW_WIDTH
-			&& (map->coord[i][j].x * gap + map->midx) < WINDOW_HEIGHT)
+			&& (map->coord[map->rows - 1][map->columns - 1].y * gap + map->midy) > 0
+			&& (map->coord[i][j].x * gap + map->midx) < WINDOW_HEIGHT
+			&& (map->coord[map->rows - 1][map->columns - 1].x * gap + map->midx) > 0)
 		{
 			my_mlx_pixel_put(img, &map->coord[i][j], map, 1);
 			if (i + 1 < map->rows)
@@ -141,14 +181,18 @@ int	key_hook(int keycode, t_vars *vars)
 	printf("keycode = %d\n", keycode);
 	if (keycode == ESC_KEY)
 		quit_map("stop", vars);
-		// mlx_loop_end(vars->mlx);
-	if (keycode == LEFT_KEY && vars->map->midy >= vars->map->zoom - vars->map->zoom * vars->map->columns)
+	// mlx_loop_end(vars->mlx);
+	if (keycode == LEFT_KEY && vars->map->midy >= vars->map->zoom
+		- vars->map->zoom * vars->map->columns)
 		vars->map->midy -= 1 * vars->map->zoom / 4 + 1;
-	if (keycode == RIGHT_KEY && vars->map->midy < WINDOW_WIDTH - vars->map->zoom)
-		vars->map->midy += 1 * vars->map->zoom / 4 + 1 ;
-	if (keycode == UP_KEY && vars->map->midx >= vars->map->zoom - vars->map->zoom * vars->map->rows)
-		vars->map->midx -= 1 * vars->map->zoom /4 +1 ;
-	if (keycode == DOWN_KEY && vars->map->midx < WINDOW_HEIGHT - vars->map->zoom)
+	if (keycode == RIGHT_KEY && vars->map->midy < WINDOW_WIDTH
+		- vars->map->zoom)
+		vars->map->midy += 1 * vars->map->zoom / 4 + 1;
+	if (keycode == UP_KEY && vars->map->midx >= vars->map->zoom
+		- vars->map->zoom * vars->map->rows)
+		vars->map->midx -= 1 * vars->map->zoom / 4 + 1;
+	if (keycode == DOWN_KEY && vars->map->midx < WINDOW_HEIGHT
+		- vars->map->zoom)
 		vars->map->midx += 1 * vars->map->zoom / 4 + 1;
 	render_next_frame(vars);
 	return (0);

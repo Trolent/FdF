@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:59:55 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/10 13:25:48 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/10 16:21:06 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@
 
 // DEFINE GRAPHICS
 // WINDOW
-# define WINDOW_WIDTH 1920 / 2
-# define WINDOW_HEIGHT 1080 / 2
+# define WINDOW_WIDTH 1920 / 3 *2
+# define WINDOW_HEIGHT 1080 / 3 * 2
 // COLORS
 # define WHITE 0xFFFFFF
 # define RED 0xFF0000
