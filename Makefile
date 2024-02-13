@@ -6,7 +6,7 @@
 #    By: trolland <trolland@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 16:23:19 by trolland          #+#    #+#              #
-#    Updated: 2024/02/13 09:45:43 by trolland         ###   ########.fr        #
+#    Updated: 2024/02/13 13:23:32 by trolland         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ LIBFT	= 	libft/libft.a
 MLX_LINUX 	=	mlx_Linux/mlx_Linux.a 
 MLX_MACOS = libmlx/libmlx.a
 
-SRC :=		fdf.c errors.c free_join.c ft_parse.c graphics.c map_utils.c
+SRC :=		fdf.c errors.c free_join.c ft_parse.c graphics.c map_utils.c draw_utils.c
 			
 SRCS := 	$(addprefix src/, $(SRC))
 OBJS := 	$(patsubst src/%.c, object/%.o, $(SRCS))

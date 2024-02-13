@@ -36,51 +36,6 @@ void	my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map, int zoom)
 	*(unsigned int *)dst = pixel->color;
 }
 
-int ft_round(float num)
-{
-	int	rounded;
-
-	rounded = (int)num;
-	if (num - rounded >= 0.5)
-		rounded++;
-	return (rounded);
-}
-double	get_r(int trgb)
-{
-	return ((trgb >> 16) & 0xFF);
-}
-
-double	get_g(int trgb)
-{
-	return ((trgb >> 8) & 0xFF);
-}
-
-double	get_b(int trgb)
-{
-	return (trgb & 0xFF);
-}
-
-int	create_rgb(int r, int g, int b)
-{
-	return ((r << 16) | (g << 8) | (b));
-}
-
-int gradient(int color_start, int color_end, int len, int pos)
-{
-	float	delta[3];
-	int		new[3];
-	int		newcolor;
-
-	delta[0] = (get_r(color_end) - (get_r(color_start))) / len;
-	delta[1] = (get_g(color_end) - (get_g(color_start))) / len;
-	delta[2] = (get_g(color_end) - (get_b(color_start))) / len;
-	new[0] = (get_r(color_start)) + ft_round(pos * delta[0]);
-	new[1] = (get_g(color_start)) + ft_round(pos * delta[1]);
-	new[2] = (get_b(color_start)) + ft_round(pos * delta[2]);
-	newcolor = create_rgb(new[0], new[1], new[2]);
-	return (newcolor);
-}
-
 void	draw_line(t_pixel *coord0, t_pixel *coord1, t_data *img, t_map *map)
 {
 	int		x0;
@@ -112,7 +67,7 @@ void	draw_line(t_pixel *coord0, t_pixel *coord1, t_data *img, t_map *map)
 	{
 		temp.x = x0;
 		temp.y = y0;
-		temp.color = gradient(coord0->color, coord1->color, len, len -pixel);
+		temp.color = gradient(coord0->color, coord1->color, len, len - pixel);
 		if (temp.x > 0 && temp.x < WINDOW_HEIGHT && temp.y < WINDOW_WIDTH
 			&& temp.y > 0)
 			my_mlx_pixel_put(img, &temp, map, 0);
@@ -196,8 +151,8 @@ int	key_hook(int keycode, t_vars *vars)
 {
 	printf("keycode = %d\n", keycode);
 	if (keycode == ESC_KEY)
-		quit_map("stop", vars);
-	// mlx_loop_end(vars->mlx);
+		// quit_map("stop", vars);
+		mlx_loop_end(vars->mlx);
 	if (keycode == RIGHT_KEY && vars->map->midy >= vars->map->zoom
 		- vars->map->zoom * vars->map->columns)
 		vars->map->midy -= 1 * vars->map->zoom / 4 + 1;
@@ -217,6 +172,18 @@ int	key_hook(int keycode, t_vars *vars)
 		else
 			vars->map->line = 0;
 	}
+	// if (keycode == C_KEY)
+	// {
+	// 	if (vars->map->z_color == 0)
+	// 		vars->map->z_color = 1;
+	// 	else
+	// 		vars->map->z_color = 0;
+	// }
+	// if (keycode == 112)
+	// {
+	// 	printf("mid x = %d", vars->map->midx);
+	// 	printf("  &&  mid y = %d\n", vars->map->midy);
+	// }
 	render_next_frame(vars);
 	return (0);
 }
@@ -263,6 +230,6 @@ int	graphics(t_map *map)
 	mlx_handle_input(&vars);
 	mlx_loop(vars.mlx);
 	mlx_destroy_window(vars.mlx, vars.win);
-	// mlx_destroy_display(vars.mlx);
+	mlx_destroy_display(vars.mlx);
 	return (0);
 }

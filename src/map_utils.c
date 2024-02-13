@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 15:09:59 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/12 17:50:44 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/13 13:15:25 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ void	map_init(t_map *map)
 	map->midx = 0;
 	map->midy = 0;
 	map->line = 1;
+	map->z_color = 1;
+	map->z_max = 0;
+	map->z_min = 0;
 }
 
 void	print_map(t_map *map) ///// ====> must comment before submiting
@@ -56,4 +59,6 @@ void	print_map(t_map *map) ///// ====> must comment before submiting
 		printf("\n");
 		i++;
 	}
+	printf("t_max = %d\n", map->z_max);
+	printf("t_min = %d\n", map->z_min);
 }
