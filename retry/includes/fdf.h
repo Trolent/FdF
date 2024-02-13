@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:59:55 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/13 17:19:46 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/13 18:31:57 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 
 // DEFINE GRAPHICS
 // WINDOW
-# define WINDOW_WIDTH 1920 / 3 * 2
-# define WINDOW_HEIGHT 1080 / 3 * 2
+# define WINDOW_WIDTH 1920 
+# define WINDOW_HEIGHT 1080
 // COLORS
 # define WHITE 0xFFFFFF
 # define RED 0xFF0000
@@ -62,8 +62,8 @@ typedef struct s_map
 	int		columns;
 	int		midx;
 	int		midy;
-	int		line;
 	int		zoom;
+	int		line;
 	int		iso;
 	int		angle;
 	int		z_color;

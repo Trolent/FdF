@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:21:25 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/13 16:31:37 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/13 18:26:52 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 #  define DOWN_KEY 0xff54
 #  define L_KEY 0x6c
 #  define C_KEY 0x63
+#  define I_KEY 0x69
 # elif defined(__APPLE__)
 #  define ESC_KEY (53)
 #  define LEFT_KEY (124)

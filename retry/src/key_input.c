@@ -6,12 +6,21 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:22:12 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/13 16:22:34 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/13 18:27:37 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/arrows.h"
 #include "../includes/fdf.h"
+
+
+void	i_key(t_vars *vars)
+{
+	if (vars->map->iso == 0)
+		vars->map->iso = 1;
+	else
+		vars->map->iso = 0;
+}
 
 int	key_map(int keycode)
 {
@@ -29,13 +38,15 @@ int	key_map(int keycode)
 		return (6);
 	if (keycode == C_KEY)
 		return (7);
+	if (keycode == I_KEY)
+		return(8);
 	else
 		return (0);
 }
 
 int	key_hook(int keycode, t_vars *vars)
 {
-	void	(*f[8])(t_vars *vars);
+	void	(*f[9])(t_vars *vars);
 
 	f[0] = &wrong_key;
 	f[1] = &key_esc;
@@ -45,6 +56,7 @@ int	key_hook(int keycode, t_vars *vars)
 	f[5] = &key_up;
 	f[6] = &l_key;
 	f[7] = &c_key;
+	f[8] = &i_key;
 	f[key_map(keycode)](vars);
 	render_next_frame(vars);
 	return (0);

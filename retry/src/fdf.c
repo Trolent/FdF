@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:05:14 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/13 17:12:30 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/13 18:02:30 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int	main(int argc, char **argv)
 			quit(ERR_GEN);
 	}
 	define_zoom(&map);
-	// print_map(&map);
 	graphics(&map);
+	// print_map(&map);
 	free_map(&map, map.rows);
 	return (0);
 }
