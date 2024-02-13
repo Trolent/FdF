@@ -31,10 +31,11 @@
 # elif defined(__APPLE__)
 #  include "../libmlx/mlx.h"
 #  define ESC_KEY (53)
-#  define LEFT_KEY (123)
-#  define RIGHT_KEY 124
-#  define UP_KEY 126
-#  define DOWN_KEY 125
+#  define LEFT_KEY (124)
+#  define RIGHT_KEY 123
+#  define UP_KEY 125
+#  define DOWN_KEY 126
+#  define L_KEY 37
 # endif
 
 // DEFINE GRAPHICS

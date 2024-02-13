@@ -1,6 +1,5 @@
-#include "mlx_Linux/mlx.h"
-#include <error.h>
-#include <mlx.h>
+// #include <error.h>
+#include "includes/fdf.h"
 #include <stdlib.h>
 
 #define WHITE 0xFFFFFF
@@ -8,16 +7,16 @@
 #define GREEN 0x00FF00
 #define BLUE 0x0000FF
 
-typedef struct s_data
+typedef struct s_datas
 {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}			t_data;
+}			t_datas;
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_datas *data, int x, int y, int color)
 {
 	char	*dst;
 
@@ -55,7 +54,7 @@ int	main(void)
 {
 	void *mlx;
 	void *mlx_win;
-	t_data img;
+	t_datas img;
 
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, 750, 750, "Hello world!");

@@ -45,23 +45,39 @@ int ft_round(float num)
 		rounded++;
 	return (rounded);
 }
+double	get_r(int trgb)
+{
+	return ((trgb >> 16) & 0xFF);
+}
+
+double	get_g(int trgb)
+{
+	return ((trgb >> 8) & 0xFF);
+}
+
+double	get_b(int trgb)
+{
+	return (trgb & 0xFF);
+}
+
+int	create_rgb(int r, int g, int b)
+{
+	return ((r << 16) | (g << 8) | (b));
+}
 
 int gradient(int color_start, int color_end, int len, int pos)
 {
-	float	increment[3];
+	float	delta[3];
 	int		new[3];
 	int		newcolor;
 
-	increment[0] = (double)((color_end >> 16) - \
-					(color_start >> 16)) / (double)len;
-	increment[1] = (double)(((color_end >> 8) & 0xFF) - \
-					((color_start >> 8) & 0xFF)) / (double)len;
-	increment[2] = (double)((color_end & 0xFF) - (color_start & 0xFF)) \
-					/ (double)len;
-	new[0] = (color_start >> 16) + ft_round(pos * increment[0]);
-	new[1] = ((color_start >> 8) & 0xFF) + ft_round(pos * increment[1]);
-	new[2] = (color_start & 0xFF) + ft_round(pos * increment[2]);
-	newcolor = (new[0] << 16) + (new[1] << 8) + new[2];
+	delta[0] = (get_r(color_end) - (get_r(color_start))) / len;
+	delta[1] = (get_g(color_end) - (get_g(color_start))) / len;
+	delta[2] = (get_g(color_end) - (get_b(color_start))) / len;
+	new[0] = (get_r(color_start)) + ft_round(pos * delta[0]);
+	new[1] = (get_g(color_start)) + ft_round(pos * delta[1]);
+	new[2] = (get_b(color_start)) + ft_round(pos * delta[2]);
+	newcolor = create_rgb(new[0], new[1], new[2]);
 	return (newcolor);
 }
 
