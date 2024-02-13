@@ -259,6 +259,6 @@ int	graphics(t_map *map)
 	mlx_handle_input(&vars);
 	mlx_loop(vars.mlx);
 	mlx_destroy_window(vars.mlx, vars.win);
-	mlx_destroy_display(vars.mlx);
+	// mlx_destroy_display(vars.mlx);
 	return (0);
 }
