@@ -218,7 +218,7 @@ int define_iso(t_map *map)
 			map->coord[i][j].iso_x = (map->coord[i][j].x - map->coord[i][j].y)
 				* cos(map->angle_x);
 			map->coord[i][j].iso_y = (map->coord[i][j].x + map->coord[i][j].y)
-				* cos(map->angle_x) - map->coord[i][j].z();
+				* cos(map->angle_x) - map->coord[i][j].z * cos(map->angle_z);
 			j++;
 		}
 		i++;
