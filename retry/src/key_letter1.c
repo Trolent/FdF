@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:22:27 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/14 11:38:34 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/14 12:06:23 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	i_key(t_vars *vars)
 		vars->map->iso = 1;
 		vars->map->top = 0;
 	}
+	else
+		return ;
 	return ;
 }
 
@@ -29,5 +31,7 @@ void	t_key(t_vars *vars)
 		vars->map->top = 1;
 		vars->map->iso = 0;
 	}
+	else
+		return ;
 	return ;
 }
