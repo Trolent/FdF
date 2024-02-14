@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:22:27 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/14 12:10:38 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/14 12:11:19 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	i_key(t_vars *vars)
 {
 	if (vars->map->top == 1)
 	{
+		printf("reached\n");
 		vars->map->iso = 1;
 		vars->map->top = 0;
 	}
