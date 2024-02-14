@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_letter.c                                       :+:      :+:    :+:   */
+/*   key_letter1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:22:27 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/14 11:28:31 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/14 11:31:03 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	key_right(t_vars *vars)
+
+void	i_key(t_vars *vars)
 {
-		vars->map->midy -= 1 * vars->map->zoom / 4 + 1;
+	if (vars->map->iso == 0)
+	{
+		vars->map->iso = 1;
+		vars->map->top = 0;
+	}
 }
 
-void	key_left(t_vars *vars)
+void	t_key(t_vars *vars)
 {
-		vars->map->midy += 1 * vars->map->zoom / 4 + 1;
-}
-
-void	key_down(t_vars *vars)
-{
-		vars->map->midx -= 1 * vars->map->zoom / 4 + 1;
-}
-
-void	key_up(t_vars *vars)
-{
-		vars->map->midx += 1 * vars->map->zoom / 4 + 1;
+	if (vars->map->top == 0)
+	{
+		vars->map->top = 1;
+		vars->map->iso = 0;
+	}
 }

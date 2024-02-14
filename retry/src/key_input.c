@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:22:12 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/14 10:43:54 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/14 11:30:58 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,6 @@
 #include "../includes/fdf.h"
 
 
-void	i_key(t_vars *vars)
-{
-	if (vars->map->iso == 0)
-	{
-		vars->map->iso = 1;
-		vars->map->top = 0;
-	}
-}
-
-void	t_key(t_vars *vars)
-{
-	if (vars->map->top == 0)
-	{
-		vars->map->top = 1;
-		vars->map->iso = 0;
-	}
-}
 
 int	key_map(int keycode)
 {
