@@ -86,9 +86,11 @@ void	draw_line(t_pixel *coord0, t_pixel *coord1, t_data *img, t_map *map)
 		if (map->z_color == 1)
 			temp.color = gradient(coord0->alt_color, coord1->alt_color, len, len
 					- pixel);
-		else
+		else{
 			temp.color = gradient(coord0->color, coord1->color, len, len
 					- pixel);
+		printf("reached\n");
+		}
 		if (temp.x > 0 && temp.x < WINDOW_HEIGHT && temp.y < WINDOW_WIDTH
 			&& temp.y > 0)
 			my_mlx_pixel_put(img, &temp, map, 0);
@@ -111,10 +113,7 @@ void	draw(t_data *img, t_map *map, int i, int j)
 {
 	my_mlx_pixel_put(img, &map->coord[i][j], map, 1);
 	if (i + 1 < map->rows && map->line == 1)
-	{
-	printf("reached\n");
 		draw_line(&map->coord[i][j], &map->coord[i + 1][j], img, map);
-	}
 	if (j + 1 < map->columns && map->line == 1)
 		draw_line(&map->coord[i][j], &map->coord[i][j + 1], img, map);
 }
