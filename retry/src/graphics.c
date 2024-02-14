@@ -87,7 +87,8 @@ void	draw_line(t_pixel *coord0, t_pixel *coord1, t_data *img, t_map *map)
 		if (map->z_color == 1)
 			temp.color = gradient(coord0->alt_color, coord1->alt_color, len, len
 					- pixel);
-		else{
+		else
+		{
 			temp.color = gradient(coord0->color, coord1->color, len, len
 					- pixel);
 		}
