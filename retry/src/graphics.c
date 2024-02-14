@@ -107,7 +107,6 @@ void	draw_line(t_pixel *coord0, t_pixel *coord1, t_data *img, t_map *map)
 		}
 		pixel--;
 	}
-	printf(" temp.color = %d \n", temp.color);
 }
 
 void	draw(t_data *img, t_map *map, int i, int j)
