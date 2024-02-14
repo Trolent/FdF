@@ -79,11 +79,11 @@ void	draw_line(t_pixel *coord0, t_pixel *coord1, t_data *img, t_map *map)
 	err = dx - dy;
 	pixel = sqrt(dx * dx + dy * dy);
 	len = pixel;
+		printf(" z_color == %d\n", map->z_color);
 	while (x0 != x1 || y0 != y1)
 	{
 		temp.x = x0;
 		temp.y = y0;
-		printf(" z_color == %d\n")
 		if (map->z_color == 1)
 			temp.color = gradient(coord0->alt_color, coord1->alt_color, len, len
 					- pixel);
