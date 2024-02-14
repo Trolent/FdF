@@ -97,8 +97,8 @@ void	draw_line(t_pixel *coord0, t_pixel *coord1, t_data *img, t_map *map)
 			&& temp.y > 0)
 		{
 			int j = 0;
-			if (j = 1)
-			
+			if (j == 1)
+				printf("reached\n");
 			j++;
 			my_mlx_pixel_put(img, &temp, map, 0);
 		}
