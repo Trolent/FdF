@@ -33,9 +33,9 @@ void	map_init(t_map *map)
 	map->zoom = 8;
 	map->line = 1;
 	map->iso = 0;
-	map->angle[X]= ;
-	map->angle[Y]= 330;
-	map->angle[Z]= 30;
+	map->angle[X]= M_PI / 4;
+	map->angle[Y]= M_PI / 4;
+	map->angle[Z]= M_PI / 4;
 	map->z_color = 1;
 	map->z_max = 0;
 	map->z_min = 0;
