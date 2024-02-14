@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:22:12 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/14 12:13:00 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/14 12:14:54 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	key_hook(int keycode, t_vars *vars)
 	f[9] = &t_key;
 	printf("keycode = %d\n", keycode);
 	f[key_map(keycode)](vars);
+	printf("out\n");
 	render_next_frame(vars);
 	return (0);
 }
