@@ -6,14 +6,12 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:22:12 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/14 11:30:58 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/14 12:13:00 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/arrows.h"
 #include "../includes/fdf.h"
-
-
 
 int	key_map(int keycode)
 {
@@ -32,16 +30,16 @@ int	key_map(int keycode)
 	if (keycode == C_KEY)
 		return (7);
 	if (keycode == I_KEY)
-		return(8);
+		return (8);
 	if (keycode == T_KEY)
-		return(8);
+		return (9);
 	else
 		return (0);
 }
 
 int	key_hook(int keycode, t_vars *vars)
 {
-	void	(*f[10])(t_vars *vars);
+	void	(*f[10])(t_vars * vars);
 
 	f[0] = &wrong_key;
 	f[1] = &key_esc;
