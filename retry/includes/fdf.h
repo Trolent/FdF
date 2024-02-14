@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:59:55 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/14 12:49:46 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/14 12:51:02 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <unistd.h>
 # if defined(__linux__)
 #  include "../mlx_Linux/mlx.h"
-#  define WINDOW_WIDTH 1920 
+#  define WINDOW_WIDTH 1920
 #  define WINDOW_HEIGHT 1080
 # elif defined(__APPLE__)
 #  include "../libmlx/mlx.h"
@@ -29,12 +29,15 @@
 #  define WINDOW_HEIGHT 1080 / 3 * 2
 # endif
 
-
 // COLORS
 # define WHITE 0xFFFFFF
 # define RED 0xFF0000
 # define GREEN 0x00FF00
 # define BLUE 0x0000FF
+
+# define X 0
+# define Y 1
+# define Z 2
 
 typedef struct s_data
 {
@@ -61,15 +64,13 @@ typedef struct s_map
 	t_pixel	**coord;
 	int		rows;
 	int		columns;
-	bool		top;
+	bool	top;
 	int		midx;
 	int		midy;
 	int		zoom;
 	int		line;
-	bool		iso;
-	float		angle_x;
-	float		angle_y;
-	float		angle_z;
+	bool	iso;
+	float	angle[3];
 	int		z_color;
 	int		z_min;
 	int		z_max;
@@ -88,7 +89,6 @@ void		free_map(t_map *map, int lines);
 char		*free_join(char *s1, char *s2);
 void		free_map(t_map *map, int lines);
 void		map_init(t_map *map);
-
 
 // WINDOW / MLX MANAGEMENT //
 int			quit(char *s);
