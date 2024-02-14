@@ -241,13 +241,13 @@ int	define_alt_color(t_map *map)
 		j = 0;
 		while (j < map->columns)
 		{
-			if (map->z_max = map->z_min)
+			if (map->z_max = map->z_min || map->coord[i][j].z == 0)
 				map->coord[i][j].alt_color = WHITE;
-			else if (map->coord[i][j] > 0)
+			else if (map->coord[i][j].z > 0)
 				map->coord[i][j].alt_color = gradient(map->z_color, RED,
 						map->z_max - map->z_min, map->coord[i][j].z
 						- map->z_min);
-			else if (map->coord[i][j] < 0 )
+			else if (map->coord[i][j].z < 0 )
 				map->coord[i][j].alt_color = gradient(map->z_color, BLUE,
 						map->z_max - map->z_min, map->coord[i][j].z
 						- map->z_min);
