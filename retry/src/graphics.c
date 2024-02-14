@@ -111,7 +111,10 @@ void	draw(t_data *img, t_map *map, int i, int j)
 {
 	my_mlx_pixel_put(img, &map->coord[i][j], map, 1);
 	if (i + 1 < map->rows && map->line == 1)
+	{
+	printf("reached\n");
 		draw_line(&map->coord[i][j], &map->coord[i + 1][j], img, map);
+	}
 	if (j + 1 < map->columns && map->line == 1)
 		draw_line(&map->coord[i][j], &map->coord[i][j + 1], img, map);
 }
