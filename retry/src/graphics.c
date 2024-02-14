@@ -23,12 +23,12 @@ void	my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map, int zoom, int j)
 	printf("j = %d\n", j);
 	if (zoom == 1)
 	{
-		if (map->iso == 0)
+		if (map->top == 1)
 		{
 			x = pixel->x * map->zoom + map->midx;
 			y = pixel->y * map->zoom + map->midy;
 		}
-		else
+		else if (map->iso == 1)
 		{
 			x = pixel->iso_x * map->zoom + map->midx;
 			y = pixel->iso_y * map->zoom + map->midy;
@@ -38,13 +38,13 @@ void	my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map, int zoom, int j)
 	{
 		if (map->iso == 1)
 		{
-			y = pixel->y;
-			x = pixel->x;
-		}
-		else
-		{
 			y = pixel->iso_y;
 			x = pixel->iso_x;
+		}
+		else if (map->top == 1)
+		{
+			y = pixel->y;
+			x = pixel->x;
 		}
 	}
 	if (x < 0 || y < 0 || x > WINDOW_HEIGHT || y > WINDOW_WIDTH)
