@@ -166,9 +166,9 @@ void print_iso_view(t_map *map, t_data *img)
 
 void	print_graph_map(t_map *map, t_data *img)
 {
-	if (map->iso == 0)
+	if (map->top == 1)
 		print_top_view(map, img);
-	else
+	else if (map->iso == 0)
 		print_iso_view(map, img);
 }
 

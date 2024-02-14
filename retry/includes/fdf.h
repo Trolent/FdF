@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:59:55 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/13 18:31:57 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/14 10:41:09 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,15 @@
 # include <unistd.h>
 # if defined(__linux__)
 #  include "../mlx_Linux/mlx.h"
+#  define WINDOW_WIDTH 1920 
+#  define WINDOW_HEIGHT 1080
 # elif defined(__APPLE__)
 #  include "../libmlx/mlx.h"
+#  define WINDOW_WIDTH 1920 / 3 * 2
+#  define WINDOW_HEIGHT 1080 / 3 * 2
 # endif
 
-// DEFINE GRAPHICS
-// WINDOW
-# define WINDOW_WIDTH 1920 
-# define WINDOW_HEIGHT 1080
+
 // COLORS
 # define WHITE 0xFFFFFF
 # define RED 0xFF0000
@@ -60,6 +61,7 @@ typedef struct s_map
 	t_pixel	**coord;
 	int		rows;
 	int		columns;
+	int		top;
 	int		midx;
 	int		midy;
 	int		zoom;

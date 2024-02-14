@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:21:25 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/13 18:26:52 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/14 10:45:09 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 #  define L_KEY 0x6c
 #  define C_KEY 0x63
 #  define I_KEY 0x69
+#  define T_KEY 0x74
 # elif defined(__APPLE__)
 #  define ESC_KEY (53)
 #  define LEFT_KEY (124)
@@ -31,6 +32,9 @@
 #  define UP_KEY 125
 #  define DOWN_KEY 126
 #  define L_KEY 37
+#  define C_KEY 34
+#  define I_KEY 8
+#  define T_KEY 17
 # endif
 
 void	key_right(t_vars *vars);

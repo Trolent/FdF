@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 15:09:59 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/13 18:31:53 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/14 10:46:53 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@ void	map_init(t_map *map)
 	map->coord = NULL;
 	map->rows = 0;
 	map->columns = 0;
+	map->top =1;
 	map->midx = 0;
 	map->midy = 0;
 	map->zoom = 8;
 	map->line = 1;
-	map->iso = 1;
+	map->iso = 0;
 	map->angle = M_PI/4;
 	map->z_color = 1;
 	map->z_max = 0;
