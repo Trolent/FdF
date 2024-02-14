@@ -67,6 +67,7 @@ void	draw_line(t_pixel *coord0, t_pixel *coord1, t_data *img, t_map *map)
 	int		e2;
 	int		pixel;
 	int		len;
+	printf("")
 
 	x0 = coord0->x * map->zoom + map->midx;
 	y0 = coord0->y * map->zoom + map->midy;
