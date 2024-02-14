@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:22:27 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/14 12:21:01 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/14 12:22:01 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,16 @@
 
 void	i_key(t_vars *vars)
 {
-	if (vars->map->top == 1)
-	{
-		vars->map->iso = 1;
-		vars->map->top = 0;
-	}
-	else
+	if (vars->map->iso == 1)
 		return ;
-	return ;
+	vars->map->iso = 1;
+	vars->map->top = 0;
 }
 
 void	t_key(t_vars *vars)
 {
-	if (vars->map->iso == 1)
-	{
-		vars->map->top = 1;
-		vars->map->iso = 0;
-	}
-	else
+	if (vars->map->top == 1)
 		return ;
-	return ;
+	vars->map->top = 1;
+	vars->map->iso = 0;
 }
