@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:59:55 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/14 12:36:10 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/14 12:49:46 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,12 @@ typedef struct s_map
 	t_pixel	**coord;
 	int		rows;
 	int		columns;
-	int		top;
+	bool		top;
 	int		midx;
 	int		midy;
 	int		zoom;
 	int		line;
-	int		iso;
+	bool		iso;
 	float		angle_x;
 	float		angle_y;
 	float		angle_z;
