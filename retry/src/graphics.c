@@ -242,9 +242,10 @@ int	define_alt_color(t_map *map)
 		while (j < map->columns)
 		{
 			if (map->z_max = map->z_min)
-				map->coord[i][j] = WHITE;
+				map->coord[i][j].alt_color = WHITE;
 			else
-				map->coord[i][j].alt_color = gradient(map->z_color, BLUE, map->z_max - map->z_min, map->coord[i][j].z
+				map->coord[i][j].alt_color = gradient(map->z_color, BLUE,
+						map->z_max - map->z_min, map->coord[i][j].z
 						- map->z_min);
 			j++;
 		}
