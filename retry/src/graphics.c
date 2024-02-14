@@ -49,6 +49,7 @@ void	my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map, int zoom, int j)
 	}
 	if (x < 0 || y < 0 || x > WINDOW_HEIGHT || y > WINDOW_WIDTH)
 		return ;
+	printf("reached\n");
 	dst = data->addr + (x * data->line_length + y * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = pixel->color;
 }
