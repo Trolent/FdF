@@ -91,7 +91,7 @@ void	draw_line(t_pixel *coord0, t_pixel *coord1, t_data *img, t_map *map)
 			temp.color = gradient(coord0->color, coord1->color, len, len
 					- pixel);
 		}
-		printf( temp.x)
+		printf("tempx = %d .  tamp.y = %d\n", temp.x, temp.y);
 		if (temp.x > 0 && temp.x < WINDOW_HEIGHT && temp.y < WINDOW_WIDTH
 			&& temp.y > 0)
 			my_mlx_pixel_put(img, &temp, map, 0);
