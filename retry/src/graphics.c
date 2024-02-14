@@ -244,11 +244,11 @@ int	define_alt_color(t_map *map)
 			if (map->z_max == map->z_min || map->coord[i][j].z == 0)
 				map->coord[i][j].alt_color = WHITE;
 			else if (map->coord[i][j].z > 0)
-				map->coord[i][j].alt_color = gradient(map->z_color, RED,
+				map->coord[i][j].alt_color = gradient(WHITE, RED,
 						map->z_max - map->z_min, map->coord[i][j].z
 						- map->z_min);
 			else if (map->coord[i][j].z < 0 )
-				map->coord[i][j].alt_color = gradient(map->z_color, BLUE ^ 0xFF,
+				map->coord[i][j].alt_color = gradient(BLUE, WHITE,
 						map->z_max - map->z_min, map->coord[i][j].z
 						- map->z_min);
 			j++;
