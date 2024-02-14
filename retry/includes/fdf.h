@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:59:55 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/14 10:41:09 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/14 12:02:57 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ typedef struct s_map
 	int		line;
 	int		iso;
 	int		angle;
+	map->angle.x= M_PI / 4;
+	map->angle.x= M_PI / 4;
 	int		z_color;
 	int		z_min;
 	int		z_max;
