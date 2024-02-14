@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:21:25 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/14 10:45:09 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/14 11:31:45 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	key_up(t_vars *vars);
 void	key_esc(t_vars *vars);
 void	l_key(t_vars *vars);
 void	c_key(t_vars *vars);
+void	i_key(t_vars *vars);
+void	t_key(t_vars *vars);
 void    wrong_key(t_vars *vars);
 
 #endif
