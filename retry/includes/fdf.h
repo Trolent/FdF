@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:59:55 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/14 12:51:02 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/14 12:52:07 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <math.h>
 # include <stdio.h>
 # include <unistd.h>
+# include <stdbool.h>
+
 # if defined(__linux__)
 #  include "../mlx_Linux/mlx.h"
 #  define WINDOW_WIDTH 1920
