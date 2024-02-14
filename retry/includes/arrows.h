@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:21:25 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/14 11:31:45 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/14 12:19:15 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 #  define UP_KEY 125
 #  define DOWN_KEY 126
 #  define L_KEY 37
-#  define C_KEY 34
-#  define I_KEY 8
+#  define C_KEY 8
+#  define I_KEY 34
 #  define T_KEY 17
 # endif
 
