@@ -249,7 +249,7 @@ int	define_alt_color(t_map *map)
 						- map->z_min);
 			else if (map->coord[i][j].z < 0 )
 				map->coord[i][j].alt_color = gradient(map->z_color, BLUE,
-						map->z_max - map->z_min, map->coord[i][j].z
+						map->z_min + map->z_max, map->coord[i][j].z
 						- map->z_min);
 			j++;
 		}
