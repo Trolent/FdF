@@ -168,7 +168,7 @@ void	print_iso_view(t_map *map, t_data *img)
 
 void	print_graph_map(t_map *map, t_data *img)
 {
-	printf("iso = %d    && top = %d\n", map->iso, map->top);
+	printf("iso = %d    &&    top = %d    && line = %d\n", map->iso, map->top, map->line);
 	if (map->top == 1 && map->iso == 0)
 		print_top_view(map, img);
 	else if (map->iso == 1 && map->top == 0)
