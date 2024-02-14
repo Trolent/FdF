@@ -6,7 +6,7 @@
 #    By: trolland <trolland@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 16:23:19 by trolland          #+#    #+#              #
-#    Updated: 2024/02/13 16:37:24 by trolland         ###   ########.fr        #
+#    Updated: 2024/02/14 11:30:05 by trolland         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ MLX_LINUX 	=	mlx_Linux/mlx_Linux.a
 MLX_MACOS = libmlx/libmlx.a
 
 SRC :=		fdf.c errors.c free_join.c ft_parse.c graphics.c map_utils.c \
-			draw_utils.c key_input.c key_arrow.c key_other.c create_win_mlx.c 
+			draw_utils.c key_input.c key_arrow.c key_letter0.c key_letter1.c \
+			create_win_mlx.c 
 			
 SRCS := 	$(addprefix src/, $(SRC))
 OBJS := 	$(patsubst src/%.c, object/%.o, $(SRCS))
