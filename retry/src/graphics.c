@@ -35,7 +35,7 @@ void	my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map, int zoom)
 	}
 	else
 	{
-		if(map->iso == 1)
+		if (map->iso == 1)
 		{
 			y = pixel->y;
 			x = pixel->x;
@@ -83,10 +83,12 @@ void	draw_line(t_pixel *coord0, t_pixel *coord1, t_data *img, t_map *map)
 	{
 		temp.x = x0;
 		temp.y = y0;
-		if(map->z_color == 1)
-			temp.color = gradient(coord0->alt_color, coord1->alt_color, len, len - pixel);
+		if (map->z_color == 1)
+			temp.color = gradient(coord0->alt_color, coord1->alt_color, len, len
+					- pixel);
 		else
-			temp.color = gradient(coord0->color, coord1->color, len, len - pixel);
+			temp.color = gradient(coord0->color, coord1->color, len, len
+					- pixel);
 		if (temp.x > 0 && temp.x < WINDOW_HEIGHT && temp.y < WINDOW_WIDTH
 			&& temp.y > 0)
 			my_mlx_pixel_put(img, &temp, map, 0);
@@ -105,7 +107,7 @@ void	draw_line(t_pixel *coord0, t_pixel *coord1, t_data *img, t_map *map)
 	}
 }
 
-void draw(t_data *img, t_map *map, int i, int j)
+void	draw(t_data *img, t_map *map, int i, int j)
 {
 	my_mlx_pixel_put(img, &map->coord[i][j], map, 1);
 	if (i + 1 < map->rows && map->line == 1)
@@ -114,8 +116,8 @@ void draw(t_data *img, t_map *map, int i, int j)
 		draw_line(&map->coord[i][j], &map->coord[i][j + 1], img, map);
 }
 
-void print_top_view(t_map *map, t_data *img)
-{	
+void	print_top_view(t_map *map, t_data *img)
+{
 	int	i;
 	int	j;
 	int	gap;
@@ -139,8 +141,8 @@ void print_top_view(t_map *map, t_data *img)
 	}
 }
 
-void print_iso_view(t_map *map, t_data *img)
-{	
+void	print_iso_view(t_map *map, t_data *img)
+{
 	int	i;
 	int	j;
 	int	gap;
@@ -166,7 +168,7 @@ void print_iso_view(t_map *map, t_data *img)
 
 void	print_graph_map(t_map *map, t_data *img)
 {
-	printf ("iso = %d    && top = %d\n", map->iso, map->top);
+	printf("iso = %d    && top = %d\n", map->iso, map->top);
 	if (map->top == 1 && map->iso == 0)
 		print_top_view(map, img);
 	else if (map->iso == 1 && map->top == 0)
@@ -205,7 +207,7 @@ int	render_next_frame(t_vars *vars)
 	return (0);
 }
 
-int define_iso(t_map *map)
+int	define_iso(t_map *map)
 {
 	int	i;
 	int	j;
@@ -217,7 +219,8 @@ int define_iso(t_map *map)
 		while (j < map->columns)
 		{
 			map->coord[i][j].iso_x = (map->coord[i][j].x - map->coord[i][j].y)
-				* cos(map->angle[X]) - map->coord[i][j].z * sin(map->angle[Z] + 1);
+				* cos(map->angle[X]) - map->coord[i][j].z * sin(map->angle[Z]
+					+ 1);
 			map->coord[i][j].iso_y = (map->coord[i][j].x + map->coord[i][j].y)
 				* cos(map->angle[Y]);
 			j++;
@@ -227,7 +230,7 @@ int define_iso(t_map *map)
 	return (0);
 }
 
-int define_alt_color(t_map *map)
+int	define_alt_color(t_map *map)
 {
 	int	i;
 	int	j;
@@ -238,9 +241,11 @@ int define_alt_color(t_map *map)
 		j = 0;
 		while (j < map->columns)
 		{
-			if (map->z_max = map->z)
-			map->coord[i][j].alt_color = gradient(map->z_color, BLUE,
-					map->z_max - map->z_min, map->coord[i][j].z - map->z_min);
+			if (map->z_max = map->z_min)
+				map->coord[i][j] = WHITE;
+			else
+				map->coord[i][j].alt_color = gradient(map->z_color, BLUE, map->z_max - map->z_min, map->coord[i][j].z
+						- map->z_min);
 			j++;
 		}
 		i++;
