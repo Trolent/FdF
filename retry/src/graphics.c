@@ -68,7 +68,6 @@ void	draw_line(t_pixel *coord0, t_pixel *coord1, t_data *img, t_map *map)
 	int		e2;
 	int		pixel;
 	int		len;
-	printf("width %d, heigh %d \n", WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	x0 = coord0->x * map->zoom + map->midx;
 	y0 = coord0->y * map->zoom + map->midy;
@@ -83,7 +82,6 @@ void	draw_line(t_pixel *coord0, t_pixel *coord1, t_data *img, t_map *map)
 	len = pixel;
 
 	int j = 0;
-		printf(" z_color == %d\n", map->z_color);
 	while (x0 != x1 || y0 != y1)
 	{
 		temp.x = x0;
@@ -96,7 +94,6 @@ void	draw_line(t_pixel *coord0, t_pixel *coord1, t_data *img, t_map *map)
 			temp.color = gradient(coord0->color, coord1->color, len, len
 					- pixel);
 		}
-		printf("tempx = %d .  tamp.y = %d .   temp.color = %d\n", temp.x, temp.y, temp.color);
 		if (temp.x > 0 && temp.x < WINDOW_HEIGHT && temp.y < WINDOW_WIDTH
 			&& temp.y > 0)
 		{
@@ -179,7 +176,6 @@ void	print_iso_view(t_map *map, t_data *img)
 
 void	print_graph_map(t_map *map, t_data *img)
 {
-	printf("iso = %d    &&    top = %d    && line = %d\n", map->iso, map->top, map->line);
 	if (map->top == 1 && map->iso == 0)
 		print_top_view(map, img);
 	else if (map->iso == 1 && map->top == 0)
