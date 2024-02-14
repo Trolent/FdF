@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:22:12 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/14 12:18:04 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/14 12:18:36 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,47 +17,47 @@ int	key_map(int keycode)
 {
 	if (keycode == ESC_KEY)
 	{
-		printf("esc"\n);
+		printf("esc\n");
 		return (1);
 	}
 	if (keycode == RIGHT_KEY)
 	{
-		printf("right"\n);
+		printf("right\n");
 		return (2);
 	}
 	if (keycode == LEFT_KEY)
 	{
-		printf("left"\n);
+		printf("left\n");
 		return (3);
 	}
 	if (keycode == DOWN_KEY)
 	{
-		printf("down"\n);
+		printf("down\n");
 		return (4);
 	}
 	if (keycode == UP_KEY)
 	{
-		printf(""\n);
+		printf("up\n");
 		return (5);
 	}
 	if (keycode == L_KEY)
 	{
-		printf(""\n);
+		printf("L\n");
 		return (6);
 	}
 	if (keycode == C_KEY)
 	{
-		printf(""\n);
+		printf("C\n");
 		return (7);
 	}
 	if (keycode == I_KEY)
 	{
-		printf(""\n);
+		printf("I\n");
 		return (8);
 	}
 	if (keycode == T_KEY)
 	{
-		printf(""\n);
+		printf("T\n");
 		return (9);
 	}
 	else
