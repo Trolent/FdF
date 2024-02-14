@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:22:12 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/14 12:18:36 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/14 12:20:47 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,50 +16,23 @@
 int	key_map(int keycode)
 {
 	if (keycode == ESC_KEY)
-	{
-		printf("esc\n");
 		return (1);
-	}
 	if (keycode == RIGHT_KEY)
-	{
-		printf("right\n");
 		return (2);
-	}
 	if (keycode == LEFT_KEY)
-	{
-		printf("left\n");
 		return (3);
-	}
 	if (keycode == DOWN_KEY)
-	{
-		printf("down\n");
 		return (4);
-	}
 	if (keycode == UP_KEY)
-	{
-		printf("up\n");
 		return (5);
-	}
 	if (keycode == L_KEY)
-	{
-		printf("L\n");
 		return (6);
-	}
 	if (keycode == C_KEY)
-	{
-		printf("C\n");
 		return (7);
-	}
 	if (keycode == I_KEY)
-	{
-		printf("I\n");
 		return (8);
-	}
 	if (keycode == T_KEY)
-	{
-		printf("T\n");
 		return (9);
-	}
 	else
 		return (0);
 }
@@ -80,7 +53,6 @@ int	key_hook(int keycode, t_vars *vars)
 	f[9] = &t_key;
 	printf("keycode = %d\n", keycode);
 	f[key_map(keycode)](vars);
-	// printf("out\n");
 	render_next_frame(vars);
 	return (0);
 }
