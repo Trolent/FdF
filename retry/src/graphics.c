@@ -224,6 +224,7 @@ int define_iso(t_map *map)
 		i++;
 	}
 	map->iso = 1;
+	map->top = 0;
 	return (0);
 }
 
