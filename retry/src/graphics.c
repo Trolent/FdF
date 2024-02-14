@@ -95,7 +95,13 @@ void	draw_line(t_pixel *coord0, t_pixel *coord1, t_data *img, t_map *map)
 		printf("tempx = %d .  tamp.y = %d .   temp.color = %d\n", temp.x, temp.y, temp.color);
 		if (temp.x > 0 && temp.x < WINDOW_HEIGHT && temp.y < WINDOW_WIDTH
 			&& temp.y > 0)
+		{
+			int j = 0;
+			if (j = 1)
+			
+			j++;
 			my_mlx_pixel_put(img, &temp, map, 0);
+		}
 		e2 = 2 * err;
 		if (e2 > -dy)
 		{
