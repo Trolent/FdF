@@ -20,7 +20,7 @@ void	my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map, int zoom, int j)
 	int		x;
 	int		y;
 
-	
+	printf("j = %d\n", j);
 	if (zoom == 1)
 	{
 		if (map->iso == 0)
