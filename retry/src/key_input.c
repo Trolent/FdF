@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:22:12 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/15 21:11:22 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/15 22:13:16 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	key_map(int keycode)
 
 int	key_hook(int keycode, t_vars *vars)
 {
-	int	(*f[10])(t_vars * vars);
+	int	(*f[10])(t_vars *vars);
 
 	f[0] = &wrong_key;
 	f[1] = &key_esc;
@@ -76,6 +76,6 @@ int	mlx_handle_input(t_vars *vars)
 {
 	mlx_mouse_hook(vars->win, (int (*)())mouse_scroll, vars);
 	mlx_key_hook(vars->win, &key_hook, vars);
-	mlx_hook(vars->win, 17, 1L<<3, &cross_close, vars);
+	mlx_hook(vars->win, 17, 1L << 3, &cross_close, vars);
 	return (1);
 }

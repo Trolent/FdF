@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:04:58 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/15 20:38:04 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/15 22:16:10 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,29 +38,29 @@ int	special_atoi(const char *str, int *index)
 	return (res * neg);
 }
 
-int strvalue(char c)
+int	strvalue(char c)
 {
-	int i;
-	char *lower;
-	char *caps;
+	int		i;
+	char	*lower;
+	char	*caps;
 
-	i =0;
+	i = 0;
 	lower = "0123456789abcdef";
 	caps = "0123456789ABCDEF";
-	while(lower[i])
+	while (lower[i])
 	{
 		if (c == lower[i])
-			return(i);
+			return (i);
 		i++;
 	}
 	i = 0;
-	while(caps[i])
+	while (caps[i])
 	{
 		if (c == caps[i])
-			return(i);
+			return (i);
 		i++;
 	}
-	return(-1);
+	return (-1);
 }
 
 unsigned int	special_atoi_hex(const char *str, int *index)
@@ -70,8 +70,8 @@ unsigned int	special_atoi_hex(const char *str, int *index)
 
 	i = 0;
 	res = 0;
-	if (str[i] == ',' && str[i+1] == '0' && str[i+2] == 'x')
-		i+=3;
+	if (str[i] == ',' && str[i + 1] == '0' && str[i + 2] == 'x')
+		i += 3;
 	while ((str[i] >= '0' && str[i] <= '9') || (str[i] >= 'a' && str[i] <= 'f')
 		|| (str[i] >= 'A' && str[i] <= 'F'))
 	{
@@ -102,28 +102,28 @@ void	asign_values(t_map *map, char **split)
 {
 	int	i;
 	int	j;
-	int	in_line;
+	int	in;
 
-	i = 0;
-	while (i < map->rows)
+	i = -1;
+	while (++i < map->rows)
 	{
 		j = 0;
-		in_line = 0;
+		in = 0;
 		while (j < map->columns)
 		{
-			map->coord[i][j].z[TOP] = special_atoi(&split[i][in_line], &in_line);
+			map->coord[i][j].z[TOP] = special_atoi(&split[i][in],
+					&in);
 			map->coord[i][j].x[TOP] = i;
 			map->coord[i][j].y[TOP] = j;
 			map->z_max = ft_max(map->z_max, map->coord[i][j].z[TOP]);
 			map->z_min = ft_min(map->z_min, map->coord[i][j].z[TOP]);
-			if (split[i][in_line] == ',')
-				map->coord[i][j].color[ORGCLR] = special_atoi_hex(&split[i][in_line],
-						&in_line);
+			if (split[i][in] == ',')
+				map->coord[i][j].color[ORGCLR] = special_atoi_hex(&split[i][in],
+						&in);
 			else
 				map->coord[i][j].color[ORGCLR] = WHITE;
 			j++;
 		}
-		i++;
 	}
 }
 
@@ -133,7 +133,7 @@ int	create_struct(t_map *map, char *line)
 	int		i;
 
 	if (map->rows < 2 && map->line < 2)
-		return(free(line), quit(ERR_MAP_DATE));
+		return (free(line), quit(ERR_MAP_DATE));
 	i = 0;
 	split = ft_split(line, '\n');
 	if (!split)

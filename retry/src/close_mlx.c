@@ -6,23 +6,22 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 19:35:18 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/15 20:43:33 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/15 22:16:39 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void close_mlx(t_vars *vars)
+void	close_mlx(t_vars *vars)
 {
-    mlx_destroy_window(vars->mlx, vars->win);
+	mlx_destroy_window(vars->mlx, vars->win);
 	mlx_destroy_image(vars->mlx, vars->img->img);
 	free(vars->img);
 	mlx_destroy_display(vars->mlx);
 	free(vars->mlx);
 }
 
-
-int cross_close(t_vars *vars)
+int	cross_close(t_vars *vars)
 {
 	mlx_loop_end(vars->mlx);
 	return (0);

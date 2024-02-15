@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:05:14 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/15 22:08:56 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/15 22:16:34 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,14 @@ void	define_zoom(t_map *map)
 	i = 1;
 	while (1)
 	{
-		if ((map->rows - 1) * i < WINDOW_HEIGHT && (map->columns - 1) * i < WINDOW_WIDTH)
+		if ((map->rows - 1) * i < WINDOW_HEIGHT && (map->columns - 1)
+			* i < WINDOW_WIDTH)
 			i += i / 10 + 1;
-		else 
+		else
 		{
 			if (i > 1)
-				i -= i/10 +1;
-			break;
+				i -= i / 10 + 1;
+			break ;
 		}
 	}
 	map->zoom = i;
@@ -37,6 +38,8 @@ void	define_zoom(t_map *map)
 int	main(int argc, char **argv)
 {
 	t_map	map;
+	int		i;
+	double	f;
 
 	errno = 0;
 	if (argc != 2)
@@ -51,8 +54,7 @@ int	main(int argc, char **argv)
 	graphics(&map);
 	// print_map(&map);
 	free_map(&map, map.rows);
-	int i = 0;
-	double f;
+	i = 0;
 	while (i < 360)
 	{
 		f = M_PI / i;
@@ -60,5 +62,4 @@ int	main(int argc, char **argv)
 		i++;
 	}
 	return (0);
-
 }
