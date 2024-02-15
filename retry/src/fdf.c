@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:05:14 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/14 11:37:32 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/15 22:08:56 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,14 @@ int	main(int argc, char **argv)
 	graphics(&map);
 	// print_map(&map);
 	free_map(&map, map.rows);
+	int i = 0;
+	double f;
+	while (i < 360)
+	{
+		f = M_PI / i;
+		printf("pi = %010f\n", f);
+		i++;
+	}
 	return (0);
+
 }

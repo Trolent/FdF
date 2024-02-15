@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_arrow.c                                        :+:      :+:    :+:   */
+/*   close_mlx.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 15:22:27 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/15 19:16:36 by trolland         ###   ########.fr       */
+/*   Created: 2024/02/15 19:35:18 by trolland          #+#    #+#             */
+/*   Updated: 2024/02/15 20:43:33 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-int	key_right(t_vars *vars)
+void close_mlx(t_vars *vars)
 {
-	vars->map->midy -= 1 * vars->map->zoom / 4 + 1;
-	return (1);
+    mlx_destroy_window(vars->mlx, vars->win);
+	mlx_destroy_image(vars->mlx, vars->img->img);
+	free(vars->img);
+	mlx_destroy_display(vars->mlx);
+	free(vars->mlx);
 }
 
-int	key_left(t_vars *vars)
-{
-	vars->map->midy += 1 * vars->map->zoom / 4 + 1;
-	return (1);
-}
 
-int	key_down(t_vars *vars)
+int cross_close(t_vars *vars)
 {
-	vars->map->midx -= 1 * vars->map->zoom / 4 + 1;
-	return (1);
-}
-
-int	key_up(t_vars *vars)
-{
-	vars->map->midx += 1 * vars->map->zoom / 4 + 1;
-	return (1);
+	mlx_loop_end(vars->mlx);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:21:25 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/14 12:19:15 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/15 19:17:40 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,15 @@
 #  define T_KEY 17
 # endif
 
-void	key_right(t_vars *vars);
-void	key_left(t_vars *vars);
-void	key_down(t_vars *vars);
-void	key_up(t_vars *vars);
-void	key_esc(t_vars *vars);
-void	l_key(t_vars *vars);
-void	c_key(t_vars *vars);
-void	i_key(t_vars *vars);
-void	t_key(t_vars *vars);
-void    wrong_key(t_vars *vars);
+int	key_right(t_vars *vars);
+int	key_left(t_vars *vars);
+int	key_down(t_vars *vars);
+int	key_up(t_vars *vars);
+int	key_esc(t_vars *vars);
+int	l_key(t_vars *vars);
+int	c_key(t_vars *vars);
+int	i_key(t_vars *vars);
+int	t_key(t_vars *vars);
+int    wrong_key(t_vars *vars);
 
 #endif

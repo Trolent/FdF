@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:04:58 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/13 17:06:52 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/15 20:38:04 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,16 +111,16 @@ void	asign_values(t_map *map, char **split)
 		in_line = 0;
 		while (j < map->columns)
 		{
-			map->coord[i][j].z = special_atoi(&split[i][in_line], &in_line);
-			map->coord[i][j].x = i;
-			map->coord[i][j].y = j;
-			map->z_max = ft_max(map->z_max, map->coord[i][j].z);
-			map->z_min = ft_min(map->z_min, map->coord[i][j].z);
+			map->coord[i][j].z[TOP] = special_atoi(&split[i][in_line], &in_line);
+			map->coord[i][j].x[TOP] = i;
+			map->coord[i][j].y[TOP] = j;
+			map->z_max = ft_max(map->z_max, map->coord[i][j].z[TOP]);
+			map->z_min = ft_min(map->z_min, map->coord[i][j].z[TOP]);
 			if (split[i][in_line] == ',')
-				map->coord[i][j].color = special_atoi_hex(&split[i][in_line],
+				map->coord[i][j].color[ORGCLR] = special_atoi_hex(&split[i][in_line],
 						&in_line);
 			else
-				map->coord[i][j].color = WHITE;
+				map->coord[i][j].color[ORGCLR] = WHITE;
 			j++;
 		}
 		i++;

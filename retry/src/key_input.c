@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:22:12 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/14 12:20:47 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/15 21:11:22 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	key_map(int keycode)
 
 int	key_hook(int keycode, t_vars *vars)
 {
-	void	(*f[10])(t_vars * vars);
+	int	(*f[10])(t_vars * vars);
 
 	f[0] = &wrong_key;
 	f[1] = &key_esc;
@@ -52,8 +52,8 @@ int	key_hook(int keycode, t_vars *vars)
 	f[8] = &i_key;
 	f[9] = &t_key;
 	printf("keycode = %d\n", keycode);
-	f[key_map(keycode)](vars);
-	render_next_frame(vars);
+	if (f[key_map(keycode)](vars) == 1)
+		render_next_frame(vars);
 	return (0);
 }
 
@@ -66,6 +66,8 @@ int	mouse_scroll(int button, int x, int y, t_vars *vars)
 		vars->map->zoom += i;
 	if (button == 5 && vars->map->zoom > 1)
 		vars->map->zoom -= i;
+	// vars->map->midx = x;
+	// vars->map->midy = y;
 	render_next_frame(vars);
 	return (0);
 }
@@ -74,5 +76,6 @@ int	mlx_handle_input(t_vars *vars)
 {
 	mlx_mouse_hook(vars->win, (int (*)())mouse_scroll, vars);
 	mlx_key_hook(vars->win, &key_hook, vars);
+	mlx_hook(vars->win, 17, 1L<<3, &cross_close, vars);
 	return (1);
 }

@@ -6,24 +6,25 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:22:27 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/14 12:22:01 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/15 19:19:06 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	i_key(t_vars *vars)
+int	i_key(t_vars *vars)
 {
 	if (vars->map->iso == 1)
-		return ;
+		return (1);
 	vars->map->iso = 1;
 	vars->map->top = 0;
+	return (1);
 }
-
-void	t_key(t_vars *vars)
+int	t_key(t_vars *vars)
 {
 	if (vars->map->top == 1)
-		return ;
+		return (1);
 	vars->map->top = 1;
 	vars->map->iso = 0;
+	return (1);
 }

@@ -33,10 +33,10 @@ void	map_init(t_map *map)
 	map->zoom = 8;
 	map->line = 1;
 	map->iso = 0;
-	map->angle[X]= M_PI / 4;
-	map->angle[Y]= M_PI / 4;
-	map->angle[Z]= M_PI / 4;
-	map->z_color = 1;
+	map->angle[X]= 0;
+	map->angle[Y]= 0;
+	map->angle[Z]= 0;
+	map->z_color = 0;
 	map->z_max = 0;
 	map->z_min = 0;
 }
@@ -46,6 +46,18 @@ void	print_map(t_map *map)
 {
 	int	i;
 	int	j;
+	int view;
+
+	if (map->iso == 1)
+		view = ISO;
+	else
+		view = TOP;
+	int clr;
+
+	if (map->z_color == 1)
+		clr = ALTCLR;
+	else
+		clr = ORGCLR;
 
 	i = 0;
 	while (i < map->rows)
@@ -53,10 +65,10 @@ void	print_map(t_map *map)
 		j = 0;
 		while (j < map->columns)
 		{
-			printf("z = %d ", map->coord[i][j].z);
-			printf("x = %d ", map->coord[i][j].x);
-			printf("y = %d ", map->coord[i][j].y);
-			printf("alt color = %d\n", map->coord[i][j].alt_color);
+			printf("z = %d ", map->coord[i][j].z[view]);
+			printf("x = %d ", map->coord[i][j].x[view]);
+			printf("y = %d ", map->coord[i][j].y[view]);
+			printf("alt color = %d\n", map->coord[i][j].color[clr]);
 			j++;
 		}
 		printf("\n");

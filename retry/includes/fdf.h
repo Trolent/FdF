@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:59:55 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/14 12:52:07 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/15 21:45:55 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 # include "error_maps.h"
 # include <errno.h>
 # include <math.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <unistd.h>
-# include <stdbool.h>
 
 # if defined(__linux__)
 #  include "../mlx_Linux/mlx.h"
@@ -41,6 +41,12 @@
 # define Y 1
 # define Z 2
 
+# define TOP 0
+# define ISO 1
+
+# define ORGCLR 0
+# define ALTCLR 1
+
 typedef struct s_data
 {
 	void	*img;
@@ -50,16 +56,26 @@ typedef struct s_data
 	int		endian;
 }			t_data;
 
+// using a define TOP 0
+//       a define ISO 1
+//       a define CLR 0
+//       a define ALTCLR 1
+
 typedef struct s_pixel
+{
+	int		x[2];
+	int		y[2];
+	int		z[2];
+	int		color[2];
+}			t_pixel;
+
+typedef struct s_temp
 {
 	int		x;
 	int		y;
 	int		z;
 	int		color;
-	int		iso_x;
-	int		iso_y;
-	int		alt_color;
-}			t_pixel;
+}			t_temp;
 
 typedef struct s_map
 {
@@ -72,7 +88,7 @@ typedef struct s_map
 	int		zoom;
 	int		line;
 	bool	iso;
-	float	angle[3];
+	double	angle[3];
 	int		z_color;
 	int		z_min;
 	int		z_max;
@@ -99,6 +115,11 @@ int			graphics(t_map *map);
 int			create_win_mlx(t_vars *vars, t_map *map);
 int			mlx_handle_input(t_vars *vars);
 int			render_next_frame(t_vars *vars);
+int			cross_close(t_vars *vars);
+void		close_mlx(t_vars *vars);
+
+// ROTATION MANAGEMENT //
+int			define_iso(t_map *map);
 
 // COLOR MANAGEMENT //
 double		get_r(int trgb);
