@@ -235,7 +235,41 @@ int	define_iso(t_map *map)
 	}
 	return (0);
 }
+#define PASTEL_BLUE 0x6fa8dc
+#define PASTEL_GREEN 0x49ab82
+#define PASTEL_RED 0xe05e5d
 
+float clamp(float val, float min, float max)
+{
+	if (val < min)
+		return (min);
+	if (val > max)
+		return (max);
+	return (val);
+}
+
+float smoothstep(float edge0, float edge1, float x) {
+    // Scale, bias and saturate x to 0..1 range
+    x = clamp((x - edge0) / (edge1 - edge0), 0.0, 1.0);
+    // Evaluate polynomial
+    return x * x * (3 - 2 * x);
+}
+
+int	smooth_gradient(int color_start, int color_end, int len, int pos)
+{
+	double	delta[3];
+	int		new[3];
+	int		newcolor;
+	
+	if(color_start == color_end)
+		return(color_end);
+	new[0] = get_r(color_start) + smoothstep(0, fabs(get_r(color_end) - (get_r(color_start))), pos / len);
+	new[1] = get_g(color_start) + smoothstep(0, fabs(get_g(color_end) - (get_g(color_start))), pos / len);
+	new[2] = get_b(color_start) + smoothstep(0, fabs(get_b(color_end) - (get_b(color_start))), pos / len);
+	newcolor = create_rgb(new[0], new[1], new[2]);
+	return (newcolor);
+}
+// 
 int	define_alt_color(t_map *map)
 {
 	int	i;
@@ -248,15 +282,13 @@ int	define_alt_color(t_map *map)
 		while (j < map->columns)
 		{
 			if (map->z_max == map->z_min || map->coord[i][j].z == 0)
-				map->coord[i][j].alt_color = WHITE;
+				map->coord[i][j].alt_color = PASTEL_GREEN;
 			else if (map->coord[i][j].z > 0)
-				map->coord[i][j].alt_color = gradient(WHITE, RED,
-						map->z_max - map->z_min, map->coord[i][j].z
-						- map->z_min);
+				map->coord[i][j].alt_color = gradient(PASTEL_GREEN, PASTEL_RED,
+				  		map->z_max, map->coord[i][j].z);
 			else if (map->coord[i][j].z < 0 )
-				map->coord[i][j].alt_color = gradient(BLUE, WHITE,
-						map->z_max - map->z_min, map->coord[i][j].z
-						- map->z_min);
+				map->coord[i][j].alt_color = gradient(PASTEL_BLUE, PASTEL_GREEN,
+				  		map->z_max, map->coord[i][j].z);
 			j++;
 		}
 		i++;
