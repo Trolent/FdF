@@ -56,13 +56,16 @@ int	define_iso(t_map *map)
 		j = 0;
 		while (j < map->columns)
 		{
-			rotate_x(&map->coord[i][j], map->angle[X]);
-			rotate_y(&map->coord[i][j], map->angle[Y]);
-			rotate_z(&map->coord[i][j], map->angle[Z]);
+			// rotate_x(&map->coord[i][j], map->angle[X]);
+			// rotate_y(&map->coord[i][j], map->angle[Y]);
+			// rotate_z(&map->coord[i][j], map->angle[Z]);
+			map->coord[i][j].x[ISO] = (map->coord[i][j].x[TOP] - map->coord[i][j].y[TOP]) * cos(map->angle[X] * M_PI /180 );
+			map->coord[i][j].y[ISO] = (map->coord[i][j].x[TOP] + map->coord[i][j].y[TOP]) * sin(map->angle[Y] * M_PI /180 ) - map->coord[i][j].z[TOP];
+			map->coord[i][j].z[ISO] = map->coord[i][j].z[TOP];
 			j++;
 		}
 		i++;
 	}
-	printf("map->coord[5][5].y[ISO] = %d\n", map->coord[5][5].y[ISO]);
+	// printf("map->coord[5][5].y[ISO] = %d\n", map->coord[5][5].y[ISO]);
 	return (0);
 }

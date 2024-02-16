@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:21:41 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/16 09:04:40 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/16 14:44:10 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	key_esc(t_vars *vars)
 {
-	quit_map("stop", vars);
-	// mlx_loop_end(vars->mlx);
+	// quit_map("stop", vars);
+	mlx_loop_end(vars->mlx);
 	return (0);
 }
 

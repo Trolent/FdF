@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:19:48 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/15 22:14:43 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/16 15:55:53 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,15 @@ int	create_rgb(int r, int g, int b)
 
 int	gradient(int color_start, int color_end, int len, int pos)
 {
-	double	delta[3];
+	float	delta[3];
 	int		new[3];
 	int		newcolor;
 
 	if (color_start == color_end)
 		return (color_end);
-	delta[0] = (get_r(color_end) - (get_r(color_start))) / (double)len;
-	delta[1] = (get_g(color_end) - (get_g(color_start))) / (double)len;
-	delta[2] = (get_b(color_end) - (get_b(color_start))) / (double)len;
+	delta[0] = (get_r(color_end) - (get_r(color_start))) / (float)len;
+	delta[1] = (get_g(color_end) - (get_g(color_start))) / (float)len;
+	delta[2] = (get_b(color_end) - (get_b(color_start))) / (float)len;
 	new[0] = (get_r(color_start)) + ft_round(pos * delta[0]);
 	new[1] = (get_g(color_start)) + ft_round(pos * delta[1]);
 	new[2] = (get_b(color_start)) + ft_round(pos * delta[2]);

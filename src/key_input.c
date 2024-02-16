@@ -6,11 +6,11 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:22:12 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/16 10:22:31 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/16 18:15:18 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/arrows.h"
+#include "../includes/keys.h"
 #include "../includes/fdf.h"
 
 int	key_map(int keycode)
@@ -37,10 +37,10 @@ int	key_map(int keycode)
 		return (10);
 	if (keycode == X_KEY)
 		return (11);
-	// if (keycode == Q_KEY)
-	// 	return (12);
-	// if (keycode == D_KEY)
-	// 	return (13);
+	if (keycode == A_KEY)
+		return (12);
+	if (keycode == D_KEY)
+		return (13);
 	// if (keycode == S_KEY)
 	// 	return (14);
 	// if (keycode == W_KEY)
@@ -49,24 +49,9 @@ int	key_map(int keycode)
 		return (0);
 }
 
-
-int z_key(t_vars *vars)
-{
-	vars->map->angle[X] += 10;
-	define_iso(vars->map);
-	return (1);
-}
-
-int x_key(t_vars *vars)
-{
-	vars->map->angle[X] = 10;
-	define_iso(vars->map);
-	return (1);
-}
-
 int	key_hook(int keycode, t_vars *vars)
 {
-	int	(*f[12])(t_vars *vars);
+	int	(*f[14])(t_vars *vars);
 
 	f[0] = &wrong_key;
 	f[1] = &key_esc;
@@ -80,11 +65,18 @@ int	key_hook(int keycode, t_vars *vars)
 	f[9] = &t_key;
 	f[10] = &z_key;
 	f[11] = &x_key;	
+	f[12] = &a_key;
+	f[13] = &d_key;
 	
 	printf("keycode = %d\n", keycode);
 	if (f[key_map(keycode)](vars) == 1)
-		printf("vars->map->angle[X] = %f\n", vars->map->angle[X]);
+	{
+		if(keycode == Z_KEY || keycode == X_KEY)
+			printf("vars->map->angle[X] = %f\n", vars->map->angle[X]);
+		if(keycode == A_KEY || keycode == D_KEY)
+			printf("vars->map->angle[Y] = %f\n", vars->map->angle[Y]);
 		render_next_frame(vars);
+	}
 	return (0);
 }
 

@@ -17,8 +17,8 @@
 void	my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map, int zoom)
 {
 	char	*dst;
-	int		x;
-	int		y;
+	float		x;
+	float		y;
 	int		view;
 	int		clr;
 
@@ -40,27 +40,28 @@ void	my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map, int zoom)
 		y = pixel->y[view];
 		x = pixel->x[view];
 	}
-	if (x < 0 || y < 0 || y > WINDOW_HEIGHT || x > WINDOW_WIDTH)
+	if (x < 0|| y < 0|| y > WINDOW_HEIGHT || x > WINDOW_WIDTH)
 		return ;
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	dst = data->addr + (int)(y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = pixel->color[clr];
 }
 
 void	draw_line(t_pixel *coord0, t_pixel *coord1, t_data *img, t_map *map)
 {
-	int		x0;
-	int		y0;
-	int		x1;
-	int		y1;
-	int		dx;
-	int		dy;
-	int		sx;
-	int		sy;
-	int		err;
+	float		x0;
+	float		y0;
+	float		x1;
+	float		y1;
+	float		dx;
+	float		dy;
+	float		sx;
+	float		sy;
+	float		err;
 	t_pixel	temp;
-	int		e2;
+	float 		e2;
+
 	int		pixel;
-	int		len;
+	float		len;
 	int		view;
 	int		clr;
 	int		j;
@@ -77,15 +78,15 @@ void	draw_line(t_pixel *coord0, t_pixel *coord1, t_data *img, t_map *map)
 	y0 = coord0->y[view] * map->zoom + map->midy;
 	x1 = coord1->x[view] * map->zoom + map->midx;
 	y1 = coord1->y[view] * map->zoom + map->midy;
-	dx = abs(x1 - x0);
-	dy = abs(y1 - y0);
+	dx = fabs(x1 - x0);
+	dy = fabs(y1 - y0);
 	sx = x0 < x1 ? 1 : -1;
 	sy = y0 < y1 ? 1 : -1;
 	err = dx - dy;
-	pixel = sqrt(dx * dx + dy * dy);
+	pixel = (int)sqrt(dx * dx + dy * dy);
 	len = pixel;
 	j = 0;
-	while (x0 != x1 || y0 != y1)
+	while (pixel)
 	{
 		temp.x[view] = x0;
 		temp.y[view] = y0;
@@ -216,18 +217,18 @@ void	define_zoom(t_map *map)
 	int	i;
 
 	i = 1;
-	while (1)
-	{
-		if ((map->rows - 1) * i < WINDOW_HEIGHT && (map->columns - 1)
-			* i < WINDOW_WIDTH)
-			i += i / 10 + 1;
-		else
-		{
-			if (i > 1)
-				i -= i / 10 + 1;
-			break ;
-		}
-	}
+	// while (1)
+	// {
+	// 	if ((map->rows - 1) * i < WINDOW_HEIGHT && (map->columns - 1)
+	// 		* i < WINDOW_WIDTH)
+	// 		i += i / 10 + 1;
+	// 	else
+	// 	{
+	// 		if (i > 1)
+	// 			i -= i / 10 + 1;
+	// 		break ;
+	// 	}
+	// }
 	map->zoom = i;
 	map->midx = (WINDOW_WIDTH / 2) - ((map->columns - 1) * map->zoom / 2);
 	map->midy = (WINDOW_HEIGHT / 2) - ((map->rows - 1) * map->zoom / 2);
@@ -242,6 +243,7 @@ int	graphics(t_map *map)
 	define_iso(map);
 	define_alt_color(map);
 	print_graph_map(vars.map, vars.img);
+
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.img->img, 0, 0);
 	mlx_handle_input(&vars);
 	mlx_loop(vars.mlx);

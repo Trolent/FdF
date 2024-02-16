@@ -31,7 +31,7 @@ void	map_init(t_map *map)
 	map->top = 1;
 	map->midx = 0;
 	map->midy = 0;
-	map->zoom = 8;
+	map->zoom = 1;
 	map->line = 1;
 	map->iso = 0;
 	map->angle[X] = 30;
