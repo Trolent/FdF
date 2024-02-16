@@ -48,10 +48,10 @@ void	my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map, int zoom)
 
 void	draw_line(t_pixel *coord0, t_pixel *coord1, t_data *img, t_map *map)
 {
-	float		x0;
-	float		y0;
-	float		x1;
-	float		y1;
+	int		x0;
+	int		y0;
+	int		x1;
+	int		y1;
 	float		dx;
 	float		dy;
 	float		sx;
@@ -217,18 +217,18 @@ void	define_zoom(t_map *map)
 	int	i;
 
 	i = 1;
-	// while (1)
-	// {
-	// 	if ((map->rows - 1) * i < WINDOW_HEIGHT && (map->columns - 1)
-	// 		* i < WINDOW_WIDTH)
-	// 		i += i / 10 + 1;
-	// 	else
-	// 	{
-	// 		if (i > 1)
-	// 			i -= i / 10 + 1;
-	// 		break ;
-	// 	}
-	// }
+	while (1)
+	{
+		if ((map->rows - 1) * i < WINDOW_HEIGHT && (map->columns - 1)
+			* i < WINDOW_WIDTH)
+			i += i / 10 + 1;
+		else
+		{
+			if (i > 1)
+				i -= i / 10 + 1;
+			break ;
+		}
+	}
 	map->zoom = i;
 	map->midx = (WINDOW_WIDTH / 2) - ((map->columns - 1) * map->zoom / 2);
 	map->midy = (WINDOW_HEIGHT / 2) - ((map->rows - 1) * map->zoom / 2);
