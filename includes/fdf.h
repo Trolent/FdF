@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:59:55 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/16 22:26:37 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/16 23:20:33 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ typedef struct s_data
 
 typedef struct s_pixel
 {
-	float		x[2];
-	float		y[2];
-	float		z[2];
+	float	x[2];
+	float	y[2];
+	float	z[2];
 	int		color[2];
 }			t_pixel;
 
@@ -120,7 +120,10 @@ double		get_b(int trgb);
 int			create_rgb(int r, int g, int b);
 int			gradient(int color_start, int color_end, int len, int pos);
 
+// utils //
 void	print_map(t_map *map); // =========> must be commented before submiting
+int			perspec(t_map *map);
+int			color(t_map *map);
 
 #endif
 

@@ -42,6 +42,28 @@ void	map_init(t_map *map)
 	map->z_min = 0;
 }
 
+int	perspec(t_map *map)
+{
+	int	view;
+
+	if (map->iso == 1)
+		view = ISO;
+	else
+		view = TOP;
+	return (view);
+}
+
+int color(t_map *map)
+{
+	int clr;
+
+	if (map->z_color == 1)
+		clr = ALTCLR;
+	else
+		clr = ORGCLR;
+	return (clr);
+}
+
 //==================================================>>>>>> COMMENT BEFORE PUSH
 void	print_map(t_map *map)
 {

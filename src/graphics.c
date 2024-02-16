@@ -22,14 +22,8 @@ void	my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map, int zoom)
 	int		view;
 	int		clr;
 
-	if (map->z_color == 1)
-		clr = ALTCLR;
-	else
-		clr = ORGCLR;
-	if (map->iso == 1)
-		view = ISO;
-	else
-		view = TOP;
+	clr = color(map);
+	view = perspec(map);
 	if (zoom == 1)
 	{
 		x = pixel->x[view] * map->zoom + map->midx;
@@ -66,20 +60,14 @@ void	draw_line(t_pixel *coord0, t_pixel *coord1, t_data *img, t_map *map)
 	int		clr;
 	int		j;
 
-	if (map->z_color == 1)
-		clr = ALTCLR;
-	else
-		clr = ORGCLR;
-	if (map->iso == 1)
-		view = ISO;
-	else
-		view = TOP;
+	clr = color(map);
+	view = perspec(map);
 	x0 = coord0->x[view] * map->zoom + map->midx;
 	y0 = coord0->y[view] * map->zoom + map->midy;
 	x1 = coord1->x[view] * map->zoom + map->midx;
 	y1 = coord1->y[view] * map->zoom + map->midy;
-	dx = fabs(x1 - x0);
-	dy = fabs(y1 - y0);
+	dx = abs(x1 - x0);
+	dy = abs(y1 - y0);
 	sx = x0 < x1 ? 1 : -1;
 	sy = y0 < y1 ? 1 : -1;
 	err = dx - dy;
