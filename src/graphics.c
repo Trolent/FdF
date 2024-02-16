@@ -193,7 +193,9 @@ int	define_alt_color(t_map *map)
 		j = 0;
 		while (j < map->columns)
 		{
-			if (map->z_max == map->z_min || map->coord[i][j].z[TOP] == 0)
+			if (map->z_max == map->z_min)
+				map->coord[i][j].color[ALTCLR] = WHITE;
+			else if (map->coord[i][j].z[TOP] == 0)
 				map->coord[i][j].color[ALTCLR] = GREEN;
 			else if (map->coord[i][j].z[TOP] > 0)
 				map->coord[i][j].color[ALTCLR] = gradient(GREEN, RED, map->z_max
