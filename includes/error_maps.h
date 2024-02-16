@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 19:09:18 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/02 18:34:15 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/13 17:05:10 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define ERR_NO_FILE "No file passed as arg"
 # define ERR_READ_FILE "Error reading file"
 # define ERR_GEN "Error generating map"
+# define ERR_MAP_DATE "Error in map datas"
 
 # define ERROR_MLX "cannot assign mlx"
 

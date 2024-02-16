@@ -1,45 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   key_letter0.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 17:05:14 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/16 10:19:01 by trolland         ###   ########.fr       */
+/*   Created: 2024/02/13 16:21:41 by trolland          #+#    #+#             */
+/*   Updated: 2024/02/16 09:04:40 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-#include <stdio.h> // must dell before push
 
-
-int	main(int argc, char **argv)
+int	key_esc(t_vars *vars)
 {
-	t_map	map;
-
-	errno = 0;
-	if (argc != 2)
-		quit(ERR_ARG);
-	else
-	{
-		map_init(&map);
-		if (parse(&map, argv[1]) == 0)
-			quit(ERR_GEN);
-	}
-	graphics(&map);
-	// print_map(&map);
-	free_map(&map, map.rows);
-
-	int i;
-	i = 0;
-	float f;
-	
-	while (i < 360)
-	{
-		f = i * M_PI / 180;
-		printf("pi = %010f\n", f);
-		i++;
-	}
+	quit_map("stop", vars);
+	// mlx_loop_end(vars->mlx);
 	return (0);
+}
+
+int	l_key(t_vars *vars)
+{
+	if (vars->map->line == 0)
+		vars->map->line = 1;
+	else
+		vars->map->line = 0;
+	return (1);
+}
+
+int	c_key(t_vars *vars)
+{
+	if (vars->map->z_color == 0)
+		vars->map->z_color = 1;
+	else
+		vars->map->z_color = 0;
+	return (1);
+}
+
+int	wrong_key(t_vars *vars)
+{
+	return (1);
 }

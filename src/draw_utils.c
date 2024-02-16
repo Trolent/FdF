@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:19:48 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/13 13:24:09 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/15 22:14:43 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	gradient(int color_start, int color_end, int len, int pos)
 	int		new[3];
 	int		newcolor;
 
+	if (color_start == color_end)
+		return (color_end);
 	delta[0] = (get_r(color_end) - (get_r(color_start))) / (double)len;
 	delta[1] = (get_g(color_end) - (get_g(color_start))) / (double)len;
 	delta[2] = (get_b(color_end) - (get_b(color_start))) / (double)len;

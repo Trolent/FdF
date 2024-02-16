@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 17:27:52 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/10 13:05:49 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/15 22:14:54 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ int	quit(char *s)
 int	quit_map(char *s, t_vars *vars)
 {
 	mlx_destroy_window(vars->mlx, vars->win);
-	// mlx_destroy_display(vars->mlx);
 	free(vars->mlx);
-	// free(vars->img);
 	free_map(vars->map, vars->map->rows);
 	return (quit(s));
 }

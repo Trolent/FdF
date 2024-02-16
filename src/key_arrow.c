@@ -1,45 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   key_arrow.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 17:05:14 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/16 10:19:01 by trolland         ###   ########.fr       */
+/*   Created: 2024/02/13 15:22:27 by trolland          #+#    #+#             */
+/*   Updated: 2024/02/16 09:55:44 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-#include <stdio.h> // must dell before push
 
-
-int	main(int argc, char **argv)
+int	key_right(t_vars *vars)
 {
-	t_map	map;
+	vars->map->midx -= 1 * vars->map->zoom / 4 + 1;
+	return (1);
+}
 
-	errno = 0;
-	if (argc != 2)
-		quit(ERR_ARG);
-	else
-	{
-		map_init(&map);
-		if (parse(&map, argv[1]) == 0)
-			quit(ERR_GEN);
-	}
-	graphics(&map);
-	// print_map(&map);
-	free_map(&map, map.rows);
+int	key_left(t_vars *vars)
+{
+	vars->map->midx += 1 * vars->map->zoom / 4 + 1;
+	return (1);
+}
 
-	int i;
-	i = 0;
-	float f;
-	
-	while (i < 360)
-	{
-		f = i * M_PI / 180;
-		printf("pi = %010f\n", f);
-		i++;
-	}
-	return (0);
+int	key_down(t_vars *vars)
+{
+	vars->map->midy -= 1 * vars->map->zoom / 4 + 1;
+	return (1);
+}
+
+int	key_up(t_vars *vars)
+{
+	vars->map->midy += 1 * vars->map->zoom / 4 + 1;
+	return (1);
 }

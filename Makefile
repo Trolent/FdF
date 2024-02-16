@@ -6,7 +6,7 @@
 #    By: trolland <trolland@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 16:23:19 by trolland          #+#    #+#              #
-#    Updated: 2024/02/13 13:23:32 by trolland         ###   ########.fr        #
+#    Updated: 2024/02/16 09:12:29 by trolland         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,20 +16,7 @@ LIBFT	= 	libft/libft.a
 MLX_LINUX 	=	mlx_Linux/mlx_Linux.a 
 MLX_MACOS = libmlx/libmlx.a
 
-SRC :=		fdf.c errors.c free_join.c ft_parse.c graphics.c map_utils.c draw_utils.c
-			
-SRCS := 	$(addprefix src/, $(SRC))
-OBJS := 	$(patsubst src/%.c, object/%.o, $(SRCS))
-DEPS := 	$(OBJS:.o=.d)
-
 OS := $(shell uname)
-
-CC := cc
-
-CFLAGS := -MMD -MP -Iincludes -Ilibft -I$(MLX_PATH) -g
-
-all: create_dirs $(NAME)
-
 ifeq ($(OS),Darwin)
     MLX_TARGET = $(MLX_MACOS)
     MLX_PATH = libmlx
@@ -39,6 +26,21 @@ else
     MLX_PATH = mlx_Linux
     LD_FLAGS = -Lmlx_Linux -lmlx_Linux -lXext -lX11 -lm -lz
 endif
+
+SRC :=		fdf.c errors.c free_join.c ft_parse.c graphics.c map_utils.c \
+			draw_utils.c key_input.c key_arrow.c key_letter0.c key_letter1.c \
+			create_win_mlx.c close_mlx.c rotation.c
+			
+SRCS := 	$(addprefix src/, $(SRC))
+OBJS := 	$(patsubst src/%.c, object/%.o, $(SRCS))
+DEPS := 	$(OBJS:.o=.d)
+
+
+CC := cc
+
+CFLAGS := -MMD -MP -Iincludes -Ilibft -I$(MLX_PATH) -g
+
+all: create_dirs $(NAME)
 
 $(NAME): create_dirs $(OBJS) $(LIBFT) $(MLX_TARGET)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(LD_FLAGS)
