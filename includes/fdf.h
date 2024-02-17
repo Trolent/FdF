@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:59:55 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/17 11:05:28 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/17 13:38:20 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ typedef struct s_data
 
 typedef struct s_pixel
 {
-	float	x[2];
-	float	y[2];
-	float	z[2];
+	int	x[2];
+	int	y[2];
+	int	z[2];
 	int		color[2];
 }			t_pixel;
 

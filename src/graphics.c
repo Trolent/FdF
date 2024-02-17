@@ -101,19 +101,19 @@ void	draw_line(t_pixel *coord0, t_pixel *coord1, t_data *img, t_map *map)
 	}
 }
 
-void	draw(t_data *img, t_map *map, int i, int j)
+void	draw(t_vars *vars, t_map *map, int i, int j)
 {
-	my_mlx_pixel_put(img, &map->coord[i][j], map, 1);
+	my_mlx_pixel_put(vars->img, &map->coord[i][j], map, 1);
 	if (i + 1 < map->rows && map->line == 1)
 		bresenham(&map->coord[i][j], &map->coord[i + 1][j], vars);
-missing vars ====>>><
 
 		// draw_line(&map->coord[i][j], &map->coord[i + 1][j], img, map);
 	if (j + 1 < map->columns && map->line == 1)
+		bresenham(&map->coord[i][j], &map->coord[i][j + 1], vars);
 		// draw_line(&map->coord[i][j], &map->coord[i][j + 1], img, map);
 }
 
-void	print_graph_map(t_map *map, t_data *img)
+void	print_graph_map(t_vars *vars, t_map *map)
 {
 	int	i;
 	int	j;
@@ -136,7 +136,7 @@ void	print_graph_map(t_map *map, t_data *img)
 			&& (map->coord[map->rows - 1][map->columns - 1].x[view] * gap
 				+ map->midx) > 0)
 		{
-			draw(img, map, i, j);
+			draw(vars, map, i, j);
 			j++;
 		}
 	}
@@ -233,7 +233,7 @@ int	graphics(t_map *map)
 	define_zoom(map);
 	define_iso(map);
 	define_alt_color(map);
-	print_graph_map(vars.map, vars.img);
+	print_graph_map(&vars, &vars.map);
 
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.img->img, 0, 0);
 	mlx_handle_input(&vars);
