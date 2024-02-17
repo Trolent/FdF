@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:22:12 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/16 18:15:18 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/17 14:53:16 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,31 @@
 int	key_map(int keycode)
 {
 	if (keycode == ESC_KEY)
-		return (1);
+		return (printf("pressed ESC_KEY\n"),1);
 	if (keycode == RIGHT_KEY)
-		return (2);
+		return (printf("pressed RIGHT_KEY\n"),2);
 	if (keycode == LEFT_KEY)
-		return (3);
+		return (printf("pressed LEFT_KEY\n"), 3);
 	if (keycode == DOWN_KEY)
-		return (4);
+		return (printf("pressed DOWN_KEY\n"), 4);
 	if (keycode == UP_KEY)
-		return (5);
+		return (printf("pressed UP_KEY\n"), 5);
 	if (keycode == L_KEY)
-		return (6);
+		return (printf("pressed L_KEY\n"), 6);
 	if (keycode == C_KEY)
-		return (7);
+		return (printf("pressed C_KEY\n"), 7);
 	if (keycode == I_KEY)
-		return (8);
+		return (printf("pressed I_KEY\n"), 8);
 	if (keycode == T_KEY)
-		return (9);
+		return (printf("pressed T_KEY\n"), 9);
 	if (keycode == Z_KEY)
-		return (10);
+		return (printf("pressed Z_KEY\n"), 10);
 	if (keycode == X_KEY)
-		return (11);
+		return (printf("pressed X_KEY\n"), 11);
 	if (keycode == A_KEY)
-		return (12);
+		return (printf("pressed A_KEY\n"), 12);
 	if (keycode == D_KEY)
-		return (13);
+		return (printf("pressed D_KEY\n"), 13);
 	// if (keycode == S_KEY)
 	// 	return (14);
 	// if (keycode == W_KEY)

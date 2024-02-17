@@ -40,7 +40,7 @@ void	my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map, int zoom)
 	*(unsigned int *)dst = pixel->color[clr];
 }
 
-void	draw_line(t_pixel *coord0, t_pixel *coord1, t_data *img, t_map *map)
+void	draw_line(t_pixel *coord0, t_pixel *coord1, t_vars *vars)
 {
 	int		x0;
 	int		y0;
@@ -60,12 +60,12 @@ void	draw_line(t_pixel *coord0, t_pixel *coord1, t_data *img, t_map *map)
 	int		clr;
 	int		j;
 
-	clr = color(map);
-	view = perspec(map);
-	x0 = coord0->x[view] * map->zoom + map->midx;
-	y0 = coord0->y[view] * map->zoom + map->midy;
-	x1 = coord1->x[view] * map->zoom + map->midx;
-	y1 = coord1->y[view] * map->zoom + map->midy;
+	clr = color(vars->map);
+	view = perspec(vars->map);
+	x0 = coord0->x[view] * vars->map->zoom + vars->map->midx;
+	y0 = coord0->y[view] * vars->map->zoom + vars->map->midy;
+	x1 = coord1->x[view] * vars->map->zoom + vars->map->midx;
+	y1 = coord1->y[view] * vars->map->zoom + vars->map->midy;
 	dx = abs(x1 - x0);
 	dy = abs(y1 - y0);
 	sx = x0 < x1 ? 1 : -1;
@@ -83,7 +83,7 @@ void	draw_line(t_pixel *coord0, t_pixel *coord1, t_data *img, t_map *map)
 		if (temp.x[view] > 0 && temp.x[view] < WINDOW_WIDTH
 			&& temp.y[view] < WINDOW_HEIGHT && temp.y[view] > 0)
 		{
-			my_mlx_pixel_put(img, &temp, map, 0);
+			my_mlx_pixel_put(vars->img, &temp, vars->map, 0);
 			j++;
 		}
 		e2 = 2 * err;
@@ -103,14 +103,14 @@ void	draw_line(t_pixel *coord0, t_pixel *coord1, t_data *img, t_map *map)
 
 void	draw(t_vars *vars, t_map *map, int i, int j)
 {
+	// printf("I'm in draw\n");
 	my_mlx_pixel_put(vars->img, &map->coord[i][j], map, 1);
 	if (i + 1 < map->rows && map->line == 1)
-		bresenham(&map->coord[i][j], &map->coord[i + 1][j], vars);
-
-		// draw_line(&map->coord[i][j], &map->coord[i + 1][j], img, map);
+		// bresenham(&map->coord[i][j], &map->coord[i + 1][j], vars);
+		draw_line(&map->coord[i][j], &map->coord[i + 1][j], vars);
 	if (j + 1 < map->columns && map->line == 1)
-		bresenham(&map->coord[i][j], &map->coord[i][j + 1], vars);
-		// draw_line(&map->coord[i][j], &map->coord[i][j + 1], img, map);
+		// bresenham(&map->coord[i][j], &map->coord[i][j + 1], vars);
+		draw_line(&map->coord[i][j], &map->coord[i][j + 1], vars);
 }
 
 void	print_graph_map(t_vars *vars, t_map *map)
@@ -120,10 +120,7 @@ void	print_graph_map(t_vars *vars, t_map *map)
 	int	gap;
 	int	view;
 
-	if (map->iso == 1)
-		view = ISO;
-	else
-		view = TOP;
+	view = perspec(map);
 	gap = map->zoom;
 	i = -1;
 	while (++i < map->rows)
@@ -163,7 +160,7 @@ int	render_next_frame(t_vars *vars)
 		mlx_destroy_image(vars->mlx, new_img->img);
 		quit_map("Error: Unable to get data address for new_img", vars);
 	}
-	print_graph_map(vars->map, new_img);
+	print_graph_map(vars, vars->map);
 	mlx_put_image_to_window(vars->mlx, vars->win, new_img->img, 0, 0);
 	if (vars->img)
 	{
@@ -208,18 +205,18 @@ void	define_zoom(t_map *map)
 	int	i;
 
 	i = 1;
-	while (1)
-	{
-		if ((map->rows - 1) * i < WINDOW_HEIGHT && (map->columns - 1)
-			* i < WINDOW_WIDTH)
-			i += i / 10 + 1;
-		else
-		{
-			if (i > 1)
-				i -= i / 10 + 1;
-			break ;
-		}
-	}
+	// while (1)
+	// {
+	// 	if ((map->rows - 1) * i < WINDOW_HEIGHT && (map->columns - 1)
+	// 		* i < WINDOW_WIDTH)
+	// 		i += i / 10 + 1;
+	// 	else
+	// 	{
+	// 		if (i > 1)
+	// 			i -= i / 10 + 1;
+	// 		break ;
+	// 	}
+	// }
 	map->zoom = i;
 	map->midx = (WINDOW_WIDTH / 2) - ((map->columns - 1) * map->zoom / 2);
 	map->midy = (WINDOW_HEIGHT / 2) - ((map->rows - 1) * map->zoom / 2);
@@ -233,7 +230,7 @@ int	graphics(t_map *map)
 	define_zoom(map);
 	define_iso(map);
 	define_alt_color(map);
-	print_graph_map(&vars, &vars.map);
+	print_graph_map(&vars, vars.map);
 
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.img->img, 0, 0);
 	mlx_handle_input(&vars);
