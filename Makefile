@@ -6,7 +6,7 @@
 #    By: trolland <trolland@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 16:23:19 by trolland          #+#    #+#              #
-#    Updated: 2024/02/16 18:15:43 by trolland         ###   ########.fr        #
+#    Updated: 2024/02/17 10:59:53 by trolland         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ endif
 
 SRC :=		fdf.c errors.c free_join.c ft_parse.c graphics.c map_utils.c \
 			draw_utils.c key_input.c key_arrow.c key_letter0.c key_letter1.c \
-			create_win_mlx.c close_mlx.c rotation.c key_angle.c
+			create_win_mlx.c close_mlx.c rotation.c key_angle.c bresenham.c
 			
 SRCS := 	$(addprefix src/, $(SRC))
 OBJS := 	$(patsubst src/%.c, object/%.o, $(SRCS))
