@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:59:55 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/16 23:20:33 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/17 11:05:28 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,8 @@ double		get_g(int trgb);
 double		get_b(int trgb);
 int			create_rgb(int r, int g, int b);
 int			gradient(int color_start, int color_end, int len, int pos);
+void bresenham(t_pixel *coord0, t_pixel *coord1, t_vars *vars);
+void	my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map, int zoom);
 
 // utils //
 void	print_map(t_map *map); // =========> must be commented before submiting

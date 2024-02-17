@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 23:09:36 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/17 10:41:50 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/17 11:04:58 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,22 +54,22 @@ void bresenham_dx_dy(t_bresenham *bres, t_pixel *coord1, t_pixel *coord0, t_vars
     int clr;
 
     clr = color(vars->map);
-    bre->cumul = bre->dx / 2;
-    while (bre->i <= bre->dx)
+    bres->cumul = bres->dx / 2;
+    while (bres->i <= bres->dx)
     {
-        bre->x0 += bre->inc_x;
-        bre->cumul += bre->dy;
-        if (bre->cumul >= bre->dx)
+        bres->x0 += bres->inc_x;
+        bres->cumul += bres->dy;
+        if (bres->cumul >= bres->dx)
         {
-            bre->cumul -= bre->dx;
-            bre->y0 += bre->inc_y;
+            bres->cumul -= bres->dx;
+            bres->y0 += bres->inc_y;
         }
         if (coord0->color[clr] != coord1->color[clr])
-			bres->temp->color[clr] = gradient(coord0, coord1, bre->i, bre->dx);
+			bres->temp->color[clr] = gradient(coord0->color[clr], coord1->color[clr], bres->i, bres->dx);
         else
             bres->temp->color[clr] = 0xFFFFFF;
-        my_mlx_pixel_put(vars->img, bre->temp, vars->map, 1);
-        bre->i += 1;
+        my_mlx_pixel_put(vars->img, bres->temp, vars->map, 1);
+        bres->i += 1;
     }
 }
 
@@ -78,35 +78,35 @@ void bresenham_dy_dx(t_bresenham *bres, t_pixel *coord1, t_pixel *coord0, t_vars
     int clr;
 
     clr = color(vars->map);
-    bre->cumul = bre->dy / 2;
-    while (bre->i <= bre->dy)
+    bres->cumul = bres->dy / 2;
+    while (bres->i <= bres->dy)
     {
-        bre->y0 += bre->inc_y;
-        bre->cumul += bre->dx;
-        if (bre->cumul >= bre->dy)
+        bres->y0 += bres->inc_y;
+        bres->cumul += bres->dx;
+        if (bres->cumul >= bres->dy)
         {
-            bre->cumul -= bre->dy;
-            bre->x0 += bre->inc_x;
+            bres->cumul -= bres->dy;
+            bres->x0 += bres->inc_x;
         }
         if (coord0->color[clr] != coord1->color[clr])
-            bres->temp->color[clr] = gradient(coord0, coord1, bre->i, bre->dy);
+            bres->temp->color[clr] = gradient(coord0->color[clr], coord1->color[clr], bres->i, bres->dy);
         else
             bres->temp->color[clr] = 0xFFFFFF;
-        my_mlx_pixel_put(vars->img, bre->temp, vars->map, 1);
-        bre->i += 1;
+        my_mlx_pixel_put(vars->img, bres->temp, vars->map, 1);
+        bres->i += 1;
     }
 }
 
-void bresenham(t_pixel *coord0, t_pixel *coord1, t_data *vars)
+void bresenham(t_pixel *coord0, t_pixel *coord1, t_vars *vars)
 {
     t_bresenham bres;
     t_pixel temp;
     int view;
     
-    bres->temp = temp;
+    bres.temp = &temp;
     bresenham_init(&bres, coord0, coord0, vars->map);
     // my_mlx_pixel_put(vars->img, &temp, vars->map, 1);
-    if (bre.dx > bre.dy)
+    if (bres.dx > bres.dy)
         bresenham_dx_dy(&bres, coord1, coord0, vars);
     else
         bresenham_dy_dx(&bres, coord1, coord0, vars);
