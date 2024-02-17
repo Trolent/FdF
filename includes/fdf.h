@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:59:55 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/17 14:18:46 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/17 15:39:21 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,6 @@ typedef struct s_data
 	int		line_length;
 	int		endian;
 }			t_data;
-
-// using a define TOP 0
-//       a define ISO 1
-//       a define CLR 0
-//       a define ALTCLR 1
 
 typedef struct s_pixel
 {
@@ -119,7 +114,7 @@ double		get_g(int trgb);
 double		get_b(int trgb);
 int			create_rgb(int r, int g, int b);
 int			gradient(int color_start, int color_end, int len, int pos);
-void bresenham(t_pixel *coord0, t_pixel *coord1, t_vars *vars);
+void bresenham(t_pixel *coord0, t_pixel *coord1, t_vars *vars, t_data *img);
 void	my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map, int zoom);
 
 // utils //
