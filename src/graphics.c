@@ -26,8 +26,8 @@ void	my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map, int zoom)
 	view = perspec(map);
 	if (zoom == 1)
 	{
-		x = pixel->x[view] * map->zoom + map->midx;
-		y = pixel->y[view] * map->zoom + map->midy;
+		x = (pixel->x[view] * map->zoom) + map->mid[X];
+		y = (pixel->y[view] * map->zoom) + map->mid[Y];
 	}
 	else
 	{
@@ -62,10 +62,10 @@ void	draw_line(t_pixel *coord0, t_pixel *coord1, t_vars *vars)
 
 	clr = color(vars->map);
 	view = perspec(vars->map);
-	x0 = coord0->x[view] * vars->map->zoom + vars->map->midx;
-	y0 = coord0->y[view] * vars->map->zoom + vars->map->midy;
-	x1 = coord1->x[view] * vars->map->zoom + vars->map->midx;
-	y1 = coord1->y[view] * vars->map->zoom + vars->map->midy;
+	x0 = coord0->x[view] * vars->map->zoom + vars->map->mid[X];
+	y0 = coord0->y[view] * vars->map->zoom + vars->map->mid[Y];
+	x1 = coord1->x[view] * vars->map->zoom + vars->map->mid[X];
+	y1 = coord1->y[view] * vars->map->zoom + vars->map->mid[Y];
 	dx = abs(x1 - x0);
 	dy = abs(y1 - y0);
 	sx = x0 < x1 ? 1 : -1;
@@ -126,11 +126,11 @@ void	print_graph_map(t_vars *vars, t_map *map, t_data *img)
 	{
 		pos[1] = 0;
 		while (pos[1] < map->columns && (map->coord[pos[0]][pos[1]].y[view] * gap
-				+ map->midy) < WINDOW_HEIGHT && (map->coord[map->rows
-				- 1][map->columns - 1].y[view] * gap + map->midy) > 0
-			&& (map->coord[pos[0]][pos[1]].x[view] * gap + map->midx) < WINDOW_WIDTH
+				+ map->mid[Y]) < WINDOW_HEIGHT && (map->coord[map->rows
+				- 1][map->columns - 1].y[view] * gap + map->mid[Y]) > 0
+			&& (map->coord[pos[0]][pos[1]].x[view] * gap + map->mid[X]) < WINDOW_WIDTH
 			&& (map->coord[map->rows - 1][map->columns - 1].x[view] * gap
-				+ map->midx) > 0)
+				+ map->mid[X]) > 0)
 		{
 			draw(vars, map, pos, img);
 			pos[1]++;
@@ -217,8 +217,8 @@ void	define_zoom(t_map *map)
 		}
 	}
 	map->zoom = i;
-	map->midx = (WINDOW_WIDTH / 2) - ((map->columns - 1) * map->zoom / 2);
-	map->midy = (WINDOW_HEIGHT / 2) - ((map->rows - 1) * map->zoom / 2);
+	map->mid[X] = (WINDOW_WIDTH / 2);
+	map->mid[Y] = (WINDOW_HEIGHT / 2);
 }
 
 int	graphics(t_map *map)

@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:59:55 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/17 15:39:21 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/18 12:11:54 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,7 @@ typedef struct s_map
 	int		rows;
 	int		columns;
 	bool	top;
-	int		midx;
-	int		midy;
+	int		mid[2];
 	float	zoom;
 	int		line;
 	bool	iso;

@@ -29,8 +29,8 @@ void	map_init(t_map *map)
 	map->rows = 0;
 	map->columns = 0;
 	map->top = 1;
-	map->midx = 0;
-	map->midy = 0;
+	map->mid[X] = 0;
+	map->mid[Y] = 0;
 	map->zoom = 1;
 	map->line = 1;
 	map->iso = 0;
