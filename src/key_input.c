@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:22:12 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/17 14:53:16 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/18 20:37:13 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,21 @@ int	key_map(int keycode)
 	// 	return (14);
 	// if (keycode == W_KEY)
 	// 	return (15);
+	if (keycode == M_KEY)
+		return (printf("pressed M_KEY\n"), 14);
 	else
 		return (0);
 }
 
+int plus_key(t_vars *vars)
+{
+	vars->map->zoom = vars->map->zoom * 1.5f;
+	return (1);
+}
+
 int	key_hook(int keycode, t_vars *vars)
 {
-	int	(*f[14])(t_vars *vars);
+	int	(*f[17])(t_vars *vars);
 
 	f[0] = &wrong_key;
 	f[1] = &key_esc;
@@ -67,6 +75,9 @@ int	key_hook(int keycode, t_vars *vars)
 	f[11] = &x_key;	
 	f[12] = &a_key;
 	f[13] = &d_key;
+	f[14] = &m_key;
+	// f[15] = &plus_key;
+	// f[16] = &minus_key;
 	
 	printf("keycode = %d\n", keycode);
 	if (f[key_map(keycode)](vars) == 1)
@@ -86,9 +97,9 @@ int	mouse_scroll(int button, int x, int y, t_vars *vars)
 
 	i = vars->map->zoom / 10 + 1;
 	if (button == 4 && vars->map->zoom < 100000)
-		vars->map->zoom += i;
+		vars->map->zoom = vars->map->zoom * 1.5f;
 	if (button == 5 && vars->map->zoom > 1)
-		vars->map->zoom -= i;
+		vars->map->zoom = vars->map->zoom / 1.5f;
 	// vars->map->midx = x;
 	// vars->map->midy = y;
 	render_next_frame(vars);

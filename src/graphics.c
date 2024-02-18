@@ -14,7 +14,7 @@
 
 // #include <mlx.h>
 
-void	my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map, int zoom)
+void	my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map)
 {
 	char	*dst;
 	float		x;
@@ -24,118 +24,108 @@ void	my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map, int zoom)
 
 	clr = color(map);
 	view = perspec(map);
-	if (zoom == 1)
-	{
-		x = (pixel->x[view] * map->zoom) + map->mid[X];
-		y = (pixel->y[view] * map->zoom) + map->mid[Y];
-	}
-	else
-	{
-		y = pixel->y[view];
-		x = pixel->x[view];
-	}
+	y = pixel->y[view];
+	x = pixel->x[view];
 	if (x < 0|| y < 0|| y > WINDOW_HEIGHT || x > WINDOW_WIDTH)
 		return ;
 	dst = data->addr + (int)(y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = pixel->color[clr];
 }
 
-void	draw_line(t_pixel *coord0, t_pixel *coord1, t_vars *vars)
+void	draw(t_vars *vars, t_map *map, int i, int j, t_data *img)
 {
-	int		x0;
-	int		y0;
-	int		x1;
-	int		y1;
-	float		dx;
-	float		dy;
-	float		sx;
-	float		sy;
-	float		err;
-	t_pixel	temp;
-	float 		e2;
-
-	int		pixel;
-	float		len;
-	int		view;
-	int		clr;
-	int		j;
-
-	clr = color(vars->map);
-	view = perspec(vars->map);
-	x0 = coord0->x[view] * vars->map->zoom + vars->map->mid[X];
-	y0 = coord0->y[view] * vars->map->zoom + vars->map->mid[Y];
-	x1 = coord1->x[view] * vars->map->zoom + vars->map->mid[X];
-	y1 = coord1->y[view] * vars->map->zoom + vars->map->mid[Y];
-	dx = abs(x1 - x0);
-	dy = abs(y1 - y0);
-	sx = x0 < x1 ? 1 : -1;
-	sy = y0 < y1 ? 1 : -1;
-	err = dx - dy;
-	pixel = (int)sqrt(dx * dx + dy * dy);
-	len = pixel;
-	j = 0;
-	while (pixel)
-	{
-		temp.x[view] = x0;
-		temp.y[view] = y0;
-		temp.color[clr] = gradient(coord0->color[clr], coord1->color[clr], len,
-				len - pixel);
-		if (temp.x[view] > 0 && temp.x[view] < WINDOW_WIDTH
-			&& temp.y[view] < WINDOW_HEIGHT && temp.y[view] > 0)
-		{
-			my_mlx_pixel_put(vars->img, &temp, vars->map, 0);
-			j++;
-		}
-		e2 = 2 * err;
-		if (e2 > -dy)
-		{
-			err -= dy;
-			x0 += sx;
-		}
-		if (e2 < dx)
-		{
-			err += dx;
-			y0 += sy;
-		}
-		pixel--;
-	}
+	my_mlx_pixel_put(img, &map->coord[i][j], map);
+	if (i + 1 < map->rows && map->line == 1)
+		bresenham(&map->coord[i][j], &map->coord[i + 1][j], vars, img);
+	if (j + 1 < map->columns && map->line == 1)
+		bresenham(&map->coord[i][j], &map->coord[i][j + 1], vars, img);
+	if (j + 1 < map->columns && i + 1 < map->rows && map->line == 1 && map->diag == 1)
+		bresenham(&map->coord[i][j], &map->coord[i + 1][j + 1], vars, img);
 }
 
-void	draw(t_vars *vars, t_map *map, int *pos, t_data *img)
+int verify_fit(t_map *map, int i, int j)
 {
-	// printf("I'm in draw\n");
-	my_mlx_pixel_put(img, &map->coord[pos[0]][pos[1]], map, 1);
-	if (pos[0] + 1 < map->rows && map->line == 1)
-		bresenham(&map->coord[pos[0]][pos[1]], &map->coord[pos[0] + 1][pos[1]], vars, img);
-		// draw_line(&map->coord[i][j], &map->coord[i + 1][j], vars);
-	if (pos[1] + 1 < map->columns && map->line == 1)
-		bresenham(&map->coord[pos[0]][pos[1]], &map->coord[pos[0]][pos[1] + 1], vars, img);
-		// draw_line(&map->coord[i][j], &map->coord[i][j + 1], vars);
+	int view;
+
+	view = perspec(map);
+	if (map->coord[i][j].x[view] < WINDOW_WIDTH
+		&& map->coord[i][j].y[view] < WINDOW_HEIGHT
+		&& map->coord[i][j].x[view] > 0 && map->coord[i][j].y[view] > 0)
+		return (1);
+	if (i + 1 < map->rows)
+		if (map->coord[i + 1][j].x[view] < WINDOW_WIDTH
+			&& map->coord[i + 1][j].y[view] < WINDOW_HEIGHT
+			&& map->coord[i + 1][j].x[view] > 0 && map->coord[i + 1][j].y[view] > 0)
+			return (1);
+	if (j + 1 < map->columns)
+		if (map->coord[i][j + 1].x[view] < WINDOW_WIDTH
+			&& map->coord[i][j + 1].y[view] < WINDOW_HEIGHT
+			&& map->coord[i][j + 1].x[view] > 0 && map->coord[i][j + 1].y[view] > 0)
+			return (1);
+	return (0);
+	
 }
 
 void	print_graph_map(t_vars *vars, t_map *map, t_data *img)
 {
-	int	pos[2];
-	int	gap;
+	int	i;
+	int	j;
 	int	view;
 
 	view = perspec(map);
-	gap = map->zoom;
-	pos[0] = -1;
-	while (++pos[0] < map->rows)
+	i = 0;
+	while (i < map->rows)
 	{
-		pos[1] = 0;
-		while (pos[1] < map->columns && (map->coord[pos[0]][pos[1]].y[view] * gap
-				+ map->mid[Y]) < WINDOW_HEIGHT && (map->coord[map->rows
-				- 1][map->columns - 1].y[view] * gap + map->mid[Y]) > 0
-			&& (map->coord[pos[0]][pos[1]].x[view] * gap + map->mid[X]) < WINDOW_WIDTH
-			&& (map->coord[map->rows - 1][map->columns - 1].x[view] * gap
-				+ map->mid[X]) > 0)
+		j = 0;
+		while (j < map->columns)
 		{
-			draw(vars, map, pos, img);
-			pos[1]++;
+			if (verify_fit(map, i, j))
+				draw(vars, map, i, j, img);
+			j++;
 		}
+		i++;
 	}
+}
+
+void put_pixel(t_data *img, int x, int y, int color)
+{
+	char	*dst;
+
+	if (x < 0 || x >= WINDOW_WIDTH || y < 0 || y >= WINDOW_HEIGHT)
+		return ;
+	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
+}
+
+void make_background(t_data *img)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < WINDOW_HEIGHT)
+	{
+		j = 0;
+		while (j < WINDOW_WIDTH)
+		{
+			put_pixel(img, j, i, BACKGROUND);
+			j++;
+		}
+		i++;
+	}
+}
+
+void generate_map(t_vars *vars, t_data *img)
+{
+	int view;
+
+	view = perspec(vars->map);
+	if (view == ISO)
+		define_iso(vars->map);
+	else if (view == TOP)
+		define_top(vars->map);
+	make_background(img);
+
 }
 
 int	render_next_frame(t_vars *vars)
@@ -159,6 +149,7 @@ int	render_next_frame(t_vars *vars)
 		mlx_destroy_image(vars->mlx, new_img->img);
 		quit_map("Error: Unable to get data address for new_img", vars);
 	}
+	generate_map(vars, new_img);
 	print_graph_map(vars, vars->map, new_img);
 	mlx_put_image_to_window(vars->mlx, vars->win, new_img->img, 0, 0);
 	if (vars->img)
@@ -183,14 +174,14 @@ int	define_alt_color(t_map *map)
 		{
 			if (map->z_max == map->z_min)
 				map->coord[i][j].color[ALTCLR] = WHITE;
-			else if (map->coord[i][j].z[TOP] == 0)
+			else if (map->coord[i][j].z[ORG] == 0)
 				map->coord[i][j].color[ALTCLR] = GREEN;
-			else if (map->coord[i][j].z[TOP] > 0)
+			else if (map->coord[i][j].z[ORG] > 0)
 				map->coord[i][j].color[ALTCLR] = gradient(GREEN, RED, map->z_max
-						- map->z_min, map->coord[i][j].z[TOP] - map->z_min);
-			else if (map->coord[i][j].z[TOP] < 0)
+						- map->z_min, map->coord[i][j].z[ORG] - map->z_min);
+			else if (map->coord[i][j].z[ORG] < 0)
 				map->coord[i][j].color[ALTCLR] = gradient(BLUE, GREEN,
-						map->z_max - map->z_min, map->coord[i][j].z[TOP]
+						map->z_max - map->z_min, map->coord[i][j].z[ORG]
 						- map->z_min);
 			j++;
 		}
@@ -201,24 +192,44 @@ int	define_alt_color(t_map *map)
 
 void	define_zoom(t_map *map)
 {
-	int	i;
+	float	i;
 
 	i = 1;
-	while (1)
-	{
-		if ((map->rows - 1) * i < WINDOW_HEIGHT && (map->columns - 1)
-			* i < WINDOW_WIDTH)
-			i += i / 10 + 1;
-		else
-		{
-			if (i > 1)
-				i -= i / 10 + 1;
-			break ;
-		}
-	}
+	// while (1)
+	// {
+	// 	if ((map->rows - 1) * i < WINDOW_HEIGHT && (map->columns - 1)
+	// 		* i < WINDOW_WIDTH)
+	// 		i += 0.2;
+	// 	else
+	// 	{
+	// 		if (i > 1)
+	// 			i -= 0.2;
+	// 		break ;
+	// 	}
+	// }
 	map->zoom = i;
 	map->mid[X] = (WINDOW_WIDTH / 2);
 	map->mid[Y] = (WINDOW_HEIGHT / 2);
+}
+
+void define_top(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < map->rows)
+	{
+		j = 0;
+		while (j < map->columns)
+		{
+			map->coord[i][j].x[TOP] = j * map->zoom + map->mid[X];
+			map->coord[i][j].y[TOP] = i * map->zoom + map->mid[Y];
+			map->coord[i][j].z[TOP] = map->coord[i][j].z[ORG] * map->zoom;
+			j++;
+		}
+		i++;
+	}
 }
 
 int	graphics(t_map *map)
@@ -227,10 +238,9 @@ int	graphics(t_map *map)
 
 	create_win_mlx(&vars, map);
 	define_zoom(map);
-	define_iso(map);
 	define_alt_color(map);
+	generate_map(&vars, vars.img);
 	print_graph_map(&vars, vars.map, vars.img);
-
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.img->img, 0, 0);
 	mlx_handle_input(&vars);
 	mlx_loop(vars.mlx);

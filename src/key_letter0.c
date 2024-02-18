@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:21:41 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/16 21:51:00 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/18 21:40:07 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,18 @@ int	l_key(t_vars *vars)
 		vars->map->line = 1;
 	else
 		vars->map->line = 0;
+	return (1);
+}
+
+int	m_key(t_vars *vars)
+{
+	if (vars->map->diag == 0)
+	{
+		vars->map->diag = 1;
+		vars->map->line = 1;
+	}
+	else
+		vars->map->diag = 0;
 	return (1);
 }
 

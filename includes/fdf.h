@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:59:55 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/18 12:11:54 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/18 22:04:59 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,15 @@
 # define RED 0xFF0000
 # define GREEN 0x00FF00
 # define BLUE 0x0000FF
+# define BACKGROUND 0x151515
 
 # define X 0
 # define Y 1
 # define Z 2
 
-# define TOP 0
-# define ISO 1
+# define ORG 0
+# define TOP 1
+# define ISO 2
 
 # define ORGCLR 0
 # define ALTCLR 1
@@ -58,11 +60,34 @@ typedef struct s_data
 
 typedef struct s_pixel
 {
-	int	x[2];
-	int	y[2];
-	int	z[2];
+	int	x[3];
+	int	y[3];
+	int	z[3];
 	int		color[2];
 }			t_pixel;
+
+typedef struct s_bresenham
+{
+    t_pixel *temp;
+    int x0;
+    int y0;
+    int x1;
+    int y1;
+    int dx;
+    int dy;
+    int inc_x;
+    int inc_y;
+    int len;
+    int i;
+    int err;
+    int err2;
+} t_bresenham;
+
+typedef struct s_draw
+{
+    t_pixel *coord0;
+    t_pixel *coord1;
+} t_draw;
 
 typedef struct s_map
 {
@@ -72,9 +97,11 @@ typedef struct s_map
 	bool	top;
 	int		mid[2];
 	float	zoom;
-	int		line;
+	bool	line;
+	bool	diag;
 	bool	iso;
 	double	angle[3];
+	int 	translate[3];
 	int		z_color;
 	int		z_min;
 	int		z_max;
@@ -88,11 +115,17 @@ typedef struct s_vars
 	t_data	*img;
 }			t_vars;
 
+// PARSING UTILS //
 int			parse(t_map *map, char *file);
 void		free_map(t_map *map, int lines);
 char		*free_join(char *s1, char *s2);
 void		free_map(t_map *map, int lines);
 void		map_init(t_map *map);
+int	special_atoi(const char *str, int *index);
+int	strvalue(char c);
+unsigned int	special_atoi_hex(const char *str, int *index);
+int	check_columns(char **split, int rows);
+void	asign_values(t_map *map, char **split);
 
 // WINDOW / MLX MANAGEMENT //
 int			quit(char *s);
@@ -106,6 +139,7 @@ void		close_mlx(t_vars *vars);
 
 // ROTATION MANAGEMENT //
 int			define_iso(t_map *map);
+void 		define_top(t_map *map);
 
 // COLOR MANAGEMENT //
 double		get_r(int trgb);
@@ -114,10 +148,9 @@ double		get_b(int trgb);
 int			create_rgb(int r, int g, int b);
 int			gradient(int color_start, int color_end, int len, int pos);
 void bresenham(t_pixel *coord0, t_pixel *coord1, t_vars *vars, t_data *img);
-void	my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map, int zoom);
+void	my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map);
 
 // utils //
-void	print_map(t_map *map); // =========> must be commented before submiting
 int			perspec(t_map *map);
 int			color(t_map *map);
 

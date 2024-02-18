@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:21:25 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/16 21:53:25 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/18 19:57:58 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 #  define X_KEY 7
 #  define A_KEY 12
 #  define D_KEY 2
+#  define M_KEY 41
 # endif
 
 int	key_right(t_vars *vars);
@@ -59,5 +60,6 @@ int	z_key(t_vars *vars);
 int	x_key(t_vars *vars);
 int	a_key(t_vars *vars);
 int	d_key(t_vars *vars);
+int m_key(t_vars *vars);
 
 #endif
