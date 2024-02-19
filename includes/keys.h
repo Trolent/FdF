@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:21:25 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/18 19:57:58 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/19 12:16:25 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 #  define X_KEY 0x78
 #  define A_KEY 0x61
 #  define D_KEY 0x64
+#  define M_KEY 0x6d
 # elif defined(__APPLE__)
 #  define ESC_KEY (53)
 #  define LEFT_KEY (124)

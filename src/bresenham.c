@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 23:09:36 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/18 21:32:23 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:08:23 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,11 @@
 void	bresenham_init(t_bresenham *bres, t_pixel *coord0, t_pixel *coord1,
 		t_map *map)
 {
-	int	view;
 
-	view = perspec(map);
-	bres->x0 = coord0->x[view];
-	bres->y0 = coord0->y[view];
-	bres->x1 = coord1->x[view];
-	bres->y1 = coord1->y[view];
+	bres->x0 = coord0->x[ISO];
+	bres->y0 = coord0->y[ISO];
+	bres->x1 = coord1->x[ISO];
+	bres->y1 = coord1->y[ISO];
 	bres->dx = abs(bres->x1 - bres->x0);
 	bres->dy = abs(bres->y1 - bres->y0);
 	if (bres->x0 < bres->x1)
@@ -39,11 +37,8 @@ void	bresenham_init(t_bresenham *bres, t_pixel *coord0, t_pixel *coord1,
 
 void	bresenham_init2(t_bresenham *bres, t_vars *vars)
 {
-	int	view;
-
-	view = perspec(vars->map);
-	bres->temp->x[view] = bres->x0;
-	bres->temp->y[view] = bres->y0;
+	bres->temp->x[ISO] = bres->x0;
+	bres->temp->y[ISO] = bres->y0;
 	bres->err2 = 2 * bres->err;
 }
 
@@ -51,17 +46,15 @@ void	bresenham_print(t_bresenham *bres, t_draw *draw, t_data *img,
 		t_vars *vars)
 {
 	int	clr;
-	int	view;
 
-	view = perspec(vars->map);
 	clr = color(vars->map);
 	while (bres->i <= bres->len)
 	{
 		bresenham_init2(bres, vars);
 		bres->temp->color[clr] = gradient(draw->coord0->color[clr],
 				draw->coord1->color[clr], bres->len, bres->i);
-		if (bres->temp->x[view] > 0 && bres->temp->x[view] < WINDOW_WIDTH
-			&& bres->temp->y[view] < WINDOW_HEIGHT && bres->temp->y[view] > 0)
+		if (bres->temp->x[ISO] > 0 && bres->temp->x[ISO] < WINDOW_WIDTH
+			&& bres->temp->y[ISO] < WINDOW_HEIGHT && bres->temp->y[ISO] > 0)
 			my_mlx_pixel_put(img, bres->temp, vars->map);
 		if (bres->err2 > -bres->dy)
 		{
@@ -82,11 +75,9 @@ void	bresenham(t_pixel *coord0, t_pixel *coord1, t_vars *vars, t_data *img)
 	t_bresenham	bres;
 	t_pixel		temp;
 	t_draw		draw;
-	int			view;
 	int			clr;
 
 	clr = color(vars->map);
-	view = perspec(vars->map);
 	draw.coord0 = coord0;
 	draw.coord1 = coord1;
 	bres.temp = &temp;

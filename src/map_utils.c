@@ -43,19 +43,6 @@ void	map_init(t_map *map)
 	map->z_min = 0;
 }
 
-int	perspec(t_map *map)
-{
-	int	view;
-
-	if (map->iso == 1)
-		view = ISO;
-	else if (map->top == 1)
-		view = TOP;
-	else
-		view = ORG;
-	return (view);
-}
-
 int	color(t_map *map)
 {
 	int	clr;

@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 19:35:18 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/16 21:51:14 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/19 13:34:32 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	close_mlx(t_vars *vars)
 	mlx_destroy_window(vars->mlx, vars->win);
 	mlx_destroy_image(vars->mlx, vars->img->img);
 	free(vars->img);
-	// mlx_destroy_display(vars->mlx);
+	mlx_destroy_display(vars->mlx);
 	free(vars->mlx);
 }
 

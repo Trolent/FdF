@@ -6,14 +6,14 @@
 #    By: trolland <trolland@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 16:23:19 by trolland          #+#    #+#              #
-#    Updated: 2024/02/18 22:02:59 by trolland         ###   ########.fr        #
+#    Updated: 2024/02/19 12:22:52 by trolland         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
 LIBFT	= 	libft/libft.a
-MLX_LINUX 	=	mlx_Linux/mlx_Linux.a 
+MLX_LINUX =	minilibx-linux/libmlx.a 
 MLX_MACOS = libmlx/libmlx.a
 
 OS := $(shell uname)
@@ -23,8 +23,8 @@ ifeq ($(OS),Darwin)
     LD_FLAGS = -L$(MLX_PATH) -lmlx -framework OpenGL -framework AppKit
 else
     MLX_TARGET = $(MLX_LINUX)
-    MLX_PATH = mlx_Linux
-    LD_FLAGS = -Lmlx_Linux -lmlx_Linux -lXext -lX11 -lm -lz
+    MLX_PATH = minilibx-linux
+    LD_FLAGS = -Lminilibx-linux -lmlx -lXext -lX11 -lm -lz
 endif
 
 SRC :=		fdf.c errors.c free_join.c ft_parse.c ft_parse2.c graphics.c \

@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:59:55 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/18 22:04:59 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/19 14:07:23 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <unistd.h>
 
 # if defined(__linux__)
-#  include "../mlx_Linux/mlx.h"
+#  include "../minilibx-linux/mlx.h"
 #  define WINDOW_WIDTH 1920
 #  define WINDOW_HEIGHT 1080
 # elif defined(__APPLE__)
@@ -43,8 +43,7 @@
 # define Z 2
 
 # define ORG 0
-# define TOP 1
-# define ISO 2
+# define ISO 1
 
 # define ORGCLR 0
 # define ALTCLR 1
@@ -60,9 +59,9 @@ typedef struct s_data
 
 typedef struct s_pixel
 {
-	int	x[3];
-	int	y[3];
-	int	z[3];
+	int	x[2];
+	int	y[2];
+	int	z[2];
 	int		color[2];
 }			t_pixel;
 
@@ -151,7 +150,6 @@ void bresenham(t_pixel *coord0, t_pixel *coord1, t_vars *vars, t_data *img);
 void	my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map);
 
 // utils //
-int			perspec(t_map *map);
 int			color(t_map *map);
 
 #endif
