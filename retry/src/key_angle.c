@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 09:14:51 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/18 21:49:43 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/19 10:22:35 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	z_key(t_vars *vars)
 {
-	vars->map->angle[X] += 1;
+	vars->map->angle[Z] += 1;
 	define_iso(vars->map);
 	return (1);
 }
