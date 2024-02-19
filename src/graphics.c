@@ -12,21 +12,20 @@
 
 #include "../includes/fdf.h"
 
-// #include <mlx.h>
-
 void	my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map)
 {
 	char	*dst;
-	float		x;
-	float		y;
+	float	x;
+	float	y;
 	int		clr;
 
 	clr = color(map);
-	y = pixel->y[ISO];
-	x = pixel->x[ISO];
-	if (x < 0|| y < 0|| y > WINDOW_HEIGHT || x > WINDOW_WIDTH)
+	y = (int)pixel->y[ISO];
+	x = (int)pixel->x[ISO];
+	if (x < 0 || y < 0 || y > WINDOW_HEIGHT || x > WINDOW_WIDTH)
 		return ;
-	dst = data->addr + (int)(y * data->line_length + x * (data->bits_per_pixel / 8));
+	dst = data->addr + (int)(y * data->line_length + x * (data->bits_per_pixel
+				/ 8));
 	*(unsigned int *)dst = pixel->color[clr];
 }
 
@@ -37,30 +36,30 @@ void	draw(t_vars *vars, t_map *map, int i, int j, t_data *img)
 		bresenham(&map->coord[i][j], &map->coord[i + 1][j], vars, img);
 	if (j + 1 < map->columns && map->line == 1)
 		bresenham(&map->coord[i][j], &map->coord[i][j + 1], vars, img);
-	if (j + 1 < map->columns && i + 1 < map->rows && map->line == 1 && map->diag == 1)
+	if (j + 1 < map->columns && i + 1 < map->rows && map->line == 1
+		&& map->diag == 1)
 		bresenham(&map->coord[i][j], &map->coord[i + 1][j + 1], vars, img);
-		// printf(" i = %d && j = %d\n", i, j);
-		// printf("map->rows = %d && map->columns = %d\n", map->rows, map->columns);
+	// printf(" i = %d && j = %d\n", i, j);
+	// printf("map->rows = %d && map->columns = %d\n", map->rows, map->columns);
 }
 
-int verify_fit(t_map *map, int i, int j)
+int	verify_fit(t_map *map, int i, int j)
 {
 	if (map->coord[i][j].x[ISO] < WINDOW_WIDTH
 		&& map->coord[i][j].y[ISO] < WINDOW_HEIGHT
 		&& map->coord[i][j].x[ISO] > 0 && map->coord[i][j].y[ISO] > 0)
 		return (1);
 	if (i + 1 < map->rows)
-		if (map->coord[i + 1][j].x[ISO] < WINDOW_WIDTH
-			&& map->coord[i + 1][j].y[ISO] < WINDOW_HEIGHT
-			&& map->coord[i + 1][j].x[ISO] > 0 && map->coord[i + 1][j].y[ISO] > 0)
+		if (map->coord[i + 1][j].x[ISO] < WINDOW_WIDTH && map->coord[i
+			+ 1][j].y[ISO] < WINDOW_HEIGHT && map->coord[i + 1][j].x[ISO] > 0
+			&& map->coord[i + 1][j].y[ISO] > 0)
 			return (1);
 	if (j + 1 < map->columns)
-		if (map->coord[i][j + 1].x[ISO] < WINDOW_WIDTH
-			&& map->coord[i][j + 1].y[ISO] < WINDOW_HEIGHT
-			&& map->coord[i][j + 1].x[ISO] > 0 && map->coord[i][j + 1].y[ISO] > 0)
+		if (map->coord[i][j + 1].x[ISO] < WINDOW_WIDTH && map->coord[i][j
+			+ 1].y[ISO] < WINDOW_HEIGHT && map->coord[i][j + 1].x[ISO] > 0
+			&& map->coord[i][j + 1].y[ISO] > 0)
 			return (1);
 	return (0);
-	
 }
 
 void	print_graph_map(t_vars *vars, t_map *map, t_data *img)
@@ -82,7 +81,7 @@ void	print_graph_map(t_vars *vars, t_map *map, t_data *img)
 	}
 }
 
-void put_pixel(t_data *img, int x, int y, int color)
+void	put_pixel(t_data *img, int x, int y, int color)
 {
 	char	*dst;
 
@@ -92,7 +91,7 @@ void put_pixel(t_data *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void make_background(t_data *img)
+void	make_background(t_data *img)
 {
 	int	i;
 	int	j;
@@ -110,7 +109,7 @@ void make_background(t_data *img)
 	}
 }
 
-void generate_map(t_vars *vars, t_data *img)
+void	generate_map(t_vars *vars, t_data *img)
 {
 	define_iso(vars->map);
 	make_background(img);
@@ -122,24 +121,18 @@ int	render_next_frame(t_vars *vars)
 
 	new_img = malloc(sizeof(t_data));
 	if (!new_img)
-		quit("Error: Unable to allocate memory for new_img");
+		return (mlx_loop_end(vars->mlx), 0);
 	new_img->img = mlx_new_image(vars->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!new_img->img)
-	{
-		free(new_img);
-		quit("Error: Unable to create new image with mlx_new_image");
-	}
+		return (free(new_img), mlx_loop_end(vars->mlx), 0);
 	new_img->addr = mlx_get_data_addr(new_img->img, &new_img->bits_per_pixel,
 			&new_img->line_length, &new_img->endian);
 	if (!new_img->addr)
-	{
-		free(new_img);
-		mlx_destroy_image(vars->mlx, new_img->img);
-		quit_map("Error: Unable to get data address for new_img", vars);
-	}
+		return (free(new_img), mlx_loop_end(vars->mlx), 0);
 	generate_map(vars, new_img);
 	print_graph_map(vars, vars->map, new_img);
 	mlx_put_image_to_window(vars->mlx, vars->win, new_img->img, 0, 0);
+	make_menu(vars, new_img);
 	if (vars->img)
 	{
 		mlx_destroy_image(vars->mlx, vars->img->img);
@@ -165,7 +158,8 @@ int	define_alt_color(t_map *map)
 			else if (map->coord[i][j].z[ORG] == 0)
 				map->coord[i][j].color[ALTCLR] = GREEN;
 			else if (map->coord[i][j].z[ORG] > 0)
-				map->coord[i][j].color[ALTCLR] = gradient(GREEN, RED, map->z_max, map->coord[i][j].z[ORG]);
+				map->coord[i][j].color[ALTCLR] = gradient(GREEN, RED,
+						map->z_max, map->coord[i][j].z[ORG]);
 			else if (map->coord[i][j].z[ORG] < 0)
 				map->coord[i][j].color[ALTCLR] = gradient(GREEN, BLUE,
 						-map->z_min, -map->coord[i][j].z[ORG]);

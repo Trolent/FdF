@@ -6,7 +6,7 @@
 #    By: trolland <trolland@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 16:23:19 by trolland          #+#    #+#              #
-#    Updated: 2024/02/19 12:22:52 by trolland         ###   ########.fr        #
+#    Updated: 2024/02/19 17:35:59 by trolland         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,9 +28,9 @@ else
 endif
 
 SRC :=		fdf.c errors.c free_join.c ft_parse.c ft_parse2.c graphics.c \
-			map_utils.c draw_utils.c key_input.c key_arrow.c key_letter0.c \
-			key_letter1.c create_win_mlx.c close_mlx.c rotation.c key_angle.c \
-			bresenham.c
+			map_utils.c draw_utils.c key_input.c key_input2.c key_arrow.c \
+			key_letter0.c key_letter1.c create_win_mlx.c close_mlx.c \
+			rotation.c key_angle.c bresenham.c menu.c
 			
 SRCS := 	$(addprefix src/, $(SRC))
 OBJS := 	$(patsubst src/%.c, object/%.o, $(SRCS))
@@ -46,8 +46,8 @@ all: create_dirs $(NAME)
 $(NAME): create_dirs $(OBJS) $(LIBFT) $(MLX_TARGET)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(LD_FLAGS)
 
-mlx: $(LIBFT) $(MLX_TARGET)
-	$(CC) $(CFLAGS) minilibx.c $(LIBFT) -o mlx $(LD_FLAGS) 
+mlx: create_dirs  $(OBJS) $(LIBFT)$(MLX_TARGET)
+	$(CC) $(CFLAGS) $(LIBFT) $(OBJS) minilibx.c -o mlx $(LD_FLAGS) 
 
 $(MLX_TARGET):
 	$(MAKE) -C $(MLX_PATH)

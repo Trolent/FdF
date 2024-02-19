@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:22:27 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/18 20:23:20 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:26:07 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,22 @@
 
 int	i_key(t_vars *vars)
 {
-	if (vars->map->iso == 1)
+	if (vars->map->angle[X] == 120 && vars->map->angle[Y] == 120
+		&& vars->map->angle[Z] == 120)
 		return (0);
-	vars->map->iso = 1;
-	vars->map->top = 0;
+	vars->map->angle[X] = 30;
+	vars->map->angle[Y] = 330;
+	vars->map->angle[Z] = 30;
 	return (1);
 }
 
 int	t_key(t_vars *vars)
 {
-	if (vars->map->top == 1)
+	if (vars->map->angle[X] == 0 && vars->map->angle[Y] == 0
+		&& vars->map->angle[Z] == 0)
 		return (0);
-	vars->map->top = 1;
-	vars->map->iso = 0;
+	vars->map->angle[X] = 0;
+	vars->map->angle[Y] = 0;
+	vars->map->angle[Z] = 0;
 	return (1);
 }

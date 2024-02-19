@@ -35,12 +35,13 @@ void	map_init(t_map *map)
 	map->diag = 0;
 	map->top = 0;
 	map->iso = 1;
-	map->angle[X] = 0;
-	map->angle[Y] = 0;
-	map->angle[Z] = 0;
+	map->angle[X] = 30;
+	map->angle[Y] = 330;
+	map->angle[Z] = 30;
 	map->z_color = 0;
 	map->z_max = 0;
 	map->z_min = 0;
+	map->z_range = 1;
 }
 
 int	color(t_map *map)
