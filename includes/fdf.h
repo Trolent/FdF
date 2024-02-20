@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:59:55 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/19 16:24:49 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/20 16:53:02 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,10 @@ void			make_menu(t_vars *vars, t_data *img);
 
 // ROTATION MANAGEMENT //
 int				define_iso(t_map *map);
-void			define_top(t_map *map);
+void	z_ratio(t_pixel *point, t_map *map);
+void	rotate_x(t_pixel *point, double angle, t_map *map);
+void	rotate_y(t_pixel *point, double angle, t_map *map);
+void	rotate_z(t_pixel *point, double angle, t_map *map);
 
 // COLOR MANAGEMENT //
 double			get_r(int trgb);

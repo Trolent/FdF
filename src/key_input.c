@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:22:12 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/19 18:30:52 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/20 17:44:09 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	key_map(int keycode, int i)
 	key[15] = W_KEY;
 	key[16] = PLUS_KEY;
 	key[17] = MINUS_KEY;
-	i = -1;
 	while (++i < 18)
 		if (keycode == key[i])
 			return (i + 1);
@@ -84,23 +83,19 @@ int	key_hook(int keycode, t_vars *vars)
 
 int	mouse_scroll(int button, int x, int y, t_vars *vars)
 {
-	int	i;
-
-	i = vars->map->zoom / 10 + 1;
 	if (button == 4 && vars->map->zoom < 100000)
 		vars->map->zoom = vars->map->zoom * 1.5f;
 	if (button == 5 && vars->map->zoom > 1)
 		vars->map->zoom = vars->map->zoom / 1.5f;
-	// vars->map->midx = x;
-	// vars->map->midy = y;
+	define_iso(vars->map);
 	render_next_frame(vars);
 	return (0);
 }
 
 int	mlx_handle_input(t_vars *vars)
 {
-	mlx_mouse_hook(vars->win, (int (*)())mouse_scroll, vars);
 	mlx_key_hook(vars->win, &key_hook, vars);
+	mlx_mouse_hook(vars->win, (int (*)())mouse_scroll, vars);
 	mlx_hook(vars->win, 17, 1L << 3, &cross_close, vars);
 	return (1);
 }

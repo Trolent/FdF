@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 19:35:18 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/19 13:34:32 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:11:38 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	close_mlx(t_vars *vars)
 
 int	cross_close(t_vars *vars)
 {
-	quit_map("stop", vars);
-	// mlx_loop_end(vars->mlx);
+	mlx_loop_end(vars->mlx);
 	return (0);
 }

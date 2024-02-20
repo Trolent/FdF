@@ -39,8 +39,6 @@ void	draw(t_vars *vars, t_map *map, int i, int j, t_data *img)
 	if (j + 1 < map->columns && i + 1 < map->rows && map->line == 1
 		&& map->diag == 1)
 		bresenham(&map->coord[i][j], &map->coord[i + 1][j + 1], vars, img);
-	// printf(" i = %d && j = %d\n", i, j);
-	// printf("map->rows = %d && map->columns = %d\n", map->rows, map->columns);
 }
 
 int	verify_fit(t_map *map, int i, int j)
@@ -109,10 +107,13 @@ void	make_background(t_data *img)
 	}
 }
 
-void	generate_map(t_vars *vars, t_data *img)
+void	generate_map(t_vars *vars, t_map *map,t_data *img)
 {
-	define_iso(vars->map);
 	make_background(img);
+	print_graph_map(vars, vars->map, img);
+	mlx_put_image_to_window(vars->mlx, vars->win, img->img, 0, 0);
+	make_menu(vars, img);
+	
 }
 
 int	render_next_frame(t_vars *vars)
@@ -129,10 +130,7 @@ int	render_next_frame(t_vars *vars)
 			&new_img->line_length, &new_img->endian);
 	if (!new_img->addr)
 		return (free(new_img), mlx_loop_end(vars->mlx), 0);
-	generate_map(vars, new_img);
-	print_graph_map(vars, vars->map, new_img);
-	mlx_put_image_to_window(vars->mlx, vars->win, new_img->img, 0, 0);
-	make_menu(vars, new_img);
+	generate_map(vars, vars->map, new_img);
 	if (vars->img)
 	{
 		mlx_destroy_image(vars->mlx, vars->img->img);
@@ -198,10 +196,9 @@ int	graphics(t_map *map)
 
 	create_win_mlx(&vars, map);
 	define_zoom(map);
+	define_iso(vars.map);
 	define_alt_color(map);
-	generate_map(&vars, vars.img);
-	print_graph_map(&vars, vars.map, vars.img);
-	mlx_put_image_to_window(vars.mlx, vars.win, vars.img->img, 0, 0);
+	generate_map(&vars, map, vars.img);
 	mlx_handle_input(&vars);
 	mlx_loop(vars.mlx);
 	close_mlx(&vars);

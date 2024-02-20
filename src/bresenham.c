@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 23:09:36 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/19 15:51:33 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:11:22 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	bresenham_init(t_bresenham *bres, t_pixel *coord0, t_pixel *coord1,
 		t_map *map)
 {
-
 	bres->x0 = floorf(coord0->x[ISO]);
 	bres->y0 = floorf(coord0->y[ISO]);
 	bres->x1 = floorf(coord1->x[ISO]);
@@ -75,9 +74,7 @@ void	bresenham(t_pixel *coord0, t_pixel *coord1, t_vars *vars, t_data *img)
 	t_bresenham	bres;
 	t_pixel		temp;
 	t_draw		draw;
-	int			clr;
 
-	clr = color(vars->map);
 	draw.coord0 = coord0;
 	draw.coord1 = coord1;
 	bres.temp = &temp;

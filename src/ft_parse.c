@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:04:58 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/18 22:00:46 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:11:07 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,12 @@ int	create_map(t_map *map, int fd)
 		line = free_join(line, buffer);
 		free(buffer);
 		if (!line)
-			return (free(buffer), 0);
+			return (free(line), 0);
 		rows++;
 	}
 	map->rows = rows;
 	if (create_struct(map, line) == 0)
-		return (free(buffer), free(line), 0);
+		return (free(buffer), 0);
 	return (free(buffer), free(line), 1);
 }
 
@@ -73,7 +73,7 @@ int	parse(t_map *map, char *file)
 	int	fd;
 
 	if (!file)
-		quit(ERR_NO_FILE);
+		return (quit(ERR_NO_FILE));
 	if (check_last_characters(file, ".fdf") == 0)
 		quit(ERR_FILE_TYPE);
 	fd = open(file, O_RDONLY);
