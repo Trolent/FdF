@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:59:55 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/20 16:53:02 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/21 11:38:52 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ typedef struct s_map
 	int			z_color;
 	int			z_min;
 	int			z_max;
-	int			z_range;
+	double			z_range;
 }				t_map;
 
 typedef struct s_vars
@@ -131,7 +131,7 @@ void			asign_values(t_map *map, char **split);
 // WINDOW / MLX MANAGEMENT //
 int				quit(char *s);
 int				quit_map(char *s, t_vars *vars);
-int				graphics(t_map *map);
+int				graphics(t_vars *map);
 int				create_win_mlx(t_vars *vars, t_map *map);
 int				mlx_handle_input(t_vars *vars);
 int				render_next_frame(t_vars *vars);

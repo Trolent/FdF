@@ -6,40 +6,12 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:22:12 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/21 01:13:17 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/21 11:18:19 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 #include "../includes/keys.h"
-
-// int	key_map(int keycode, int i)
-// {
-// 	int	key[18];
-
-// 	key[0] = ESC_KEY;
-// 	key[1] = RIGHT_KEY;
-// 	key[2] = LEFT_KEY;
-// 	key[3] = DOWN_KEY;
-// 	key[4] = UP_KEY;
-// 	key[5] = L_KEY;
-// 	key[6] = C_KEY;
-// 	key[7] = D_KEY;
-// 	key[8] = I_KEY;
-// 	key[9] = T_KEY;
-// 	key[10] = Z_KEY;
-// 	key[11] = X_KEY;
-// 	key[12] = A_KEY;
-// 	key[13] = S_KEY;
-// 	key[14] = Q_KEY;
-// 	key[15] = W_KEY;
-// 	key[16] = PLUS_KEY;
-// 	key[17] = MINUS_KEY;
-// 	while (++i < 18)
-// 		if (keycode == key[i])
-// 			return (i + 1);
-// 	return (0);
-// }
 
 int	key_map(int keycode)
 {
@@ -66,34 +38,6 @@ const int	minus_key(t_vars *vars)
 	vars->map->z_range = vars->map->z_range;
 	return (1);
 }
-
-// int	key_hook(int keycode, t_vars *vars)
-// {
-// 	int	(*f[19])(t_vars *vars);
-
-// 	f[0] = &wrong_key;
-// 	f[1] = &key_esc;
-// 	f[2] = &key_right;
-// 	f[3] = &key_left;
-// 	f[4] = &key_down;
-// 	f[5] = &key_up;
-// 	f[6] = &l_key;
-// 	f[7] = &c_key;
-// 	f[8] = &d_key;
-// 	f[9] = &i_key;
-// 	f[10] = &t_key;
-// 	f[11] = &z_key;
-// 	f[12] = &x_key;
-// 	f[13] = &a_key;
-// 	f[14] = &s_key;
-// 	f[15] = &q_key;
-// 	f[16] = &w_key;
-// 	f[17] = &plus_key;
-// 	f[18] = &minus_key;
-// 	if (f[key_map(keycode, -1)](vars) == 1)
-// 		render_next_frame(vars);
-// 	return (0);
-// }
 
 int	key_hook(int keycode, t_vars *vars)
 {

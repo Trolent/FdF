@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:21:41 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/21 01:14:39 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/21 11:25:42 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 const int	key_esc(t_vars *vars)
 {
-	// mlx_loop_end(vars->mlx);
-	quit("tchus");
+	mlx_loop_end(vars->mlx);
+	// quit("tchus");
 	return (0);
 }
 

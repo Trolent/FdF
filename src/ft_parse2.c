@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:04:58 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/18 22:01:06 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/21 12:16:34 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,23 +102,23 @@ void	asign_values(t_map *map, char **split)
 {
 	int	i;
 	int	j;
-	int	in;
+	int	line;
 
 	i = -1;
 	while (++i < map->rows)
 	{
 		j = 0;
-		in = 0;
+		line = 0;
 		while (j < map->columns)
 		{
-			map->coord[i][j].z[ORG] = special_atoi(&split[i][in], &in);
-			map->coord[i][j].x[ORG] = j;
-			map->coord[i][j].y[ORG] = i;
+			map->coord[i][j].z[ORG] = special_atoi(&split[i][line], &line);
+			map->coord[i][j].x[ORG] = j - (map->columns / 2);
+			map->coord[i][j].y[ORG] = i - (map->rows / 2);
 			map->z_max = ft_max(map->z_max, map->coord[i][j].z[ORG]);
 			map->z_min = ft_min(map->z_min, map->coord[i][j].z[ORG]);
-			if (split[i][in] == ',')
-				map->coord[i][j].color[ORGCLR] = special_atoi_hex(&split[i][in],
-						&in);
+			if (split[i][line] == ',')
+				map->coord[i][j].color[ORGCLR] = special_atoi_hex(&split[i][line],
+						&line);
 			else
 				map->coord[i][j].color[ORGCLR] = WHITE;
 			j++;

@@ -36,7 +36,7 @@ void	map_init(t_map *map)
 	map->top = 0;
 	map->iso = 1;
 	map->angle[X] = 45;
-	map->angle[Y] = 45;
+	map->angle[Y] = 0;
 	map->angle[Z] = 45;
 	map->z_color = 0;
 	map->z_max = 0;

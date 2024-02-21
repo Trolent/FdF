@@ -91,9 +91,9 @@ void	rotate_z(t_pixel *point, double angle, t_map *map)
 
 void	z_ratio(t_pixel *point, t_map *map)
 {
-	point->x[ISO] = point->x[ORG] * map->zoom * map->z_range;
+	point->x[ISO] = point->x[ORG] * map->zoom;
 	point->y[ISO] = point->y[ORG] * map->zoom;
-	point->z[ISO] = point->z[ORG] * map->zoom;
+	point->z[ISO] = point->z[ORG] * map->zoom * map->z_range;
 }
 
 int	define_iso(t_map *map)
@@ -111,9 +111,9 @@ int	define_iso(t_map *map)
 		while (j < map->columns)
 		{
 			z_ratio(&map->coord[i][j], map);
+			rotate_z(&map->coord[i][j], map->angle[Z], map);
 			rotate_x(&map->coord[i][j], map->angle[X], map);
 			rotate_y(&map->coord[i][j], map->angle[Y], map);
-			rotate_z(&map->coord[i][j], map->angle[Z], map);
 			map->coord[i][j].x[ISO] = map->coord[i][j].x[ISO] + map->mid[X];
 			map->coord[i][j].y[ISO] = map->coord[i][j].y[ISO] + map->mid[Y];
 			j++;

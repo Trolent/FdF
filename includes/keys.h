@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:21:25 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/19 18:28:30 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/21 11:21:50 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,26 +55,25 @@
 #  define D_KEY 2
 # endif
 
-int	wrong_key(t_vars *vars);
-int	key_esc(t_vars *vars);
-int	key_right(t_vars *vars);
-int	key_left(t_vars *vars);
-int	key_down(t_vars *vars);
-int	key_up(t_vars *vars);
-int	l_key(t_vars *vars);
-int	c_key(t_vars *vars);
-int	d_key(t_vars *vars);
+const int	wrong_key(t_vars *vars);
+const int	key_esc(t_vars *vars);
+const int	key_right(t_vars *vars);
+const int	key_left(t_vars *vars);
+const int	key_down(t_vars *vars);
+const int	key_up(t_vars *vars);
+const int	l_key(t_vars *vars);
+const int	c_key(t_vars *vars);
+const int	d_key(t_vars *vars);
 
-int	i_key(t_vars *vars);
-int	t_key(t_vars *vars);
-int	z_key(t_vars *vars);
-int	x_key(t_vars *vars);
-int	a_key(t_vars *vars);
-int    s_key(t_vars *vars);
-int    q_key(t_vars *vars);
-int    w_key(t_vars *vars);
-int    plus_key(t_vars *vars);
-int    minus_key(t_vars *vars);
-
+const int	i_key(t_vars *vars);
+const int	t_key(t_vars *vars);
+const int	z_key(t_vars *vars);
+const int	x_key(t_vars *vars);
+const int	a_key(t_vars *vars);
+const int	s_key(t_vars *vars);
+const int	q_key(t_vars *vars);
+const int	w_key(t_vars *vars);
+const int	plus_key(t_vars *vars);
+const int	minus_key(t_vars *vars);
 
 #endif

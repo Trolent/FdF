@@ -110,6 +110,7 @@ void	make_background(t_data *img)
 void	generate_map(t_vars *vars, t_map *map,t_data *img)
 {
 	make_background(img);
+	define_iso(map);
 	print_graph_map(vars, vars->map, img);
 	mlx_put_image_to_window(vars->mlx, vars->win, img->img, 0, 0);
 	make_menu(vars, img);
@@ -140,27 +141,42 @@ int	render_next_frame(t_vars *vars)
 	return (0);
 }
 
-int	define_alt_color(t_map *map)
+void define_z_range(t_map *map)
+{
+	map->z_range = map->z_max / map->rows;
+	if (map->z_range < 1)
+		map->z_range = 1;
+}
+
+void define_alt_color(t_map *map, t_pixel *point)
+{
+	if (map->z_max == map->z_min)
+		point->color[ALTCLR] = WHITE;
+	else if (point->z[ORG] == 0)
+		point->color[ALTCLR] = GREEN;
+	else if (point->z[ORG] > 0)
+		point->color[ALTCLR] = gradient(GREEN, RED,
+				map->z_max, point->z[ORG]);
+	else if (point->z[ORG] < 0)
+		point->color[ALTCLR] = gradient(GREEN, BLUE,
+				-map->z_min, -point->z[ORG]);
+
+}
+
+int	define_z_relations(t_map *map)
 {
 	int	i;
 	int	j;
 
 	i = 0;
+	define_z_range(map);
 	while (i < map->rows)
 	{
 		j = 0;
 		while (j < map->columns)
 		{
-			if (map->z_max == map->z_min)
-				map->coord[i][j].color[ALTCLR] = WHITE;
-			else if (map->coord[i][j].z[ORG] == 0)
-				map->coord[i][j].color[ALTCLR] = GREEN;
-			else if (map->coord[i][j].z[ORG] > 0)
-				map->coord[i][j].color[ALTCLR] = gradient(GREEN, RED,
-						map->z_max, map->coord[i][j].z[ORG]);
-			else if (map->coord[i][j].z[ORG] < 0)
-				map->coord[i][j].color[ALTCLR] = gradient(GREEN, BLUE,
-						-map->z_min, -map->coord[i][j].z[ORG]);
+			define_alt_color(map, &map->coord[i][j]);
+			map->coord[i][j].z[ISO] = map->coord[i][j].z[ORG] / map->z_range;
 			j++;
 		}
 		i++;
@@ -190,17 +206,15 @@ void	define_zoom(t_map *map)
 	map->mid[Y] = (WINDOW_HEIGHT / 2);
 }
 
-int	graphics(t_map *map)
+int	graphics(t_vars *vars)
 {
-	t_vars	vars;
-
-	create_win_mlx(&vars, map);
-	define_zoom(map);
-	define_iso(vars.map);
-	define_alt_color(map);
-	generate_map(&vars, map, vars.img);
-	mlx_handle_input(&vars);
-	mlx_loop(vars.mlx);
-	close_mlx(&vars);
+	create_win_mlx(vars, vars->map);
+	define_zoom(vars->map);
+	define_iso(vars->map);
+	define_z_relations(vars->map);
+	generate_map(vars, vars->map, vars->img);
+	mlx_handle_input(vars);
+	mlx_loop(vars->mlx);
+	close_mlx(vars);
 	return (0);
 }
