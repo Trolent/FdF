@@ -5,12 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/21 15:52:35 by trolland          #+#    #+#             */
+/*   Updated: 2024/02/21 15:52:36 by trolland         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_utils.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 15:09:59 by trolland          #+#    #+#             */
 /*   Updated: 2024/02/14 11: by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+#include "../includes/error_maps.h"
 
 void	free_map(t_map *map, int rows)
 {
@@ -25,7 +38,6 @@ void	free_map(t_map *map, int rows)
 
 void	map_init(t_map *map)
 {
-	map->coord = NULL;
 	map->rows = 0;
 	map->columns = 0;
 	map->mid[X] = 0;

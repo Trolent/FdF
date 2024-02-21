@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:05:14 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/21 11:06:00 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:52:09 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 int	main(int argc, char **argv)
 {
 	t_vars	vars;
+	t_map	map;
 
-	errno = 0;
+	vars.map = &map;
 	if (argc != 2)
 		quit(ERR_ARG);
 	map_init(vars.map);

@@ -6,7 +6,7 @@
 #    By: trolland <trolland@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 16:23:19 by trolland          #+#    #+#              #
-#    Updated: 2024/02/20 15:10:19 by trolland         ###   ########.fr        #
+#    Updated: 2024/02/21 15:59:31 by trolland         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,9 +28,9 @@ else
 endif
 
 SRC :=		fdf.c errors.c free_join.c ft_parse.c ft_parse2.c graphics.c \
-			map_utils.c draw_utils.c key_input.c key_input2.c key_arrow.c \
-			key_letter0.c key_letter1.c create_win_mlx.c close_mlx.c \
-			rotation.c bresenham.c menu.c \
+			graphics_utils.c map_utils.c draw_utils.c key_input.c key_range.c \
+			key_arrow.c key_lines_spec.c key_views.c create_win_mlx.c \
+			close_mlx.c rotation.c bresenham.c menu.c coordinates_utils.c\
 			key_angle_x.c key_angle_y.c key_angle_z.c
 			
 SRCS := 	$(addprefix src/, $(SRC))
@@ -46,9 +46,6 @@ all: create_dirs $(NAME)
 
 $(NAME): create_dirs $(OBJS) $(LIBFT) $(MLX_TARGET)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(LD_FLAGS)
-
-mlx: create_dirs  $(OBJS) $(LIBFT)$(MLX_TARGET)
-	$(CC) $(CFLAGS) $(LIBFT) $(OBJS) minilibx.c -o mlx $(LD_FLAGS) 
 
 $(MLX_TARGET):
 	$(MAKE) -C $(MLX_PATH)
@@ -73,6 +70,11 @@ fclean: clean
 	@$(MAKE) --no-print-directory fclean -C libft
 
 re: fclean all
+
+norm:
+	@norminette -R CheckDefine includes/*.h
+	norminette -R CheckForbiddenSourceHeader src/*.c
+
 
 -include $(DEPS)
 

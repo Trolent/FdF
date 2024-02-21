@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:34:16 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/20 21:04:15 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:59:59 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	create_win_mlx(t_vars *vars, t_map *map)
 	vars->map = map;
 	vars->mlx = mlx_init();
 	if (!vars->mlx)
-		quit(ERROR_MLX);  // ======> Change it to do the free map
+		quit(ERROR_MLX);
 	vars->win = mlx_new_window(vars->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "FDF");
 	if (!vars->win)
 		return (free(vars->mlx), quit(ERROR_MLX));

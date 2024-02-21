@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:04:58 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/20 15:11:07 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:32:23 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,21 @@ int	create_struct(t_map *map, char *line)
 
 	split = ft_split(line, '\n');
 	if (!split)
-		return (0);
+		return (free(line), 0);
+	free(line);
 	map->columns = check_columns(split, map->rows);
 	if (map->columns == 0)
 		return (ft_free_tab(split, map->rows), 0);
-	if (map->rows > 1 && map->columns > 1)
+	if (map->rows >= 1 && map->columns >= 1)
 		map->coord = malloc(sizeof(t_pixel) * map->rows + 1);
 	if (!map->coord)
-		return (free(line), ft_free_tab(split, map->rows), quit(ERR_MAP_DATA));
+		return (ft_free_tab(split, map->rows), quit(ERR_MAP_DATA));
 	i = -1;
 	while (++i <= map->rows)
 	{
 		map->coord[i] = malloc(sizeof(t_pixel) * map->columns + 1);
 		if (!map->coord[i])
-			return (free_map(map, i), 0);
+			return (free_map(map, i), ft_free_tab(split, map->rows), 0);
 	}
 	asign_values(map, split);
 	ft_free_tab(split, map->rows);
@@ -65,7 +66,7 @@ int	create_map(t_map *map, int fd)
 	map->rows = rows;
 	if (create_struct(map, line) == 0)
 		return (free(buffer), 0);
-	return (free(buffer), free(line), 1);
+	return (free(buffer), 1);
 }
 
 int	parse(t_map *map, char *file)

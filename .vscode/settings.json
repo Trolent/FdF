@@ -4,6 +4,7 @@
         "mlx.h": "c",
         "mlx_int.h": "c",
         "libft.h": "c",
-        "keys.h": "c"
+        "keys.h": "c",
+        "error_maps.h": "c"
     }
 }

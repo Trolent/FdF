@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 09:14:51 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/21 11:20:20 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:52:21 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ const int	a_key(t_vars *vars)
 	int	j;
 
 	vars->map->angle[Y] += 1;
+	if (vars->map->angle[Y] >= 360)
+		vars->map->angle[Y] = vars->map->angle[Y] % 360;
 	i = 0;
 	while (i < vars->map->rows)
 	{
@@ -45,6 +47,8 @@ const int	s_key(t_vars *vars)
 	int	j;
 
 	vars->map->angle[Y] -= 1;
+	if (vars->map->angle[Y] <= -360)
+		vars->map->angle[Y] = vars->map->angle[Y] % 360;
 	i = 0;
 	while (i < vars->map->rows)
 	{

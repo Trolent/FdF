@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/15 21:35:24 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/16 10: by trolland         ###   ########.fr       */
+/*   Created: 2024/02/21 15:52:40 by trolland          #+#    #+#             */
+/*   Updated: 2024/02/21 15:53:03 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,11 @@ void	rotate_y(t_pixel *point, double angle, t_map *map)
 	double	angle_rad;
 
 	angle_rad = angle * (M_PI / 180);
-	temp_x = (point->x[ISO] * cos(angle_rad)) + (point->z[ISO] * sin(angle_rad));
+	temp_x = (point->x[ISO] * cos(angle_rad)) + (point->z[ISO]
+			* sin(angle_rad));
 	temp_y = point->y[ISO];
-	temp_z = (-point->x[ISO] * sin(angle_rad)) + (point->z[ISO] * cos(angle_rad));
+	temp_z = (-point->x[ISO] * sin(angle_rad)) + (point->z[ISO]
+			* cos(angle_rad));
 	point->x[ISO] = temp_x;
 	point->y[ISO] = temp_y;
 	point->z[ISO] = temp_z;
@@ -63,31 +65,6 @@ void	rotate_z(t_pixel *point, double angle, t_map *map)
 	point->y[ISO] = temp_y;
 	point->z[ISO] = temp_z;
 }
-
-// void	rotate_xyz(t_pixel *point, double *angle, t_map *map)
-// {
-// 	double	temp_x;
-// 	double	temp_y;
-// 	double	temp_z;
-// 	double	angle_rad[3];
-
-// 	angle_rad[X] = ((int)angle[X] % 360) * (M_PI / 180);
-// 	angle_rad[Y] = ((int)angle[X] % 360) * (M_PI / 180);
-// 	angle_rad[Z] = ((int)angle[X] % 360) * (M_PI / 180);
-
-// 	temp_x = 
-	
-
-
-// 	temp_y = (point->x[ISO] * sin(angle_rad)) + (point->y[ISO]
-// 			* cos(angle_rad));
-// 	temp_z = point->z[ISO];
-// 	point->x[ISO] = temp_x;
-// 	point->y[ISO] = temp_y;
-// 	point->z[ISO] = temp_z;
-// }
-
-
 
 void	z_ratio(t_pixel *point, t_map *map)
 {

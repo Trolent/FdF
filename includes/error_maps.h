@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 19:09:18 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/18 21:45:24 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:03:48 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define ERR_READ_FILE "Error reading file"
 # define ERR_GEN "Error generating map"
 # define ERR_MAP_DATA "Error in map datas"
-
+# define ERR_MALLOC_MAP "cannot assign map"
 # define ERROR_MLX "cannot assign mlx"
 
 #endif

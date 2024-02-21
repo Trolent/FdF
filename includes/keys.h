@@ -6,12 +6,12 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:21:25 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/21 11:21:50 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:49:23 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ARROWS_H
-# define ARROWS_H
+#ifndef KEYS_H
+# define KEYS_H
 
 # include "fdf.h"
 
@@ -39,6 +39,9 @@
 
 #  define PLUS_KEY 0xffab
 #  define MINUS_KEY 0xffad
+
+#  define R_KEY 0x72
+#  define Y_KEY 0x79
 # elif defined(__APPLE__)
 #  define ESC_KEY (53)
 #  define LEFT_KEY (124)
@@ -64,6 +67,8 @@ const int	key_up(t_vars *vars);
 const int	l_key(t_vars *vars);
 const int	c_key(t_vars *vars);
 const int	d_key(t_vars *vars);
+const int	r_key(t_vars *vars);
+const int	y_key(t_vars *vars);
 
 const int	i_key(t_vars *vars);
 const int	t_key(t_vars *vars);

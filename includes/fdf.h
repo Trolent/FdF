@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:59:55 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/21 11:38:52 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:30:23 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,12 +100,12 @@ typedef struct s_map
 	bool		line;
 	bool		diag;
 	bool		iso;
-	double		angle[3];
+	int			angle[3];
 	int			translate[3];
 	int			z_color;
 	int			z_min;
 	int			z_max;
-	double			z_range;
+	double		z_range;
 }				t_map;
 
 typedef struct s_vars
@@ -141,10 +141,22 @@ void			make_menu(t_vars *vars, t_data *img);
 
 // ROTATION MANAGEMENT //
 int				define_iso(t_map *map);
-void	z_ratio(t_pixel *point, t_map *map);
-void	rotate_x(t_pixel *point, double angle, t_map *map);
-void	rotate_y(t_pixel *point, double angle, t_map *map);
-void	rotate_z(t_pixel *point, double angle, t_map *map);
+void			z_ratio(t_pixel *point, t_map *map);
+void			rotate_x(t_pixel *point, double angle, t_map *map);
+void			rotate_y(t_pixel *point, double angle, t_map *map);
+void			rotate_z(t_pixel *point, double angle, t_map *map);
+
+// COORDINATES MANAGEMENT //
+void			define_z_range(t_map *map);
+void			define_alt_color(t_map *map, t_pixel *point);
+int				define_z_relations(t_map *map);
+void			define_zoom(t_map *map);
+
+// PIXEL PRINTING MANAGEMENT //
+void			my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map);
+void			put_pixel(t_data *img, int x, int y, int color);
+void			make_background(t_data *img);
+int				verify_fit(t_map *map, int i, int j);
 
 // COLOR MANAGEMENT //
 double			get_r(int trgb);
@@ -160,8 +172,3 @@ void			my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map);
 int				color(t_map *map);
 
 #endif
-
-/* *x = (*x - *y) * cos(angle);
-*y = (*x + *y) * sin(angle) - z;
-
-M_PI / 4 = angle 45 degres */

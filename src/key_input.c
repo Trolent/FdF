@@ -6,22 +6,22 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:22:12 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/21 11:29:36 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:52:26 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/keys.h"
 #include "../includes/fdf.h"
+#include "../includes/keys.h"
 
 int	key_map(int keycode)
 {
 	int			i;
-	const int	key[18] = {ESC_KEY, RIGHT_KEY, LEFT_KEY, DOWN_KEY, UP_KEY,
+	const int	key[20] = {ESC_KEY, RIGHT_KEY, LEFT_KEY, DOWN_KEY, UP_KEY,
 		L_KEY, C_KEY, D_KEY, I_KEY, T_KEY, Z_KEY, X_KEY, A_KEY, S_KEY,
-		Q_KEY, W_KEY, PLUS_KEY, MINUS_KEY};
+		Q_KEY, W_KEY, PLUS_KEY, MINUS_KEY, R_KEY, Y_KEY};
 
 	i = -1;
-	while (++i < 18)
+	while (++i < 20)
 		if (keycode == key[i])
 			return (i + 1);
 	return (0);
@@ -29,10 +29,11 @@ int	key_map(int keycode)
 
 int	key_hook(int keycode, t_vars *vars)
 {
-	const int	(*f[19])(t_vars *vars) = {&wrong_key, &key_esc, &key_right,
+	const int	(*f[21])(t_vars *vars) = {&wrong_key, &key_esc, &key_right,
 		&key_left, &key_down, &key_up, &l_key, &c_key, &d_key, &i_key, &t_key,
-		&z_key, &x_key, &a_key, &s_key, &q_key, &w_key, &plus_key, &minus_key};
-	printf("keycode: %d\n", keycode);
+		&z_key, &x_key, &a_key, &s_key, &q_key, &w_key, &plus_key, &minus_key,
+		&r_key, &y_key};
+
 	if (f[key_map(keycode)](vars) == 1)
 		render_next_frame(vars);
 	return (0);
@@ -44,7 +45,6 @@ int	mouse_scroll(int button, int x, int y, t_vars *vars)
 		vars->map->zoom = vars->map->zoom * 1.5f;
 	if (button == 5 && vars->map->zoom > 1)
 		vars->map->zoom = vars->map->zoom / 1.5f;
-	define_iso(vars->map);
 	render_next_frame(vars);
 	return (0);
 }
