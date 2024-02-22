@@ -51,10 +51,9 @@ int	mouse_scroll(int button, int x, int y, t_vars *vars)
 
 int	mlx_handle_input(t_vars *vars)
 {
-	mlx_key_hook(vars->win, &key_hook, vars);
+	// mlx_key_hook(vars->win, &key_hook, vars);
+	mlx_hook(vars->win, 2, 1L << 0, &key_hook, vars);
 	mlx_mouse_hook(vars->win, (int (*)())mouse_scroll, vars);
 	mlx_hook(vars->win, 17, 1L << 3, &cross_close, vars);
 	return (1);
 }
-
-	// mlx_hook(vars->win, 2, 1L << 0, &key_hook, vars);

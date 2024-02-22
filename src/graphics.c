@@ -84,7 +84,6 @@ int	graphics(t_vars *vars)
 	create_win_mlx(vars, vars->map);
 	define_zoom(vars->map);
 	define_z_relations(vars->map);
-	mlx_do_key_autorepeaton(vars->mlx);
 	generate_map(vars, vars->map, vars->img);
 	mlx_handle_input(vars);
 	mlx_loop(vars->mlx);

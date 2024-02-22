@@ -23,8 +23,8 @@
 
 # if defined(__linux__)
 #  include "../minilibx-linux/mlx.h"
-#  define WINDOW_WIDTH 1920
-#  define WINDOW_HEIGHT 1080
+#  define WINDOW_WIDTH 1920 / 3 *2
+#  define WINDOW_HEIGHT 1080 / 3 *2
 # elif defined(__APPLE__)
 #  include "../libmlx/mlx.h"
 #  define WINDOW_WIDTH 1920 / 3 * 2
