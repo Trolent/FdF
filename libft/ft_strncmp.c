@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_range.c                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 16:22:12 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/21 17:27:23 by trolland         ###   ########.fr       */
+/*   Created: 2023/08/31 15:20:04 by trolland          #+#    #+#             */
+/*   Updated: 2023/09/18 11:58:44 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
-#include "../includes/keys.h"
+#include "libft.h"
 
-const int	plus_key(t_vars *vars)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	vars->map->z_range += 0.01;
-	return (1);
-}
+	unsigned char	u1;
+	unsigned char	u2;
 
-const int	minus_key(t_vars *vars)
-{
-	vars->map->z_range -= 0.01;
-	return (1);
-}
-
-const int	u_key(t_vars *vars)
-{
-	vars->map->z_range = 1;
-	return (1);
+	if (n <= 0)
+		return (0);
+	while (n-- > 0)
+	{
+		u1 = (unsigned char)*s1++;
+		u2 = (unsigned char)*s2++;
+		if (u1 != u2)
+			return (u1 - u2);
+		if (u1 == '\0')
+			return (0);
+	}
+	return (0);
 }

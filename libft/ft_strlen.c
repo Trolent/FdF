@@ -1,32 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_range.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 16:22:12 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/21 17:27:23 by trolland         ###   ########.fr       */
+/*   Created: 2023/08/30 12:40:35 by trolland          #+#    #+#             */
+/*   Updated: 2023/10/05 14:23:00 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
-#include "../includes/keys.h"
+#include "libft.h"
 
-const int	plus_key(t_vars *vars)
+size_t	ft_strlen(const char *s)
 {
-	vars->map->z_range += 0.01;
-	return (1);
-}
+	size_t		len;
 
-const int	minus_key(t_vars *vars)
-{
-	vars->map->z_range -= 0.01;
-	return (1);
-}
-
-const int	u_key(t_vars *vars)
-{
-	vars->map->z_range = 1;
-	return (1);
+	len = 0;
+	while (1)
+	{
+		if (!s[0])
+			return (len);
+		if (!s[1])
+			return (len + 1);
+		if (!s[2])
+			return (len + 2);
+		if (!s[3])
+			return (len + 3);
+		if (!s[4])
+			return (len + 4);
+		if (!s[5])
+			return (len + 5);
+		if (!s[6])
+			return (len + 6);
+		if (!s[7])
+			return (len + 7);
+		s += 8;
+		len += 8;
+	}
 }

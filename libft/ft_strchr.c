@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_range.c                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 16:22:12 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/21 17:27:23 by trolland         ###   ########.fr       */
+/*   Created: 2023/08/31 15:09:08 by trolland          #+#    #+#             */
+/*   Updated: 2023/09/28 14:45:33 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
-#include "../includes/keys.h"
+#include "libft.h"
 
-const int	plus_key(t_vars *vars)
+char	*ft_strchr(const char *s, int c)
 {
-	vars->map->z_range += 0.01;
-	return (1);
-}
+	int	i;
 
-const int	minus_key(t_vars *vars)
-{
-	vars->map->z_range -= 0.01;
-	return (1);
-}
-
-const int	u_key(t_vars *vars)
-{
-	vars->map->z_range = 1;
-	return (1);
+	i = 0;
+	while (1)
+	{
+		if (s[i] == (char)c)
+			return ((char *)s + i);
+		else if (s[i] == 0)
+			return (NULL);
+		i++;
+	}
 }

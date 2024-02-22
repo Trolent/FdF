@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_range.c                                        :+:      :+:    :+:   */
+/*   check_last_characters.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 16:22:12 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/21 17:27:23 by trolland         ###   ########.fr       */
+/*   Created: 2023/08/31 15:20:04 by trolland          #+#    #+#             */
+/*   Updated: 2024/02/20 14:48:56 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
-#include "../includes/keys.h"
+#include "libft.h"
+#include <stdio.h>
 
-const int	plus_key(t_vars *vars)
+int	check_last_characters(char *str, char *last)
 {
-	vars->map->z_range += 0.01;
-	return (1);
-}
+	unsigned char	u1;
+	unsigned char	u2;
+	size_t			str_len;
+	size_t			last_len;
 
-const int	minus_key(t_vars *vars)
-{
-	vars->map->z_range -= 0.01;
-	return (1);
-}
-
-const int	u_key(t_vars *vars)
-{
-	vars->map->z_range = 1;
+	str_len = ft_strlen(str);
+	last_len = ft_strlen(last);
+	if (str_len <= last_len)
+		return (0);
+	while (last_len > 0)
+	{
+		u1 = str[str_len - 1];
+		u2 = last[last_len - 1];
+		if (u1 != u2)
+			return (0);
+		str_len--;
+		last_len--;
+	}
 	return (1);
 }

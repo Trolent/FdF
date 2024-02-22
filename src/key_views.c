@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:22:27 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/21 15:52:34 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/22 18:33:59 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,22 @@ const int	t_key(t_vars *vars)
 
 const int	y_key(t_vars *vars)
 {
-	if (vars->map->angle[X] == 0 && vars->map->angle[Y] == 0
+	if (vars->map->angle[X] == 0 && vars->map->angle[Y] == 90
 		&& vars->map->angle[Z] == 0)
 		return (0);
 	vars->map->angle[X] = 0;
 	vars->map->angle[Y] = 90;
+	vars->map->angle[Z] = 0;
+	return (1);
+}
+
+const int	g_key(t_vars *vars)
+{
+	if (vars->map->angle[X] == 90 && vars->map->angle[Y] == 0
+		&& vars->map->angle[Z] == 0)
+		return (0);
+	vars->map->angle[X] = 90;
+	vars->map->angle[Y] = 0;
 	vars->map->angle[Z] = 0;
 	return (1);
 }

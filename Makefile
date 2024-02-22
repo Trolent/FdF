@@ -6,7 +6,7 @@
 #    By: trolland <trolland@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 16:23:19 by trolland          #+#    #+#              #
-#    Updated: 2024/02/21 15:59:31 by trolland         ###   ########.fr        #
+#    Updated: 2024/02/22 18:55:43 by trolland         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,22 +40,20 @@ DEPS := 	$(OBJS:.o=.d)
 
 CC := cc
 
-CFLAGS := -MMD -MP -Iincludes -Ilibft -I$(MLX_PATH) -g
+CFLAGS := -MMD -MP -Iincludes -Ilibft -I$(MLX_PATH)
 
-all: create_dirs $(NAME)
+all:	$(NAME)
 
-$(NAME): create_dirs $(OBJS) $(LIBFT) $(MLX_TARGET)
+$(NAME): $(OBJS) $(LIBFT) $(MLX_TARGET)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(LD_FLAGS)
 
 $(MLX_TARGET):
 	$(MAKE) -C $(MLX_PATH)
 
 object/%.o: src/%.c
+	@if [ ! -d "object" ]; then mkdir object; fi
 	@printf "\033[0;32m\tCompiling: $<\033[0m\n";
 	@$(CC) $(CFLAGS) -c $< -o $@
-
-create_dirs:
-	@if [ ! -d "object" ]; then mkdir object; fi
 
 $(LIBFT):
 	@$(MAKE) -C libft

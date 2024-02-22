@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_range.c                                        :+:      :+:    :+:   */
+/*   ft_ceasar.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 16:22:12 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/21 17:27:23 by trolland         ###   ########.fr       */
+/*   Created: 2023/12/09 18:03:45 by trolland          #+#    #+#             */
+/*   Updated: 2023/12/13 17:48:11 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
-#include "../includes/keys.h"
+#include "libft.h"
 
-const int	plus_key(t_vars *vars)
+static int	ft_index(int c, int num)
 {
-	vars->map->z_range += 0.01;
-	return (1);
+	if (ft_islower(c))
+		return (((c - 97 + num) % 26) + 97);
+	else
+		return (((c - 65 + num) % 26) + 65);
 }
 
-const int	minus_key(t_vars *vars)
+char	*ft_ceasar(char *input, int num)
 {
-	vars->map->z_range -= 0.01;
-	return (1);
-}
+	int		i;
+	char	*str;
 
-const int	u_key(t_vars *vars)
-{
-	vars->map->z_range = 1;
-	return (1);
+	str = ft_strdup(input);
+	i = 0;
+	while (str[i])
+	{
+		if (ft_isalpha(str[i]))
+			str[i] = ft_index(str[i], num);
+		i++;
+	}
+	return (str);
 }

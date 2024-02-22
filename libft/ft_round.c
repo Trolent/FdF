@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_range.c                                        :+:      :+:    :+:   */
+/*   ft_round.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 16:22:12 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/21 17:27:23 by trolland         ###   ########.fr       */
+/*   Created: 2024/02/14 10:04:26 by trolland          #+#    #+#             */
+/*   Updated: 2024/02/20 14:48:50 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
-#include "../includes/keys.h"
-
-const int	plus_key(t_vars *vars)
+int	ft_round(float num)
 {
-	vars->map->z_range += 0.01;
-	return (1);
-}
+	int	round;
 
-const int	minus_key(t_vars *vars)
-{
-	vars->map->z_range -= 0.01;
-	return (1);
-}
-
-const int	u_key(t_vars *vars)
-{
-	vars->map->z_range = 1;
-	return (1);
+	round = (int)num;
+	if (round - num >= 0.5)
+		round += 1;
+	return (round);
 }

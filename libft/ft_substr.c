@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_mlx.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/15 19:35:18 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/21 16:49:41 by trolland         ###   ########.fr       */
+/*   Created: 2023/08/31 16:42:26 by trolland          #+#    #+#             */
+/*   Updated: 2023/10/05 14:29:32 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "libft.h"
 
-void	close_mlx(t_vars *vars)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	mlx_destroy_window(vars->mlx, vars->win);
-	mlx_destroy_image(vars->mlx, vars->img->img);
-	free(vars->img);
-	mlx_destroy_display(vars->mlx);
-	free(vars->mlx);
-}
+	char	*newstr;
+	size_t	sublen;
 
-int	cross_close(t_vars *vars)
-{
-	mlx_loop_end(vars->mlx);
-	return (0);
+	if (!s)
+		return (NULL);
+	if ((unsigned int)ft_strlen(s) <= start)
+		return (ft_strdup(""));
+	sublen = ft_strlen(s + start);
+	if (sublen > len)
+		sublen = len;
+	newstr = malloc(sizeof(char) * sublen + 1);
+	if (!newstr)
+		return (NULL);
+	ft_strlcpy(newstr, s + start, sublen + 1);
+	return (newstr);
 }

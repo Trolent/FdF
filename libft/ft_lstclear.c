@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_range.c                                        :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 16:22:12 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/21 17:27:23 by trolland         ###   ########.fr       */
+/*   Created: 2023/10/05 16:16:17 by trolland          #+#    #+#             */
+/*   Updated: 2023/10/05 16:16:24 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
-#include "../includes/keys.h"
+#include "libft.h"
 
-const int	plus_key(t_vars *vars)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	vars->map->z_range += 0.01;
-	return (1);
-}
+	t_list	*temp;
+	t_list	*next;
 
-const int	minus_key(t_vars *vars)
-{
-	vars->map->z_range -= 0.01;
-	return (1);
-}
-
-const int	u_key(t_vars *vars)
-{
-	vars->map->z_range = 1;
-	return (1);
+	if (!lst || !*lst || !del)
+		return ;
+	temp = *lst;
+	while (temp)
+	{
+		next = temp->next;
+		ft_lstdelone(temp, del);
+		temp = next;
+	}
+	*lst = NULL;
 }

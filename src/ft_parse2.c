@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:04:58 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/21 16:05:05 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/21 17:17:37 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,8 @@ void	asign_values(t_map *map, char **split)
 			map->z_max = ft_max(map->z_max, map->coord[i][j].z[ORG]);
 			map->z_min = ft_min(map->z_min, map->coord[i][j].z[ORG]);
 			if (split[i][line] == ',')
-				map->coord[i][j].color[ORGCLR] = special_atoi_hex(&split[i][line],
-						&line);
+				map->coord[i][j].color[ORGCLR] = \
+				special_atoi_hex(&split[i][line], &line);
 			else
 				map->coord[i][j].color[ORGCLR] = WHITE;
 			j++;

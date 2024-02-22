@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:59:55 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/21 15:30:23 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/21 17:33:44 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@
 # define RED 0xFF0000
 # define GREEN 0x00FF00
 # define BLUE 0x0000FF
-# define BLACK 0x000000
-# define BACKGROUND 0x151515
+# define BACKGROUND 0x202020
 
 # define X 0
 # define Y 1

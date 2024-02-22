@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_range.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 16:22:12 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/21 17:27:23 by trolland         ###   ########.fr       */
+/*   Created: 2023/08/28 18:17:32 by trolland          #+#    #+#             */
+/*   Updated: 2023/11/10 14:03:02 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
-#include "../includes/keys.h"
+#include "libft.h"
 
-const int	plus_key(t_vars *vars)
+void	*ft_calloc(size_t count, size_t size)
 {
-	vars->map->z_range += 0.01;
-	return (1);
-}
+	void	*calloc;
 
-const int	minus_key(t_vars *vars)
-{
-	vars->map->z_range -= 0.01;
-	return (1);
-}
-
-const int	u_key(t_vars *vars)
-{
-	vars->map->z_range = 1;
-	return (1);
+	if ((int)count < 0 && (int)size < 0)
+		return (NULL);
+	if ((int)count == 0 || (int)size == 0)
+	{
+		count = 1;
+		size = 1;
+	}
+	if ((int)(size * count) <= 0)
+		return (NULL);
+	calloc = malloc(size * count);
+	if (!calloc)
+		return (NULL);
+	ft_bzero(calloc, (size * count));
+	return (calloc);
 }

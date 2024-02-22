@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 12:53:47 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/21 15:52:17 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/21 17:16:58 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int	graphics(t_vars *vars)
 	create_win_mlx(vars, vars->map);
 	define_zoom(vars->map);
 	define_z_relations(vars->map);
+	mlx_do_key_autorepeaton(vars->mlx);
 	generate_map(vars, vars->map, vars->img);
 	mlx_handle_input(vars);
 	mlx_loop(vars->mlx);

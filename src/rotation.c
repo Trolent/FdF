@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:52:40 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/21 15:53:03 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/21 16:38:45 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	rotate_z(t_pixel *point, double angle, t_map *map)
 	double	temp_z;
 	double	angle_rad;
 
-	angle_rad = ((int)angle % 360) * (M_PI / 180);
+	angle_rad = angle * (M_PI / 180);
 	temp_x = (point->x[ISO] * cos(angle_rad)) - (point->y[ISO]
 			* sin(angle_rad));
 	temp_y = (point->x[ISO] * sin(angle_rad)) + (point->y[ISO]
