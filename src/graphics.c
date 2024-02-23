@@ -52,7 +52,7 @@ void	generate_map(t_vars *vars, t_map *map, t_data *img)
 	define_iso(map);
 	print_graph_map(vars, vars->map, img);
 	mlx_put_image_to_window(vars->mlx, vars->win, img->img, 0, 0);
-	make_menu(vars, img);
+	make_menu(vars);
 }
 
 int	render_next_frame(t_vars *vars)

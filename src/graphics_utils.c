@@ -15,8 +15,8 @@
 void	my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map)
 {
 	char	*dst;
-	float	x;
-	float	y;
+	int		x;
+	int		y;
 	int		clr;
 
 	clr = color(map);
@@ -26,7 +26,7 @@ void	my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map)
 		return ;
 	dst = data->addr + (int)(y * data->line_length + x * (data->bits_per_pixel
 				/ 8));
-	*(unsigned int *)dst = pixel->color[clr];
+	*(unsigned int *)dst = (unsigned int)pixel->color[clr];
 }
 
 void	put_pixel(t_data *img, int x, int y, int color)
@@ -36,7 +36,7 @@ void	put_pixel(t_data *img, int x, int y, int color)
 	if (x < 0 || x >= WINDOW_WIDTH || y < 0 || y >= WINDOW_HEIGHT)
 		return ;
 	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
+	*(unsigned int *)dst = (unsigned int)color;
 }
 
 void	make_background(t_data *img)

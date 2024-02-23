@@ -15,24 +15,25 @@
 void	define_z_range(t_map *map)
 {
 	if (map->z_max == map->z_min)
-		map->z_range = 0.1;
+		map->z_range = 0.1f;
 	else
 		map->z_range = (map->z_max / (map->z_max - map->z_min)) / 100;
-	if (map->z_range < 0.1)
-		map->z_range = 0.1;
+	if (map->z_range < 0.1f)
+		map->z_range = 0.1f;
 }
 
 void	define_alt_color(t_map *map, t_pixel *point)
 {
 	if (map->z_max == map->z_min)
 		point->color[ALTCLR] = GREEN;
-	else if (point->z[ORG] == 0)
+	else if ((int)point->z[ORG] == 0)
 		point->color[ALTCLR] = GREEN;
 	else if (point->z[ORG] > 0)
-		point->color[ALTCLR] = gradient(GREEN + 0x330000 /* - 0x00110 */, RED, map->z_max, point->z[ORG]);
+		point->color[ALTCLR] = gradient(GREEN + 0x330000, RED, map->z_max,
+				(int)point->z[ORG]);
 	else if (point->z[ORG] < 0)
 		point->color[ALTCLR] = gradient(GREEN - 0x005510, BLUE, -map->z_min,
-				-point->z[ORG]);
+				(int)-point->z[ORG]);
 }
 
 int	define_z_relations(t_map *map)
@@ -65,11 +66,11 @@ void	define_zoom(t_map *map)
 	{
 		if ((map->rows - 1) * i < WINDOW_HEIGHT && (map->columns - 1)
 			* i < WINDOW_WIDTH)
-			i += 0.2;
+			i += 0.2f;
 		else
 		{
 			if (i > 1)
-				i /= 1.5;
+				i /= 1.5f;
 			break ;
 		}
 	}

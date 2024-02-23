@@ -14,24 +14,24 @@
 
 const int	key_right(t_vars *vars)
 {
-	vars->map->mid[X] -= 1 * vars->map->zoom / 4 + 1;
+	vars->map->mid[X] -= (int)(1 * vars->map->zoom / 4 + 1);
 	return (1);
 }
 
 const int	key_left(t_vars *vars)
 {
-	vars->map->mid[X] += 1 * vars->map->zoom / 4 + 1;
+	vars->map->mid[X] += (int)(1 * vars->map->zoom / 4 + 1);
 	return (1);
 }
 
 const int	key_down(t_vars *vars)
 {
-	vars->map->mid[Y] -= 1 * vars->map->zoom / 4 + 1;
+	vars->map->mid[Y] -= (int)(1 * vars->map->zoom / 4 + 1);
 	return (1);
 }
 
 const int	key_up(t_vars *vars)
 {
-	vars->map->mid[Y] += 1 * vars->map->zoom / 4 + 1;
+	vars->map->mid[Y] += (int)(1 * vars->map->zoom / 4 + 1);
 	return (1);
 }

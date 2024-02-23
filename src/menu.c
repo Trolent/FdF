@@ -14,7 +14,6 @@
 
 #define SKIPLINE 20
 #define TEXT_COLOR 0xead162
-#define MENU_COLOR 0x6286ea
 #define TAB 50
 
 void	print_text(t_vars *vars, char *str, int *line_sep)
@@ -88,7 +87,7 @@ void	print_xyz(t_vars *vars, int *line_sep)
 	return ;
 }
 
-void	make_menu(t_vars *vars, t_data *img)
+void	make_menu(t_vars *vars)
 {
 	int	line_sep;
 

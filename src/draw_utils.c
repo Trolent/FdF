@@ -34,7 +34,7 @@ int	create_rgb(int r, int g, int b)
 
 int	gradient(int color_start, int color_end, int len, int pos)
 {
-	float	delta[3];
+	double	delta[3];
 	int		new[3];
 	int		newcolor;
 
@@ -43,9 +43,9 @@ int	gradient(int color_start, int color_end, int len, int pos)
 	delta[0] = (get_r(color_end) - (get_r(color_start))) / len;
 	delta[1] = (get_g(color_end) - (get_g(color_start))) / len;
 	delta[2] = (get_b(color_end) - (get_b(color_start))) / len;
-	new[0] = (get_r(color_start)) + (pos * delta[0]);
-	new[1] = (get_g(color_start)) + (pos * delta[1]);
-	new[2] = (get_b(color_start)) + (pos * delta[2]);
+	new[0] = (int)((get_r(color_start)) + (pos * delta[0]));
+	new[1] = (int)((get_g(color_start)) + (pos * delta[1]));
+	new[2] = (int)((get_b(color_start)) + (pos * delta[2]));
 	newcolor = create_rgb(new[0], new[1], new[2]);
 	return (newcolor);
 }

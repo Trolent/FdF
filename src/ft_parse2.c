@@ -63,10 +63,10 @@ int	strvalue(char c)
 	return (-1);
 }
 
-unsigned int	special_atoi_hex(const char *str, int *index)
+int	special_atoi_hex(const char *str, int *index)
 {
-	int				i;
-	unsigned int	res;
+	int	i;
+	int	res;
 
 	i = 0;
 	res = 0;
@@ -114,11 +114,11 @@ void	asign_values(t_map *map, char **split)
 			map->coord[i][j].z[ORG] = special_atoi(&split[i][line], &line);
 			map->coord[i][j].x[ORG] = j - (map->columns / 2);
 			map->coord[i][j].y[ORG] = i - (map->rows / 2);
-			map->z_max = ft_max(map->z_max, map->coord[i][j].z[ORG]);
-			map->z_min = ft_min(map->z_min, map->coord[i][j].z[ORG]);
+			map->z_max = ft_max(map->z_max, (int)map->coord[i][j].z[ORG]);
+			map->z_min = ft_min(map->z_min, (int)map->coord[i][j].z[ORG]);
 			if (split[i][line] == ',')
 				map->coord[i][j].color[ORGCLR] = \
-				special_atoi_hex(&split[i][line], &line);
+					special_atoi_hex(&split[i][line], &line);
 			else
 				map->coord[i][j].color[ORGCLR] = WHITE;
 			j++;

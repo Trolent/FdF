@@ -40,7 +40,14 @@ DEPS := 	$(OBJS:.o=.d)
 
 CC := cc
 
-CFLAGS := -MMD -MP -Iincludes -Ilibft -I$(MLX_PATH)
+CFLAGS := -MMD -MP -Iincludes -Ilibft -I$(MLX_PATH) -g 
+# -fsanitize=address -fanalyzer -fsanitize-recover \
+			-Wunknown-pragmas -Wunsuffixed-float-constants  -Wunused \
+           -Wunused-but-set-parameter  -Wunused-but-set-variable -Wunused-const-variable \
+        	-Wunused-function  -Wunused-label \
+           -Wunused-local-typedefs -Wunused-macros -Wunused-parameter \
+           -Wno-unused-result -Wunused-value  -Wunused-variable -Wno-varargs \
+		   -Wall -Wextra -pedantic -Wconversion -Wundef -Wunreachable-code -Wunused -Wunused-parameter -Wfloat-equal -Wshadow
 
 all:	$(NAME)
 

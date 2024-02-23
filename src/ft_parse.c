@@ -25,13 +25,13 @@ int	create_struct(t_map *map, char *line)
 	if (map->columns == 0)
 		return (ft_free_tab(split, map->rows), 0);
 	if (map->rows >= 1 && map->columns >= 1)
-		map->coord = malloc(sizeof(t_pixel) * map->rows + 1);
+		map->coord = malloc(sizeof(t_pixel) * (map->rows + 1));
 	if (!map->coord)
 		return (ft_free_tab(split, map->rows), quit(ERR_MAP_DATA));
 	i = -1;
 	while (++i <= map->rows)
 	{
-		map->coord[i] = malloc(sizeof(t_pixel) * map->columns + 1);
+		map->coord[i] = malloc(sizeof(t_pixel) * (map->columns + 1));
 		if (!map->coord[i])
 			return (free_map(map, i), ft_free_tab(split, map->rows), 0);
 	}

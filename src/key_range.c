@@ -15,13 +15,13 @@
 
 const int	plus_key(t_vars *vars)
 {
-	vars->map->z_range += 0.01;
+	vars->map->z_range += 0.01f;
 	return (1);
 }
 
 const int	minus_key(t_vars *vars)
 {
-	vars->map->z_range -= 0.01;
+	vars->map->z_range -= 0.01f;
 	return (1);
 }
 

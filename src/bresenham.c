@@ -12,13 +12,12 @@
 
 #include "../includes/fdf.h"
 
-void	bresenham_init(t_bresenham *bres, t_pixel *coord0, t_pixel *coord1,
-		t_map *map)
+void	bresenham_init(t_bresenham *bres, t_pixel *coord0, t_pixel *coord1)
 {
-	bres->x0 = floorf(coord0->x[ISO]);
-	bres->y0 = floorf(coord0->y[ISO]);
-	bres->x1 = floorf(coord1->x[ISO]);
-	bres->y1 = floorf(coord1->y[ISO]);
+	bres->x0 = (coord0->x[ISO]);
+	bres->y0 = (coord0->y[ISO]);
+	bres->x1 = (coord1->x[ISO]);
+	bres->y1 = (coord1->y[ISO]);
 	bres->dx = abs(bres->x1 - bres->x0);
 	bres->dy = abs(bres->y1 - bres->y0);
 	if (bres->x0 < bres->x1)
@@ -34,7 +33,7 @@ void	bresenham_init(t_bresenham *bres, t_pixel *coord0, t_pixel *coord1,
 	bres->err = bres->dx - bres->dy;
 }
 
-void	bresenham_init2(t_bresenham *bres, t_vars *vars)
+void	bresenham_init2(t_bresenham *bres)
 {
 	bres->temp->x[ISO] = bres->x0;
 	bres->temp->y[ISO] = bres->y0;
@@ -49,7 +48,7 @@ void	bresenham_print(t_bresenham *bres, t_draw *draw, t_data *img,
 	clr = color(vars->map);
 	while (bres->i <= bres->len)
 	{
-		bresenham_init2(bres, vars);
+		bresenham_init2(bres);
 		bres->temp->color[clr] = gradient(draw->coord0->color[clr],
 				draw->coord1->color[clr], bres->len, bres->i);
 		if (bres->temp->x[ISO] > 0 && bres->temp->x[ISO] < WINDOW_WIDTH
@@ -78,6 +77,6 @@ void	bresenham(t_pixel *coord0, t_pixel *coord1, t_vars *vars, t_data *img)
 	draw.coord0 = coord0;
 	draw.coord1 = coord1;
 	bres.temp = &temp;
-	bresenham_init(&bres, coord0, coord1, vars->map);
+	bresenham_init(&bres, coord0, coord1);
 	bresenham_print(&bres, &draw, img, vars);
 }

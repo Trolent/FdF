@@ -22,7 +22,6 @@ void	free_map(t_map *map, int rows)
 	}
 	free(map->coord);
 }
-#define PI 3.14159265
 
 void	map_init(t_map *map)
 {

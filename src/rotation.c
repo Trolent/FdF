@@ -12,7 +12,7 @@
 
 #include "../includes/fdf.h"
 
-void	rotate_x(t_pixel *point, double angle, t_map *map)
+void	rotate_x(t_pixel *point, double angle)
 {
 	double	temp_x;
 	double	temp_y;
@@ -30,7 +30,7 @@ void	rotate_x(t_pixel *point, double angle, t_map *map)
 	point->z[ISO] = temp_z;
 }
 
-void	rotate_y(t_pixel *point, double angle, t_map *map)
+void	rotate_y(t_pixel *point, double angle)
 {
 	double	temp_x;
 	double	temp_y;
@@ -48,7 +48,7 @@ void	rotate_y(t_pixel *point, double angle, t_map *map)
 	point->z[ISO] = temp_z;
 }
 
-void	rotate_z(t_pixel *point, double angle, t_map *map)
+void	rotate_z(t_pixel *point, double angle)
 {
 	double	temp_x;
 	double	temp_y;
@@ -77,9 +77,6 @@ int	define_iso(t_map *map)
 {
 	int	i;
 	int	j;
-	int	temp_x;
-	int	temp_y;
-	int	temp_z;
 
 	i = 0;
 	while (i < map->rows)
@@ -88,9 +85,9 @@ int	define_iso(t_map *map)
 		while (j < map->columns)
 		{
 			z_ratio(&map->coord[i][j], map);
-			rotate_z(&map->coord[i][j], map->angle[Z], map);
-			rotate_x(&map->coord[i][j], map->angle[X], map);
-			rotate_y(&map->coord[i][j], map->angle[Y], map);
+			rotate_z(&map->coord[i][j], map->angle[Z]);
+			rotate_x(&map->coord[i][j], map->angle[X]);
+			rotate_y(&map->coord[i][j], map->angle[Y]);
 			map->coord[i][j].x[ISO] = map->coord[i][j].x[ISO] + map->mid[X];
 			map->coord[i][j].y[ISO] = map->coord[i][j].y[ISO] + map->mid[Y];
 			j++;

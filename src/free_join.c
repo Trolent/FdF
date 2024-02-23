@@ -18,8 +18,8 @@ static int	ft_valid_len(int *s1len, int *s2len, char *s1, char *s2)
 		return (0);
 	else
 	{
-		*s1len = ft_strlen(s1);
-		*s2len = ft_strlen(s2);
+		*s1len = (int)ft_strlen(s1);
+		*s2len = (int)ft_strlen(s2);
 		return (1);
 	}
 }
@@ -36,7 +36,7 @@ char	*free_join(char *s1, char *s2)
 	j = 0;
 	if (!ft_valid_len(&s1len, &s2len, s1, s2))
 		return (free(s1), NULL);
-	join = malloc(sizeof(char) * (s1len + s2len + 1));
+	join = malloc(sizeof(char) * (long unsigned int)(s1len + s2len + 1));
 	if (!join)
 		return (free(s1), NULL);
 	while (s1[i])

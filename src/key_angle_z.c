@@ -27,9 +27,9 @@ const int	z_key(t_vars *vars)
 		while (j < vars->map->columns)
 		{
 			z_ratio(&vars->map->coord[i][j], vars->map);
-			rotate_x(&vars->map->coord[i][j], vars->map->angle[X], vars->map);
-			rotate_y(&vars->map->coord[i][j], vars->map->angle[Y], vars->map);
-			rotate_z(&vars->map->coord[i][j], vars->map->angle[Z], vars->map);
+			rotate_x(&vars->map->coord[i][j], vars->map->angle[X]);
+			rotate_y(&vars->map->coord[i][j], vars->map->angle[Y]);
+			rotate_z(&vars->map->coord[i][j], vars->map->angle[Z]);
 			vars->map->coord[i][j].x[ISO] = vars->map->coord[i][j].x[ISO]
 				+ vars->map->mid[X];
 			vars->map->coord[i][j].y[ISO] = vars->map->coord[i][j].y[ISO]
@@ -56,9 +56,9 @@ const int	x_key(t_vars *vars)
 		while (j < vars->map->columns)
 		{
 			z_ratio(&vars->map->coord[i][j], vars->map);
-			rotate_x(&vars->map->coord[i][j], vars->map->angle[X], vars->map);
-			rotate_z(&vars->map->coord[i][j], vars->map->angle[Z], vars->map);
-			rotate_y(&vars->map->coord[i][j], vars->map->angle[Y], vars->map);
+			rotate_x(&vars->map->coord[i][j], vars->map->angle[X]);
+			rotate_z(&vars->map->coord[i][j], vars->map->angle[Z]);
+			rotate_y(&vars->map->coord[i][j], vars->map->angle[Y]);
 			vars->map->coord[i][j].x[ISO] = vars->map->coord[i][j].x[ISO]
 				+ vars->map->mid[X];
 			vars->map->coord[i][j].y[ISO] = vars->map->coord[i][j].y[ISO]
