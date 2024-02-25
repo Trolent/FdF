@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:20:04 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/20 14:48:56 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/24 10:30:54 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	check_last_characters(char *str, char *last)
 		return (0);
 	while (last_len > 0)
 	{
-		u1 = str[str_len - 1];
-		u2 = last[last_len - 1];
+		u1 = (unsigned char)str[str_len - 1];
+		u2 = (unsigned char)last[last_len - 1];
 		if (u1 != u2)
 			return (0);
 		str_len--;

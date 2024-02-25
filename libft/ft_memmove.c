@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 13:17:32 by trolland          #+#    #+#             */
-/*   Updated: 2023/11/06 16:58:17 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/24 10:24:20 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 		return (dst);
 	else if (to > from && to - from < (int)len)
 	{
-		i = len;
+		i = (int)len;
 		while (--i >= 0)
 			to[i] = from[i];
 	}

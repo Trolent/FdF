@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:41:21 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/21 16:18:09 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/24 10:29:25 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static char	*ft_strjoin_to_n(char *s1, char *s2)
 		s2len = ft_strchr_index_n_strlen(s2, 0);
 	else
 		s2len = ft_strchr_index_n_strlen(s2, 1) + 1;
-	join = malloc(sizeof(char) * (s1len + s2len + 1));
+	join = malloc(sizeof(char) * (unsigned long)(s1len + s2len + 1));
 	if (!join)
 		return (free(s1), NULL);
 	i = -1;
@@ -97,7 +97,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	while (ft_strchr_index_n_strlen(line, 0) == -1 && bytes_read > 0)
 	{
-		bytes_read = read(fd, temp, BUFFER_SIZE);
+		bytes_read = (int)read(fd, temp, BUFFER_SIZE);
 		if (bytes_read < 0 && ft_clear_temp(temp, 0))
 			return (free(line), NULL);
 		temp[bytes_read] = '\0';

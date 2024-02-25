@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 12:40:21 by trolland          #+#    #+#             */
-/*   Updated: 2023/09/18 12:11:25 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/24 10:27:48 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static int	ft_valid_len(int *s1len, int *s2len, char const *s1, char const *s2)
 		return (0);
 	else
 	{
-		*s1len = ft_strlen(s1);
-		*s2len = ft_strlen(s2);
+		*s1len = (int)ft_strlen(s1);
+		*s2len = (int)ft_strlen(s2);
 		return (1);
 	}
 }
@@ -36,7 +36,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	j = 0;
 	if (!ft_valid_len(&s1len, &s2len, s1, s2))
 		return (NULL);
-	join = malloc(sizeof(char) * (s1len + s2len + 1));
+	join = malloc(sizeof(char) * (unsigned long)(s1len + s2len + 1));
 	if (!join)
 		return (NULL);
 	while (s1[i])

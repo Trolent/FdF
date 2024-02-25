@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 17:17:26 by trolland          #+#    #+#             */
-/*   Updated: 2023/09/18 12:15:55 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/24 10:28:16 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	i = 0;
 	if (!s)
 		return (NULL);
-	len = ft_strlen(s);
+	len = (unsigned int)ft_strlen(s);
 	result = malloc(sizeof(char) * len + 1);
 	if (!result)
 		return (NULL);

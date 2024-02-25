@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 12:40:00 by trolland          #+#    #+#             */
-/*   Updated: 2024/01/12 17:28:25 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/24 10:30:19 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static char	*ft_create_sub_tab(char const *s, char *c, int *pos)
 		(*pos)++;
 	while (ft_is_charset_multi(s[*pos + len], c) && s[*pos + len])
 		len++;
-	tab = malloc(sizeof(char) * len + 1);
+	tab = malloc(sizeof(char) * (unsigned long)(len + 1));
 	if (!tab)
 		return (NULL);
 	while (k < len)
@@ -86,7 +86,7 @@ char	**ft_split_multi(char const *s, char *c)
 	i = 0;
 	j = 0;
 	word_count = (ft_count_words_multi(s, c));
-	split = malloc(sizeof(char *) * (word_count + 1));
+	split = malloc(sizeof(char *) * (unsigned long)(word_count + 1));
 	if (!split)
 		return (NULL);
 	while (i < word_count)

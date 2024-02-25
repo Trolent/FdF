@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 12:40:08 by trolland          #+#    #+#             */
-/*   Updated: 2023/08/31 14:21:47 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/24 10:27:20 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ char	*ft_strdup(const char *s1)
 	char	*dup;
 
 	i = 0;
-	s1len = ft_strlen(s1);
-	dup = malloc(sizeof(char) * s1len + 1);
+	s1len = (int)ft_strlen(s1);
+	dup = malloc(sizeof(char) * (unsigned long)(s1len + 1));
 	if (!dup)
 		return (NULL);
 	while (i < s1len)

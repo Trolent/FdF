@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 18:00:09 by trolland          #+#    #+#             */
-/*   Updated: 2023/12/02 16:44:46 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/24 10:25:37 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 int	ft_putchar_fd(char c, int fd)
 {
-	return (write(fd, &c, 1));
+	return ((int)write(fd, &c, 1));
 }

@@ -6,13 +6,13 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 09:14:51 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/21 15:52:22 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/24 19:19:18 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-const int	z_key(t_vars *vars)
+int	z_key(t_vars *vars)
 {
 	int	i;
 	int	j;
@@ -41,7 +41,7 @@ const int	z_key(t_vars *vars)
 	return (1);
 }
 
-const int	x_key(t_vars *vars)
+int	x_key(t_vars *vars)
 {
 	int	i;
 	int	j;

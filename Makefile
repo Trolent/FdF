@@ -6,7 +6,7 @@
 #    By: trolland <trolland@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 16:23:19 by trolland          #+#    #+#              #
-#    Updated: 2024/02/22 18:55:43 by trolland         ###   ########.fr        #
+#    Updated: 2024/02/24 18:27:23 by trolland         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,19 +40,23 @@ DEPS := 	$(OBJS:.o=.d)
 
 CC := cc
 
-CFLAGS := -MMD -MP -Iincludes -Ilibft -I$(MLX_PATH) -g 
-# -fsanitize=address -fanalyzer -fsanitize-recover \
+CFLAGS := -Wall -Werror -Wextra -MMD -MP -Iincludes -Ilibft -I$(MLX_PATH) -g 
+MEGA_FLAGS:= -Werror -Wextra -MMD -MP -Iincludes -Ilibft -I$(MLX_PATH) \
+			-fsanitize=address -fanalyzer -fsanitize-recover \
 			-Wunknown-pragmas -Wunsuffixed-float-constants  -Wunused \
-           -Wunused-but-set-parameter  -Wunused-but-set-variable -Wunused-const-variable \
+        	-Wunused-but-set-parameter  -Wunused-but-set-variable -Wunused-const-variable \
         	-Wunused-function  -Wunused-label \
-           -Wunused-local-typedefs -Wunused-macros -Wunused-parameter \
-           -Wno-unused-result -Wunused-value  -Wunused-variable -Wno-varargs \
-		   -Wall -Wextra -pedantic -Wconversion -Wundef -Wunreachable-code -Wunused -Wunused-parameter -Wfloat-equal -Wshadow
+        	-Wunused-local-typedefs -Wunused-macros -Wunused-parameter \
+        	-Wno-unused-result -Wunused-value  -Wunused-variable -Wno-varargs \
+			-pedantic -Wconversion -Wundef -Wunreachable-code -Wunused -Wunused-parameter -Wfloat-equal -Wshadow
 
 all:	$(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(MLX_TARGET)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(LD_FLAGS)
+
+extra_flags: $(OBJS) $(LIBFT) $(MLX_TARGET)
+	$(CC) $(MEGA_FLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(LD_FLAGS)
 
 $(MLX_TARGET):
 	$(MAKE) -C $(MLX_PATH)

@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 12:39:34 by trolland          #+#    #+#             */
-/*   Updated: 2023/09/06 09:59:38 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/24 10:23:45 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*ft_itoa(int n)
 	int		i;
 
 	i = ft_itoalen(n);
-	str = malloc(sizeof(char) * (i + 1));
+	str = malloc(sizeof(char) * (unsigned long)(i + 1));
 	if (!str)
 		return (NULL);
 	if (n == -2147483648)

@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 18:03:45 by trolland          #+#    #+#             */
-/*   Updated: 2023/12/13 17:48:11 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/24 10:30:36 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_ceasar(char *input, int num)
 	while (str[i])
 	{
 		if (ft_isalpha(str[i]))
-			str[i] = ft_index(str[i], num);
+			str[i] = (char)ft_index(str[i], num);
 		i++;
 	}
 	return (str);

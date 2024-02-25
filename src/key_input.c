@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:22:12 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/22 18:34:39 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/24 19:16:46 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	key_map(int keycode)
 {
 	int			i;
 	const int	key[22] = {ESC_KEY, RIGHT_KEY, LEFT_KEY, DOWN_KEY, UP_KEY,
-		L_KEY, C_KEY, D_KEY, I_KEY, T_KEY, Z_KEY, X_KEY, A_KEY, S_KEY,
-		Q_KEY, W_KEY, PLUS_KEY, MINUS_KEY, R_KEY, Y_KEY, U_KEY, G_KEY};
+			L_KEY, C_KEY, D_KEY, I_KEY, T_KEY, Z_KEY, X_KEY, A_KEY, S_KEY,
+			Q_KEY, W_KEY, PLUS_KEY, MINUS_KEY, R_KEY, Y_KEY, U_KEY, G_KEY};
 
 	i = -1;
 	while (++i < 22)
@@ -26,16 +26,52 @@ int	key_map(int keycode)
 			return (i + 1);
 	return (0);
 }
+int	key_hook2(int index, t_vars *vars)
+{
+	int (*f[13])(t_vars *vars);
+
+	f[0] = &t_key;
+	f[1] = &z_key;
+	f[2] = &x_key;
+	f[3] = &a_key;
+	f[4] = &s_key;
+	f[5] = &q_key;
+	f[6] = &w_key;
+	f[7] = &plus_key;
+	f[8] = &minus_key;
+	f[9] = &r_key;
+	f[10] = &y_key;
+	f[11] = &u_key;
+	f[12] = &g_key;
+	if (index < 13)
+		return (f[index](vars));
+	return (0);
+}
+	
 
 int	key_hook(int keycode, t_vars *vars)
 {
-	const int	(*f[23])(t_vars *vars) = {&wrong_key, &key_esc, &key_right,
-		&key_left, &key_down, &key_up, &l_key, &c_key, &d_key, &i_key, &t_key,
-		&z_key, &x_key, &a_key, &s_key, &q_key, &w_key, &plus_key, &minus_key,
-		&r_key, &y_key, &u_key, &g_key};
+	int (*f[15])(t_vars *vars);
+	int index;
 
-	if (f[key_map(keycode)](vars) == 1)
-		render_next_frame(vars);
+	f[0] = &wrong_key;
+	f[1] = &key_esc;
+	f[2] = &key_right;
+	f[3] = &key_left;
+	f[4] = &key_down;
+	f[5] = &key_up;
+	f[6] = &l_key;
+	f[7] = &c_key;
+	f[8] = &d_key;
+	f[9] = &i_key;
+	index = key_map(keycode);
+	if (index > 0)
+	{
+		if (index < 10 && f[index](vars))
+			render_next_frame(vars);
+		else if (index > 9 && key_hook2(index - 10, vars))
+			render_next_frame(vars);
+	}
 	return (0);
 }
 
@@ -59,4 +95,4 @@ int	mlx_handle_input(t_vars *vars)
 	return (1);
 }
 
-	// mlx_hook(vars->win, 2, 1L << 0, &key_hook, vars);
+// mlx_hook(vars->win, 2, 1L << 0, &key_hook, vars);

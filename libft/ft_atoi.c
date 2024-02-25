@@ -6,14 +6,14 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 12:38:41 by trolland          #+#    #+#             */
-/*   Updated: 2023/10/02 18:01:02 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/24 10:23:12 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_atoi(const char *str)
 {
 	int			i;
-	double long	res;
+	long long	res;
 	int			neg;
 
 	i = 0;
@@ -36,5 +36,5 @@ int	ft_atoi(const char *str)
 	}
 	if ((res * neg) > 2147483647)
 		return (-1);
-	return (res * neg);
+	return ((int)(res * neg));
 }

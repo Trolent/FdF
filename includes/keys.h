@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:21:25 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/22 18:30:01 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/24 19:15:10 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "fdf.h"
 
+
+# if(__LINUX__)
 # define ESC_KEY 0xff1b
 # define RIGHT_KEY 0xff53
 # define LEFT_KEY 0xff51
@@ -37,29 +39,53 @@
 # define Y_KEY 0x79
 # define U_KEY 0x75
 # define G_KEY 0x67
+# elif(__APPLE__)
+# define ESC_KEY 53
+# define RIGHT_KEY 124
+# define LEFT_KEY 123
+# define DOWN_KEY 125
+# define UP_KEY 126
+# define L_KEY 37
+# define C_KEY 8
+# define D_KEY 2
+# define I_KEY 34
+# define T_KEY 17
+# define Z_KEY 6
+# define X_KEY 7
+# define A_KEY 0
+# define S_KEY 1
+# define Q_KEY 12
+# define W_KEY 13
+# define PLUS_KEY 24
+# define MINUS_KEY 27
+# define R_KEY 15
+# define Y_KEY 16
+# define U_KEY 32
+# define G_KEY 5
+# endif
 
-const int	wrong_key(t_vars *vars);
-const int	key_esc(t_vars *vars);
-const int	key_right(t_vars *vars);
-const int	key_left(t_vars *vars);
-const int	key_down(t_vars *vars);
-const int	key_up(t_vars *vars);
-const int	l_key(t_vars *vars);
-const int	c_key(t_vars *vars);
-const int	d_key(t_vars *vars);
-const int	r_key(t_vars *vars);
-const int	y_key(t_vars *vars);
-const int	i_key(t_vars *vars);
-const int	t_key(t_vars *vars);
-const int	g_key(t_vars *vars);
-const int	z_key(t_vars *vars);
-const int	x_key(t_vars *vars);
-const int	a_key(t_vars *vars);
-const int	s_key(t_vars *vars);
-const int	q_key(t_vars *vars);
-const int	w_key(t_vars *vars);
-const int	plus_key(t_vars *vars);
-const int	minus_key(t_vars *vars);
-const int	u_key(t_vars *vars);
+int	wrong_key(t_vars *vars);
+int	key_esc(t_vars *vars);
+int	key_right(t_vars *vars);
+int	key_left(t_vars *vars);
+int	key_down(t_vars *vars);
+int	key_up(t_vars *vars);
+int	l_key(t_vars *vars);
+int	c_key(t_vars *vars);
+int	d_key(t_vars *vars);
+int	r_key(t_vars *vars);
+int	y_key(t_vars *vars);
+int	i_key(t_vars *vars);
+int	t_key(t_vars *vars);
+int	g_key(t_vars *vars);
+int	z_key(t_vars *vars);
+int	x_key(t_vars *vars);
+int	a_key(t_vars *vars);
+int	s_key(t_vars *vars);
+int	q_key(t_vars *vars);
+int	w_key(t_vars *vars);
+int	plus_key(t_vars *vars);
+int	minus_key(t_vars *vars);
+int	u_key(t_vars *vars);
 
 #endif

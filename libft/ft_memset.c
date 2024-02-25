@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 09:36:27 by trolland          #+#    #+#             */
-/*   Updated: 2023/09/26 12:05:55 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/24 10:25:21 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*ft_memset(void *b, int c, size_t len)
 	i = 0;
 	while (i < len)
 	{
-		((unsigned char *)b)[i] = c;
+		((unsigned char *)b)[i] = (unsigned char)c;
 		i++;
 	}
 	return (b);
