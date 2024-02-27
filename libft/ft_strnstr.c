@@ -6,12 +6,11 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 14:56:39 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/20 14:48:32 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:50:48 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {

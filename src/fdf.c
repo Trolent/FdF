@@ -6,12 +6,11 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:05:14 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/21 15:52:09 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:50:22 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-#include <stdio.h> // must dell before push
 
 int	main(int argc, char **argv)
 {

@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:59:55 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/21 17:33:44 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:50:40 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <errno.h>
 # include <math.h>
 # include <stdbool.h>
-# include <stdio.h>
 # include <unistd.h>
 
 # if defined(__linux__)

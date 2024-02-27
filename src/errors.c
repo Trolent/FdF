@@ -6,13 +6,14 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 17:27:52 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/21 15:52:07 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:51:15 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/error_maps.h"
 #include "../includes/fdf.h"
 #include "../libft/libft.h"
+#include <stdio.h>
 
 int	quit(char *s)
 {
