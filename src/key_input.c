@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:22:12 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/24 19:16:46 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/25 20:30:15 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	key_map(int keycode)
 {
 	int			i;
 	const int	key[22] = {ESC_KEY, RIGHT_KEY, LEFT_KEY, DOWN_KEY, UP_KEY,
-			L_KEY, C_KEY, D_KEY, I_KEY, T_KEY, Z_KEY, X_KEY, A_KEY, S_KEY,
-			Q_KEY, W_KEY, PLUS_KEY, MINUS_KEY, R_KEY, Y_KEY, U_KEY, G_KEY};
+		L_KEY, C_KEY, D_KEY, I_KEY, T_KEY, Z_KEY, X_KEY, A_KEY, S_KEY,
+		Q_KEY, W_KEY, PLUS_KEY, MINUS_KEY, R_KEY, Y_KEY, U_KEY, G_KEY};
 
 	i = -1;
 	while (++i < 22)
@@ -26,9 +26,10 @@ int	key_map(int keycode)
 			return (i + 1);
 	return (0);
 }
+
 int	key_hook2(int index, t_vars *vars)
 {
-	int (*f[13])(t_vars *vars);
+	int	(*f[13])(t_vars *vars);
 
 	f[0] = &t_key;
 	f[1] = &z_key;
@@ -47,12 +48,11 @@ int	key_hook2(int index, t_vars *vars)
 		return (f[index](vars));
 	return (0);
 }
-	
 
 int	key_hook(int keycode, t_vars *vars)
 {
-	int (*f[15])(t_vars *vars);
-	int index;
+	int	(*f[15])(t_vars *vars);
+	int	index;
 
 	f[0] = &wrong_key;
 	f[1] = &key_esc;

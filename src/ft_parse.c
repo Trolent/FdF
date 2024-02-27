@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:04:58 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/21 16:32:23 by trolland         ###   ########.fr       */
+/*   Updated: 2024/02/25 20:33:06 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	create_struct(t_map *map, char *line)
 	if (map->columns == 0)
 		return (ft_free_tab(split, map->rows), 0);
 	if (map->rows >= 1 && map->columns >= 1)
-		map->coord = malloc(sizeof(t_pixel) * (map->rows + 1));
+		map->coord = malloc(sizeof(t_pixel *) * (map->rows + 1));
 	if (!map->coord)
 		return (ft_free_tab(split, map->rows), quit(ERR_MAP_DATA));
 	i = -1;

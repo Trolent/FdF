@@ -6,7 +6,7 @@
 #    By: trolland <trolland@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 16:23:19 by trolland          #+#    #+#              #
-#    Updated: 2024/02/24 18:27:23 by trolland         ###   ########.fr        #
+#    Updated: 2024/02/27 15:36:01 by trolland         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,26 +37,14 @@ SRCS := 	$(addprefix src/, $(SRC))
 OBJS := 	$(patsubst src/%.c, object/%.o, $(SRCS))
 DEPS := 	$(OBJS:.o=.d)
 
-
 CC := cc
 
-CFLAGS := -Wall -Werror -Wextra -MMD -MP -Iincludes -Ilibft -I$(MLX_PATH) -g 
-MEGA_FLAGS:= -Werror -Wextra -MMD -MP -Iincludes -Ilibft -I$(MLX_PATH) \
-			-fsanitize=address -fanalyzer -fsanitize-recover \
-			-Wunknown-pragmas -Wunsuffixed-float-constants  -Wunused \
-        	-Wunused-but-set-parameter  -Wunused-but-set-variable -Wunused-const-variable \
-        	-Wunused-function  -Wunused-label \
-        	-Wunused-local-typedefs -Wunused-macros -Wunused-parameter \
-        	-Wno-unused-result -Wunused-value  -Wunused-variable -Wno-varargs \
-			-pedantic -Wconversion -Wundef -Wunreachable-code -Wunused -Wunused-parameter -Wfloat-equal -Wshadow
+CFLAGS := -Wall -Werror -Wextra -MMD -MP -Iincludes -Ilibft -I$(MLX_PATH) 
 
 all:	$(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(MLX_TARGET)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(LD_FLAGS)
-
-extra_flags: $(OBJS) $(LIBFT) $(MLX_TARGET)
-	$(CC) $(MEGA_FLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(LD_FLAGS)
 
 $(MLX_TARGET):
 	$(MAKE) -C $(MLX_PATH)
@@ -81,10 +69,10 @@ fclean: clean
 re: fclean all
 
 norm:
-	@norminette -R CheckDefine includes/*.h
+	norminette -R CheckDefine includes/*.h
 	norminette -R CheckForbiddenSourceHeader src/*.c
 
 
 -include $(DEPS)
 
-.PHONY: all create_dirs clean fclean
+.PHONY: all create_dirs clean fclean re norm
