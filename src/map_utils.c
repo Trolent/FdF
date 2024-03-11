@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:35:46 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/21 17:35:50 by trolland         ###   ########.fr       */
+/*   Updated: 2024/03/11 21:00:16 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,7 @@ void	free_map(t_map *map, int rows)
 
 void	map_init(t_map *map)
 {
-	map->rows = 0;
-	map->columns = 0;
-	map->mid[X] = 0;
-	map->mid[Y] = 0;
-	map->zoom = 1;
-	map->line = 1;
-	map->diag = 0;
-	map->top = 0;
-	map->iso = 1;
-	map->angle[X] = 45;
-	map->angle[Y] = 0;
-	map->angle[Z] = 45;
-	map->z_color = 0;
-	map->z_max = 0;
-	map->z_min = 0;
-	map->z_range = 1;
+	*map = (t_map){.zoom = 1, .line = 1, .angle = {45, 0, 45}, .z_range = 1};
 }
 
 int	color(t_map *map)
