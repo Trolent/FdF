@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 12:40:53 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/14 10:06:01 by trolland         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:38:17 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 // # define MIN(nb, nb2) ((nb < nb2) ? nb : nb2)
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 100000
 # endif
 
 void				ft_swap(void *a, void *b, size_t size);
