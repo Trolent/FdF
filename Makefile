@@ -6,7 +6,7 @@
 #    By: trolland <trolland@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 16:23:19 by trolland          #+#    #+#              #
-#    Updated: 2024/02/27 15:36:01 by trolland         ###   ########.fr        #
+#    Updated: 2024/05/20 20:37:57 by trolland         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = fdf
 
 LIBFT	= 	libft/libft.a
 MLX_LINUX =	minilibx-linux/libmlx.a 
-MLX_MACOS = libmlx/libmlx.a
+MLX_MACOS = libmlx-mac-osx/libmlx.a
 
 OS := $(shell uname)
 ifeq ($(OS),Darwin)

@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:59:55 by trolland          #+#    #+#             */
-/*   Updated: 2024/03/11 21:00:40 by trolland         ###   ########.fr       */
+/*   Updated: 2024/05/20 20:37:40 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 #  define WINDOW_WIDTH 1920 / 3 * 2
 #  define WINDOW_HEIGHT 1080 / 3 * 2
 # elif defined(__APPLE__)
-#  include "../libmlx/mlx.h"
+#  include "../minilibx-mac-osx/mlx.h"
 #  define WINDOW_WIDTH 1920 / 3 * 2
 #  define WINDOW_HEIGHT 1080 / 3 * 2
 # endif
