@@ -1,4 +1,4 @@
-# fract-ol
+# fdf
 
 <p align="center">
   <img src="https://github.com/Trolent/Trolent/blob/e2a84c046e74211bac5266747ef54d4af820baf6/Badges/fdfm.png" alt="FDF badge"/>
@@ -10,7 +10,7 @@ Grade: 125%.
 Fil de Fer (wireframe) also known as FDF is one of the first graphical projects at 42 school. The goal si to develop a program that reads a .fdf file containing coordinates of a landscape and displays it as a wireframe model in isometric projection. 
 
 
-## Installing and Compiling Fract-ol
+## Installing and Compiling FDF
 
 Clone the repository, including the embedded MiniLibX repository:
 ```shell
