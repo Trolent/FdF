@@ -46,8 +46,6 @@ While fdf is running, the following set of controls are available:
   <tr><td><kbd>&nbsp;←&nbsp;</kbd></td><td>Move left</td></tr>
   <tr><td><kbd>&nbsp;↓&nbsp;</kbd></td><td>Move down</td></tr>
   <tr><td><kbd>&nbsp;↑&nbsp;</kbd></td><td>Move up</td></tr>
-  <tr><td><kbd>&nbsp;↑&nbsp;</kbd></td><td>Move up</td></tr>
-  <tr><td><kbd>&nbsp;↑&nbsp;</kbd></td><td>Move up</td></tr>
   <tr><td><kbd>&nbsp;C&nbsp;</kbd></td><td>Activate/deactivate altitude based color</td></tr>
   <tr><td><kbd>&nbsp;Q&nbsp;</kbd></td><td>Rotate X</td></tr>
   <tr><td><kbd>&nbsp;W&nbsp;</kbd></td><td>Rotate X</td></tr>
