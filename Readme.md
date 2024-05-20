@@ -17,6 +17,8 @@ Clone the repository, including the embedded MiniLibX repository:
 git clone git@github.com:Trolent/FdF.git && cd FdF && git submodule init && git submodule update
 ```
 
+make rules are
+
 Compile using ```make```.
 
 ## Executing FDF
