@@ -7,7 +7,7 @@ Finished: 28/02/2024.
 Grade: 125%.
 </p>
 
-Fil de Fer (wireframe) also known as FDF is one of the first graphical projects at 42 school. The goal si to develop a program that reads a .fdf file containing coordinates of a landscape and displays it as a wireframe model in isometric projection. 
+Fil de Fer (wireframe) also known as FDF is one of the first graphical projects at 42 school. The goal is to develop a program that reads a ".fdf" file containing coordinates of a landscape and displays it as a wireframe model in isometric projection. This specific implementation also allows you to rotate, zoom, change the altitude ratio ...
 
 
 ## Installing and Compiling FDF
