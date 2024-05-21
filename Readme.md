@@ -35,7 +35,7 @@ Such as
 ./fdf maps/MGDS_WHOLE_WORLD_OCEAN1_XL.fdf
 ```
 
-If the file isn't proprely formated or with the wrong extension name, the program will display ``Èrror```and quit. 
+If the file isn't proprely formated or with the wrong extension name, the program will display ```rror```and quit. 
 
 ## FDF Controls
 
