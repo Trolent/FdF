@@ -6,7 +6,7 @@
 #    By: trolland <trolland@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 16:23:19 by trolland          #+#    #+#              #
-#    Updated: 2024/05/20 20:37:57 by trolland         ###   ########.fr        #
+#    Updated: 2024/05/21 01:22:15 by trolland         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,12 +14,12 @@ NAME = fdf
 
 LIBFT	= 	libft/libft.a
 MLX_LINUX =	minilibx-linux/libmlx.a 
-MLX_MACOS = libmlx-mac-osx/libmlx.a
+MLX_MACOS = minilibx-mac-osx/libmlx.a
 
 OS := $(shell uname)
 ifeq ($(OS),Darwin)
     MLX_TARGET = $(MLX_MACOS)
-    MLX_PATH = libmlx
+    MLX_PATH = minilibx-mac-osx
     LD_FLAGS = -L$(MLX_PATH) -lmlx -framework OpenGL -framework AppKit
 else
     MLX_TARGET = $(MLX_LINUX)
@@ -32,9 +32,10 @@ SRC :=		fdf.c errors.c free_join.c ft_parse.c ft_parse2.c graphics.c \
 			key_arrow.c key_lines_spec.c key_views.c create_win_mlx.c \
 			close_mlx.c rotation.c bresenham.c menu.c coordinates_utils.c\
 			key_angle_x.c key_angle_y.c key_angle_z.c
-			
-SRCS := 	$(addprefix src/, $(SRC))
-OBJS := 	$(patsubst src/%.c, object/%.o, $(SRCS))
+
+SRC_PATH = ./src/
+SRCS := 	$(addprefix $(SRC_PATH), $(SRC))
+OBJS := 	$(patsubst $(SRC_PATH)%.c, object/%.o, $(SRCS))
 DEPS := 	$(OBJS:.o=.d)
 
 CC := cc
