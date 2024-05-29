@@ -1,25 +1,41 @@
-# fdf
+# FdF - Wireframe Model Project
 
-Fil de Fer (wireframe) also known as FDF is one of the first graphical projects at 42 school. The goal is to develop a program that reads a ".fdf" file containing coordinates of a landscape and displays it as a wireframe model in isometric projection. This specific implementation also allows you to rotate, zoom, change the altitude ratio ...
+Welcome to my FdF project! This project is part of the curriculum at 42 School and involves creating a simple wireframe model of a 3D landscape using the MiniLibX library. The goal is to represent the model in isometric projection by linking various points in space with line segments.
 
+## Objectives
 
-## Installing and Compiling FDF
+The main objectives of this project are to:
 
-Clone the repository, including the embedded MiniLibX repository:
-```shell
-git clone git@github.com:Trolent/FdF.git && cd FdF && git submodule init && git submodule update
+- Get familiar with the MiniLibX library.
+- Learn the basics of graphics programming.
+- Understand how to place points in space, join them, and view the scene from specific viewpoints.
+
+## Features
+
+- **Isometric Projection**: The program displays the landscape in isometric projection.
+- **Smooth Window Management**: The window can be resized, minimized, and changed without issues.
+- **User Interaction**: The program allows for various interactions such as zooming, rotating, and translating the model.
+- **Clean Exit**: The program exits cleanly when pressing `ESC` or clicking the close button.
+
+## Usage
+
+### Compilation
+
+To compile the project, use the following commands:
+
+```sh
+make        # Compiles the library and generates the `fdf` executable.
+make clean  # Deletes the compiled object files.
+make fclean # Deletes the compiled object files and the executable.
+make re     # Fully recompiles the library.
 ```
-
-make rules are
-
-Compile using ```make```.
 
 ## Executing FDF
 
-At execution time, you must specify the path to a .fdf file.
+At execution time, you must specify the path to a .fdf file (some maps are avaiable in the map directory).
 
 ```shell
-./fdf [path to .fdf file]
+./fdf <map.fdf>
 ```
 
 Such as
@@ -61,4 +77,15 @@ While fdf is running, the following set of controls are available:
   <tr><td><kbd>&nbsp;ESC&nbsp;</kbd></td><td>Quit program</td></tr>
 </table>
 
-# Screenshots
+## Educational Value
+
+This project is crucial for learning:
+
+- **Graphics Programming:** Basics of rendering 3D models and handling user input for graphics applications.
+- **Memory Management:** Handling dynamic memory allocation and deallocation efficiently.
+- **Modular Programming:** Organizing code into reusable modules.
+- **Debugging and Testing:** Developing strong debugging and testing skills to ensure the robustness of the program.
+
+---
+
+Thank you for taking the time to check out this project! I hope it will be useful in your own C projects.
