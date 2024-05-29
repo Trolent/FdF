@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:04:58 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/21 17:17:37 by trolland         ###   ########.fr       */
+/*   Updated: 2024/05/29 11:25:51 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	special_atoi(const char *str, int *index)
 	return (res * neg);
 }
 
-int	strvalue(char c)
+static int	strvalue(char c)
 {
 	int		i;
 	char	*lower;

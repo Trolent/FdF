@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:21:25 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/25 20:28:56 by trolland         ###   ########.fr       */
+/*   Updated: 2024/05/29 11:55:24 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@
 # endif
 
 int	wrong_key(t_vars *vars);
-int	key_esc(t_vars *vars);
+int	key_esc_or_cross_close(t_vars *vars);
 int	key_right(t_vars *vars);
 int	key_left(t_vars *vars);
 int	key_down(t_vars *vars);

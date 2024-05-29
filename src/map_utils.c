@@ -6,19 +6,19 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 17:35:46 by trolland          #+#    #+#             */
-/*   Updated: 2024/03/11 21:00:16 by trolland         ###   ########.fr       */
+/*   Updated: 2024/05/29 11:27:00 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 #include "../includes/error_maps.h"
 
-void	free_map(t_map *map, int rows)
+void	free_map(t_map *map, int size)
 {
-	while (rows >= 0)
+	while (size >= 0)
 	{
-		free(map->coord[rows]);
-		rows--;
+		free(map->coord[size]);
+		size--;
 	}
 	free(map->coord);
 }

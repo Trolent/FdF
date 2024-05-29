@@ -6,13 +6,13 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 12:53:47 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/25 20:29:19 by trolland         ###   ########.fr       */
+/*   Updated: 2024/05/29 11:33:23 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	draw(t_vars *vars, int i, int j, t_data *img)
+static void	draw(t_vars *vars, int i, int j, t_data *img)
 {
 	my_mlx_pixel_put(img, &vars->map->coord[i][j], vars->map);
 	if (i + 1 < vars->map->rows && vars->map->line == 1)
@@ -27,7 +27,7 @@ void	draw(t_vars *vars, int i, int j, t_data *img)
 			vars, img);
 }
 
-void	print_graph_map(t_vars *vars, t_map *map, t_data *img)
+static void	print_graph_map(t_vars *vars, t_map *map, t_data *img)
 {
 	int	i;
 	int	j;
@@ -46,7 +46,7 @@ void	print_graph_map(t_vars *vars, t_map *map, t_data *img)
 	}
 }
 
-void	generate_map(t_vars *vars, t_map *map, t_data *img)
+static void	generate_map(t_vars *vars, t_map *map, t_data *img)
 {
 	make_background(img);
 	define_iso(map);

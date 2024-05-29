@@ -6,30 +6,13 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 12:53:47 by trolland          #+#    #+#             */
-/*   Updated: 2024/03/11 21:25:16 by trolland         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:07:06 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map)
-{
-	char	*dst;
-	double		x;
-	double		y;
-	int		clr;
-
-	clr = color(map);
-	y = pixel->y[ISO];
-	x = pixel->x[ISO];
-	if (x < 0 || y < 0 || y >= WINDOW_HEIGHT || x >= WINDOW_WIDTH)
-		return ;
-	dst = data->addr + (int)(round(y) * data->line_length + round(x) * (data->bits_per_pixel
-				/ 8));
-	*(unsigned int *)dst = (unsigned int)pixel->color[clr];
-}
-
-void	put_pixel(t_data *img, int x, int y, int color)
+static void	put_pixel(t_data *img, int x, int y, int color)
 {
 	char	*dst;
 
@@ -55,6 +38,23 @@ void	make_background(t_data *img)
 		}
 		i++;
 	}
+}
+
+void	my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map)
+{
+	char	*dst;
+	double	x;
+	double	y;
+	int		clr;
+
+	clr = color(map);
+	y = pixel->y[ISO];
+	x = pixel->x[ISO];
+	if (x < 0 || y < 0 || y >= WINDOW_HEIGHT || x >= WINDOW_WIDTH)
+		return ;
+	dst = data->addr + (int)(round(y) * data->line_length + round(x)
+			* (data->bits_per_pixel / 8));
+	*(unsigned int *)dst = (unsigned int)pixel->color[clr];
 }
 
 int	verify_fit(t_map *map, int i, int j)

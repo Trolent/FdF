@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 17:04:58 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/25 20:33:06 by trolland         ###   ########.fr       */
+/*   Updated: 2024/05/29 11:46:00 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,20 @@ int	create_struct(t_map *map, char *line)
 	free(line);
 	map->columns = check_columns(split, map->rows);
 	if (map->columns == 0)
-		return (ft_free_tab(split, map->rows), 0);
+		return (ft_free_tab(split), 0);
 	if (map->rows >= 1 && map->columns >= 1)
-		map->coord = malloc(sizeof(t_pixel *) * (map->rows + 1));
+		map->coord = ft_calloc(sizeof(t_pixel *), (map->rows + 1));
 	if (!map->coord)
-		return (ft_free_tab(split, map->rows), quit(ERR_MAP_DATA));
+		return (ft_free_tab(split), quit(ERR_MAP_DATA));
 	i = -1;
 	while (++i <= map->rows)
 	{
-		map->coord[i] = malloc(sizeof(t_pixel) * (map->columns + 1));
+		map->coord[i] = ft_calloc(sizeof(t_pixel), (map->columns + 1));
 		if (!map->coord[i])
-			return (free_map(map, i), ft_free_tab(split, map->rows), 0);
+			return (free_map(map, i), ft_free_tab(split), 0);
 	}
 	asign_values(map, split);
-	ft_free_tab(split, map->rows);
+	ft_free_tab(split);
 	return (1);
 }
 

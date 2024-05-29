@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:22:12 by trolland          #+#    #+#             */
-/*   Updated: 2024/05/22 12:27:01 by trolland         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:28:36 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	key_map(int keycode)
 {
 	int			i;
 	const int	key[22] = {ESC_KEY, RIGHT_KEY, LEFT_KEY, DOWN_KEY, UP_KEY,
-			L_KEY, C_KEY, D_KEY, I_KEY, T_KEY, Z_KEY, X_KEY, A_KEY, S_KEY,
-			Q_KEY, W_KEY, PLUS_KEY, MINUS_KEY, R_KEY, Y_KEY, U_KEY, G_KEY};
+		L_KEY, C_KEY, D_KEY, I_KEY, T_KEY, Z_KEY, X_KEY, A_KEY, S_KEY,
+		Q_KEY, W_KEY, PLUS_KEY, MINUS_KEY, R_KEY, Y_KEY, U_KEY, G_KEY};
 
 	i = -1;
 	while (++i < 22)
@@ -29,7 +29,7 @@ int	key_map(int keycode)
 
 int	key_hook2(int index, t_vars *vars)
 {
-	int	(*f[13])(t_vars * vars);
+	int	(*f[13])(t_vars *vars);
 
 	f[0] = &t_key;
 	f[1] = &z_key;
@@ -51,11 +51,11 @@ int	key_hook2(int index, t_vars *vars)
 
 int	key_hook(int keycode, t_vars *vars)
 {
-	int	(*f[15])(t_vars * vars);
+	int	(*f[15])(t_vars *vars);
 	int	index;
 
 	f[0] = &wrong_key;
-	f[1] = &key_esc;
+	f[1] = &key_esc_or_cross_close;
 	f[2] = &key_right;
 	f[3] = &key_left;
 	f[4] = &key_down;
@@ -93,6 +93,6 @@ int	mlx_handle_input(t_vars *vars)
 {
 	mlx_hook(vars->win, 2, 1L << 0, &key_hook, vars);
 	mlx_mouse_hook(vars->win, (int (*)())mouse_scroll, vars);
-	mlx_hook(vars->win, 17, 1L << 3, &cross_close, vars);
+	mlx_hook(vars->win, 17, 1L << 3, &key_esc_or_cross_close, vars);
 	return (1);
 }

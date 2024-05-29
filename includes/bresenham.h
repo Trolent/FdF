@@ -1,34 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   bresenham.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/04 20:24:29 by trolland          #+#    #+#             */
-/*   Updated: 2023/12/02 16:37:58 by trolland         ###   ########.fr       */
+/*   Created: 2024/05/29 12:22:16 by trolland          #+#    #+#             */
+/*   Updated: 2024/05/29 12:25:57 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef BRESENHAM_H
+# define BRESENHAM_H
 
-int	ft_putnbr_fd(int n, int fd)
+# include "fdf.h"
+
+/*struct for the bresenham algorithm*/
+typedef struct s_bresenham
 {
-	int	count;
+	t_pixel	*temp;
+	int		x0;
+	int		y0;
+	int		x1;
+	int		y1;
+	int		dx;
+	int		dy;
+	int		inc_x;
+	int		inc_y;
+	int		len;
+	int		i;
+	int		err;
+	int		err2;
+}			t_bresenham;
 
-	count = 0;
-	if (n == -2147483648)
-		return (ft_putstr_fd("-2147483648", fd));
-	else
-	{
-		if (n < 0)
-		{
-			n = -n;
-			count += ft_putchar_fd('-', fd);
-		}
-		if (n > 9)
-			count += ft_putnbr_fd(n / 10, fd);
-		count += ft_putchar_fd(n % 10 + 48, fd);
-	}
-	return (count);
-}
+/*struct use only to draw the line*/
+typedef struct s_draw
+{
+	t_pixel	*coord0;
+	t_pixel	*coord1;
+}			t_draw;
+
+#endif

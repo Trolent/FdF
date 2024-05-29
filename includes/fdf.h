@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:59:55 by trolland          #+#    #+#             */
-/*   Updated: 2024/05/20 20:37:40 by trolland         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:29:21 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,20 @@
 # define BLUE 0x0000FF
 # define BACKGROUND 0x202020
 
+// COORDINATES
 # define X 0
 # define Y 1
 # define Z 2
 
+// D
 # define ORG 0
 # define ISO 1
 
+// ALT OR MAP COLORS
 # define ORGCLR 0
 # define ALTCLR 1
 
+/*struct for the mlx image*/
 typedef struct s_data
 {
 	void	*img;
@@ -56,6 +60,11 @@ typedef struct s_data
 	int		endian;
 }			t_data;
 
+/*struct for every coordinate.
+- x[0], y[0], z[0] are the original coordinates;
+- x[1], y[1], z[1] are the iso coordinates;
+- color[0] is the original color;
+- color[1] is the altitude color.*/
 typedef struct s_pixel
 {
 	double	x[2];
@@ -64,29 +73,7 @@ typedef struct s_pixel
 	int		color[2];
 }			t_pixel;
 
-typedef struct s_bresenham
-{
-	t_pixel	*temp;
-	int		x0;
-	int		y0;
-	int		x1;
-	int		y1;
-	int		dx;
-	int		dy;
-	int		inc_x;
-	int		inc_y;
-	int		len;
-	int		i;
-	int		err;
-	int		err2;
-}			t_bresenham;
-
-typedef struct s_draw
-{
-	t_pixel	*coord0;
-	t_pixel	*coord1;
-}			t_draw;
-
+/*struct containing the map and its visual properties*/
 typedef struct s_map
 {
 	t_pixel	**coord;
@@ -103,6 +90,7 @@ typedef struct s_map
 	double	z_range;
 }			t_map;
 
+/*struct containing the mlx elements and the map*/
 typedef struct s_vars
 {
 	void	*mlx;
@@ -111,59 +99,93 @@ typedef struct s_vars
 	t_data	*img;
 }			t_vars;
 
-// PARSING UTILS //
+/* ************************************************************************** */
+/* ***************************** PARSING UTILS ****************************** */
+/* ************************************************************************** */
+
+/*parses the file and creates the map into a struct tab pixel*/
 int			parse(t_map *map, char *file);
-void		free_map(t_map *map, int lines);
+/*free the map*/
+void		free_map(t_map *map, int size);
+/*join two strings s1 and s2 and free s1*/
 char		*free_join(char *s1, char *s2);
-void		free_map(t_map *map, int lines);
+/*initialize the map struct for zoom, line, angle and z_range*/
 void		map_init(t_map *map);
+/*atoi with index incrementation*/
 int			special_atoi(const char *str, int *index);
-int			strvalue(char c);
+/*atoi with index incrementation for hexadecimal values*/
 int			special_atoi_hex(const char *str, int *index);
+/*check if the number of columns is the same for each row*/
 int			check_columns(char **split, int rows);
+/*assign values to the map struct for each coordinate*/
 void		asign_values(t_map *map, char **split);
 
-// WINDOW / MLX MANAGEMENT //
-int			quit(char *s);
-int			quit_map(char *s, t_vars *vars);
-int			graphics(t_vars *map);
-int			create_win_mlx(t_vars *vars, t_map *map);
-int			mlx_handle_input(t_vars *vars);
-int			render_next_frame(t_vars *vars);
-int			cross_close(t_vars *vars);
-void		close_mlx(t_vars *vars);
-void		make_menu(t_vars *vars);
+/* ************************************************************************** */
+/* ****************************** WINDOW UTILS ****************************** */
+/* ************************************************************************** */
 
-// ROTATION MANAGEMENT //
+/*quit the program with an error message*/
+int			quit(char *s);
+/*quit the program with an error message, free the map and destroy the window*/
+int			quit_map(char *s, t_vars *vars);
+/*initialize the mlx elements, graphipcs and the loop*/
+int			graphics(t_vars *map);
+/*add the menu to the window*/
+void		make_menu(t_vars *vars);
+/*create the mlx window, and the image. Start the graphics*/
+int			create_win_mlx(t_vars *vars, t_map *map);
+/*handle the key and mouse input from the user*/
+int			mlx_handle_input(t_vars *vars);
+/*render the next frame*/
+int			render_next_frame(t_vars *vars);
+/*ends the loop and let mlx end*/
+int			key_esc_or_cross_close(t_vars *vars);
+/*free all the mlx elements*/
+void		close_mlx(t_vars *vars);
+
+/* ************************************************************************** */
+/* ****************************** ROTATION UTILS **************************** */
+/* ************************************************************************** */
+
+/*apply the iso rotation to the map coordinates*/
 int			define_iso(t_map *map);
+/*define the altitude ratio for the z axis*/
 void		z_ratio(t_pixel *point, t_map *map);
 void		rotate_x(t_pixel *point, double angle);
+/*rotate the map coordinates on the y axis*/
 void		rotate_y(t_pixel *point, double angle);
+/*rotate the map coordinates on the z axis*/
 void		rotate_z(t_pixel *point, double angle);
 
-// COORDINATES MANAGEMENT //
+/* ************************************************************************** */
+/* *************************** COORDINATES UTILS **************************** */
+/* ************************************************************************** */
+
+/*define the z range for the map according to the altitudes*/
 void		define_z_range(t_map *map);
+/*define the alternate color for the map coordinates*/
 void		define_alt_color(t_map *map, t_pixel *point);
+/*apply define_z_range and define_alt_color to the map coordinates*/
 int			define_z_relations(t_map *map);
+/*define the zoom for the map according to the window size*/
 void		define_zoom(t_map *map);
 
-// PIXEL PRINTING MANAGEMENT //
-void		my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map);
-void		put_pixel(t_data *img, int x, int y, int color);
-void		make_background(t_data *img);
-int			verify_fit(t_map *map, int i, int j);
+/* ************************************************************************** */
+/* ****************************** DRAWING UTILS ***************************** */
+/* ************************************************************************** */
 
-// COLOR MANAGEMENT //
-double		get_r(int trgb);
-double		get_g(int trgb);
-double		get_b(int trgb);
-int			create_rgb(int r, int g, int b);
-int			gradient(int color_start, int color_end, int len, int pos);
+/*make the background of the image*/
+void		make_background(t_data *img);
+/*prints a pixel on the image*/
+void		my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map);
+/*verify if the pixel is in the window to draw it or not*/
+int			verify_fit(t_map *map, int i, int j);
+/*draw the line between two coordinates*/
 void		bresenham(t_pixel *coord0, t_pixel *coord1, t_vars *vars,
 				t_data *img);
-void		my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map);
-
-// utils //
+/*create a gradient between two colors according to the position and the len*/
+int			gradient(int color_start, int color_end, int len, int pos);
+/*return either the original color or the altitude color*/
 int			color(t_map *map);
 
 #endif

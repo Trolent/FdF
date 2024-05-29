@@ -6,28 +6,28 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:19:48 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/21 15:52:06 by trolland         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:13:03 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-double	get_r(int trgb)
+static double	get_r(int trgb)
 {
 	return ((trgb >> 16) & 0xFF);
 }
 
-double	get_g(int trgb)
+static double	get_g(int trgb)
 {
 	return ((trgb >> 8) & 0xFF);
 }
 
-double	get_b(int trgb)
+static double	get_b(int trgb)
 {
 	return (trgb & 0xFF);
 }
 
-int	create_rgb(int r, int g, int b)
+static int	create_rgb(int r, int g, int b)
 {
 	return ((r << 16) | (g << 8) | (b));
 }

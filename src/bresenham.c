@@ -6,13 +6,14 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 23:09:36 by trolland          #+#    #+#             */
-/*   Updated: 2024/02/28 18:06:38 by trolland         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:23:20 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "fdf.h"
+#include "bresenham.h"
 
-void	bresenham_init(t_bresenham *bres, t_pixel *coord0, t_pixel *coord1)
+static void	bresenham_init(t_bresenham *bres, t_pixel *coord0, t_pixel *coord1)
 {
 	bres->x0 = (coord0->x[ISO]);
 	bres->y0 = (coord0->y[ISO]);
@@ -33,14 +34,14 @@ void	bresenham_init(t_bresenham *bres, t_pixel *coord0, t_pixel *coord1)
 	bres->err = bres->dx - bres->dy;
 }
 
-void	bresenham_init2(t_bresenham *bres)
+static void	bresenham_init2(t_bresenham *bres)
 {
 	bres->temp->x[ISO] = bres->x0;
 	bres->temp->y[ISO] = bres->y0;
 	bres->err2 = 2 * bres->err;
 }
 
-void	bresenham_print(t_bresenham *bres, t_draw *draw, t_data *img,
+static void	bresenham_print(t_bresenham *bres, t_draw *draw, t_data *img,
 		t_vars *vars)
 {
 	int	clr;
