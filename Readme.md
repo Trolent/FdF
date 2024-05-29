@@ -77,6 +77,12 @@ While fdf is running, the following set of controls are available:
   <tr><td><kbd>&nbsp;ESC&nbsp;</kbd></td><td>Quit program</td></tr>
 </table>
 
+## Screenshot
+
+Here is a vue mxing different color and lines options..
+![FdF Screenshot](https://github.com/Trolent/FdF/blob/main/images/merge.png)
+
+
 ## Educational Value
 
 This project is crucial for learning:
