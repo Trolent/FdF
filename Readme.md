@@ -1,12 +1,5 @@
 # fdf
 
-<p align="center">
-  <img src="https://github.com/Trolent/Trolent/blob/e2a84c046e74211bac5266747ef54d4af820baf6/Badges/fdfm.png" alt="FDF badge"/>
-Finished: 28/02/2024.
-
-Grade: 125%.
-</p>
-
 Fil de Fer (wireframe) also known as FDF is one of the first graphical projects at 42 school. The goal is to develop a program that reads a ".fdf" file containing coordinates of a landscape and displays it as a wireframe model in isometric projection. This specific implementation also allows you to rotate, zoom, change the altitude ratio ...
 
 
