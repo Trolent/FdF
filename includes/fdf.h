@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:59:55 by trolland          #+#    #+#             */
-/*   Updated: 2024/05/30 11:58:12 by trolland         ###   ########.fr       */
+/*   Updated: 2024/05/30 12:18:25 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,21 @@
 # include <math.h>
 # include <stdbool.h>
 # include <unistd.h>
+# include <fcntl.h>
 
 # if defined(__linux__)
 #  include "../minilibx-linux/mlx.h"
 #  define WINDOW_WIDTH 1920 / 3 * 2
 #  define WINDOW_HEIGHT 1080 / 3 * 2
-#  define HANDLE_EXIT(vars) mlx_loop_end(vars->mlx)
+#  define NORMAL_EXIT(vars) mlx_loop_end(vars->mlx)
+#  define ERROR_EXIT(vars) mlx_loop_end(vars->mlx)
 #  define DESTROY(vars) mlx_destroy_display(vars->mlx)
 # elif defined(__APPLE__)
 #  include "../minilibx_macos/mlx.h"
 #  define WINDOW_WIDTH 1400
 #  define WINDOW_HEIGHT 900
-#  define HANDLE_EXIT(vars) quit_map(vars)
+#  define NORMAL_EXIT(vars) free_exit(vars)
+#  define ERROR_EXIT(vars) quit_map(vars)
 #  define DESTROY(vars) "\\"
 # endif
 
@@ -146,6 +149,8 @@ int			render_next_frame(t_vars *vars);
 int			key_esc_or_cross_close(t_vars *vars);
 /*free all the mlx elements*/
 void		close_mlx(t_vars *vars);
+/*On mac os, close and free the program noramlly*/
+int	free_exit(t_vars *vars);
 
 /* ************************************************************************** */
 /* ****************************** ROTATION UTILS **************************** */
