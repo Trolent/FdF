@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 12:53:47 by trolland          #+#    #+#             */
-/*   Updated: 2024/05/29 12:07:06 by trolland         ###   ########.fr       */
+/*   Updated: 2024/05/30 12:07:07 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ void	my_mlx_pixel_put(t_data *data, t_pixel *pixel, t_map *map)
 	clr = color(map);
 	y = pixel->y[ISO];
 	x = pixel->x[ISO];
-	if (x < 0 || y < 0 || y >= WINDOW_HEIGHT || x >= WINDOW_WIDTH)
+	if ((int)(round(x)) < 0 || (int)(round(y)) < 0 || \
+	(int)(round(y)) >= WINDOW_HEIGHT || (int)(round(x)) >= WINDOW_WIDTH)
 		return ;
 	dst = data->addr + (int)(round(y) * data->line_length + round(x)
 			* (data->bits_per_pixel / 8));

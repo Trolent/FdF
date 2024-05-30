@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:22:12 by trolland          #+#    #+#             */
-/*   Updated: 2024/05/29 12:28:36 by trolland         ###   ########.fr       */
+/*   Updated: 2024/05/30 11:57:36 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ int	mouse_scroll(int button, int x, int y, t_vars *vars)
 
 int	mlx_handle_input(t_vars *vars)
 {
-	mlx_hook(vars->win, 2, 1L << 0, &key_hook, vars);
 	mlx_mouse_hook(vars->win, (int (*)())mouse_scroll, vars);
+	mlx_hook(vars->win, 2, 1L << 0, &key_hook, vars);
 	mlx_hook(vars->win, 17, 1L << 3, &key_esc_or_cross_close, vars);
 	return (1);
 }

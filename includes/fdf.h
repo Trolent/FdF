@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 16:59:55 by trolland          #+#    #+#             */
-/*   Updated: 2024/05/29 12:29:21 by trolland         ###   ########.fr       */
+/*   Updated: 2024/05/30 11:58:12 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,14 @@
 #  include "../minilibx-linux/mlx.h"
 #  define WINDOW_WIDTH 1920 / 3 * 2
 #  define WINDOW_HEIGHT 1080 / 3 * 2
+#  define HANDLE_EXIT(vars) mlx_loop_end(vars->mlx)
+#  define DESTROY(vars) mlx_destroy_display(vars->mlx)
 # elif defined(__APPLE__)
-#  include "../minilibx-mac-osx/mlx.h"
-#  define WINDOW_WIDTH 1920 / 3 * 2
-#  define WINDOW_HEIGHT 1080 / 3 * 2
+#  include "../minilibx_macos/mlx.h"
+#  define WINDOW_WIDTH 1400
+#  define WINDOW_HEIGHT 900
+#  define HANDLE_EXIT(vars) quit_map(vars)
+#  define DESTROY(vars) "\\"
 # endif
 
 // COLORS
@@ -127,7 +131,7 @@ void		asign_values(t_map *map, char **split);
 /*quit the program with an error message*/
 int			quit(char *s);
 /*quit the program with an error message, free the map and destroy the window*/
-int			quit_map(char *s, t_vars *vars);
+int			quit_map(t_vars *vars);
 /*initialize the mlx elements, graphipcs and the loop*/
 int			graphics(t_vars *map);
 /*add the menu to the window*/

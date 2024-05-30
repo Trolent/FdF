@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 12:53:47 by trolland          #+#    #+#             */
-/*   Updated: 2024/05/29 11:33:23 by trolland         ###   ########.fr       */
+/*   Updated: 2024/05/30 11:57:56 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,14 @@ int	render_next_frame(t_vars *vars)
 
 	new_img = malloc(sizeof(t_data));
 	if (!new_img)
-		return (mlx_loop_end(vars->mlx), 0);
+		return (HANDLE_EXIT(vars), 0);
 	new_img->img = mlx_new_image(vars->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!new_img->img)
-		return (free(new_img), mlx_loop_end(vars->mlx), 0);
+		return (free(new_img), HANDLE_EXIT(vars), 0);
 	new_img->addr = mlx_get_data_addr(new_img->img, &new_img->bits_per_pixel,
 			&new_img->line_length, &new_img->endian);
 	if (!new_img->addr)
-		return (free(new_img), mlx_loop_end(vars->mlx), 0);
+		return (free(new_img), HANDLE_EXIT(vars), 0);
 	generate_map(vars, vars->map, new_img);
 	if (vars->img)
 	{

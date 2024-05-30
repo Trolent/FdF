@@ -6,7 +6,7 @@
 /*   By: trolland <trolland@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 23:09:36 by trolland          #+#    #+#             */
-/*   Updated: 2024/05/29 12:23:20 by trolland         ###   ########.fr       */
+/*   Updated: 2024/05/30 11:59:47 by trolland         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ static void	bresenham_print(t_bresenham *bres, t_draw *draw, t_data *img,
 		bresenham_init2(bres);
 		bres->temp->color[clr] = gradient(draw->coord0->color[clr],
 				draw->coord1->color[clr], bres->len, bres->i);
-		if (bres->temp->x[ISO] > 0 && bres->temp->x[ISO] < WINDOW_WIDTH
-			&& bres->temp->y[ISO] < WINDOW_HEIGHT && bres->temp->y[ISO] > 0)
+		if (bres->temp->x[ISO] >= 0 && bres->temp->x[ISO] < WINDOW_WIDTH
+			&& bres->temp->y[ISO] < WINDOW_HEIGHT && bres->temp->y[ISO] >= 0)
 			my_mlx_pixel_put(img, bres->temp, vars->map);
 		if (bres->err2 > -bres->dy)
 		{

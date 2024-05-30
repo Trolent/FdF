@@ -6,7 +6,7 @@
 #    By: trolland <trolland@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 16:23:19 by trolland          #+#    #+#              #
-#    Updated: 2024/05/21 01:22:15 by trolland         ###   ########.fr        #
+#    Updated: 2024/05/30 11:55:47 by trolland         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,12 +14,12 @@ NAME = fdf
 
 LIBFT	= 	libft/libft.a
 MLX_LINUX =	minilibx-linux/libmlx.a 
-MLX_MACOS = minilibx-mac-osx/libmlx.a
+MLX_MACOS = minilibx_macos/libmlx.a
 
 OS := $(shell uname)
 ifeq ($(OS),Darwin)
     MLX_TARGET = $(MLX_MACOS)
-    MLX_PATH = minilibx-mac-osx
+    MLX_PATH = minilibx_macos
     LD_FLAGS = -L$(MLX_PATH) -lmlx -framework OpenGL -framework AppKit
 else
     MLX_TARGET = $(MLX_LINUX)
@@ -40,7 +40,7 @@ DEPS := 	$(OBJS:.o=.d)
 
 CC := cc
 
-CFLAGS := -Wall -Werror -Wextra -MMD -MP -Iincludes -Ilibft -I$(MLX_PATH) 
+CFLAGS := -Wall -Werror -Wextra -MMD -MP -Iincludes -Ilibft -I$(MLX_PATH) -g 
 
 all:	$(NAME)
 
