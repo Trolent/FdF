@@ -13,7 +13,7 @@
 #ifndef ERROR_MAPS_H
 # define ERROR_MAPS_H
 
-# include "../libft/libft.h"
+# include "libft.h"
 
 # define ERR_ARG "Wrong number of arguments"
 # define ERR_FILE_TYPE "Wrong file type : it should be using \".fdf\" format"
