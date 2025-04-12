@@ -79,7 +79,7 @@ While fdf is running, the following set of controls are available:
 
 ## Screenshot
 
-Here is a vue mxing different color and lines options..
+Here is a vue mixing different color and lines options..
 ![FdF Screenshot](https://github.com/Trolent/FdF/blob/main/images/merge.png)
 
 
